@@ -480,6 +480,38 @@ section { position: relative; z-index: 1; }
 .cert-org  { font-size: 10px; margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
 
 /* ═══════════════════════════════════════════════
+   RECOMMENDATIONS
+═══════════════════════════════════════════════ */
+.rec-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 22px;
+}
+.rec-card { display: flex; flex-direction: column; gap: 14px; }
+.rec-quote-mark {
+  font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: 1;
+  color: var(--ac); opacity: .55;
+}
+.rec-text {
+  font-size: 13.5px; line-height: 1.7; color: #cbd5e0; flex: 1;
+}
+.rec-person {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 14px; border-top: 1px solid rgba(255,255,255,.06);
+}
+.rec-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--ac-g); border: 1px solid var(--ac);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 15px; color: var(--ac-l);
+  flex-shrink: 0;
+}
+.rec-name { font-size: 13px; font-weight: 600; color: #f7fafc; }
+.rec-role { font-size: 10.5px; color: #718096; margin-top: 2px; }
+.rec-badge {
+  margin-left: auto; font-size: 15px; opacity: .7; flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════════ */
 .contact-inner {
@@ -577,6 +609,7 @@ footer {
       <a href="#projects">Projects</a>
       <a href="#certifications">Certs</a>
       <a href="#achievements">Achievements</a>
+      <a href="#recommendations">Recs</a>
       <a href="#contact">Contact</a>
     </div>
     <a href="Ashwik_Bire_Resume.pdf" download="Ashwik_Bire_Resume.pdf" class="nav-resume-btn">⬇ Resume</a>
@@ -1179,6 +1212,140 @@ footer {
         <div class="cert-icon" style="background:rgba(104,211,145,.12);border:1px solid rgba(104,211,145,.28);box-shadow:0 0 18px rgba(104,211,145,.2)">💯</div>
         <div><div class="cert-name">Top 100 Rank — 100 Days Coding Challenge</div><div class="cert-org" style="color:#68d391">Unstop</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     RECOMMENDATIONS
+══════════════════════════════════════════ -->
+<section id="recommendations">
+  <div class="section-inner">
+    <div class="section-title reveal">
+      <h2>Recommendations</h2>
+      <div class="title-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+    </div>
+
+    <div class="rec-grid">
+      <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.02s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">I had the pleasure of working with Ashwik on a crucial project. I find him sincere, dedicated and a very quick learner. He delivered quality work on time and with great attention to detail on TIBCO Spotfire technology.</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Jaison Raj</div>
+            <div class="rec-role">Delivery Director, Atos Syntel</div>
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+
+      <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.06s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">Ashwik has been developing his skills in business intelligence with Spotfire and has shown impressive enthusiasm and a strong willingness to learn. He eagerly absorbs new concepts, is open to feedback, and confidently shares his own ideas.</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Khadijah Salleh</div>
+            <div class="rec-role">Scrum Master, FedEx APAC</div>
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+
+      <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.1s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">Ashwik is a good quality developer who possesses all the skills one would want in a developer. He did an incredible job on the project, making timely deliveries and helping me. His work is always exceptional, and he is always welcoming to feedback.</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Ashwin Phalke</div>
+            <div class="rec-role">Senior Developer, TIBCO</div>
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+	  
+      <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.06s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">Beyond his professional abilities, Ashwik is a pleasure to work with on a personal level. He has a friendly and approachable demeanour, which makes it easy for colleagues to reach out to him for support or guidance.</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Mukesh Kolhe</div>
+            <div class="rec-role">role: Senior User Experience Designer, CGI</div>
+             
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+	  
+	  <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.06s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">Sincere, dedicated and very quick learner..</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Rajendrasinh Solanki</div>
+            <div class="rec-role">Delivery Manager, Atos Syntel</div>
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+	  
+	   <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.06s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">Ashwik is a good quality developer with impressive work ethic and client satisfaction. I highly recommend him for his diverse talents and commitment to excellence..</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Sagar Kuntewar</div>
+            <div class="rec-role">PLM Teamcenter Professional — MCAD & ECAD Integration Expert, Atos Syntel</div>
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+	  <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.06s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">Ashwik is a dedicated professional but also a great team player. His excellent adoption skills and willingness to collaborate made him a pleasure to work with. He has a strong work ethic and a passion for continuous learning</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Akash Dhudate</div>
+            <div class="rec-role">Senior AWS Data Engineer, Atos Syntel</div>
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+	   <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.06s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">Ashwik is a very hard-working person. We worked together on one project, and I found him a highly dedicated professional. He's also an all-around great guy..</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Vijay Chavhan</div>
+            <div class="rec-role">role: "Ab Initio · Cloud · Unix Shell Scripting · SQL",Team Lead, Atos Syntel</div>
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+   
+   <div class="rec-grid">
+      <div class="glass glass-hover rec-card reveal scale" style="transition-delay:.02s">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-text">Excellent knowledge in Power BI and Dashboard Design. Keen learner and co-operative. Enthusiastic.".</div>
+        <div class="rec-person">
+          <div class="rec-avatar">XX</div>
+          <div>
+            <div class="rec-name">Lalit Rasane</div>
+            <div class="rec-role">Assistant Manager — CAD Applications & Teamcenter Consultant Atos Syntel</div>
+          </div>
+          <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="rec-badge" title="View on LinkedIn">🔗</a>
+        </div>
+      </div>
+	  
+	  
+	 
     </div>
   </div>
 </section>
