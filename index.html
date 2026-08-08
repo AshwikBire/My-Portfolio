@@ -210,6 +210,65 @@ section { position: relative; z-index: 1; }
   border-color: rgba(229,62,62,.25);
   box-shadow: 0 20px 60px rgba(0,0,0,.35), 0 0 22px var(--ac-g);
 }
+/* Cursor-tracked spotlight glow on glass cards */
+.glass-hover {
+  position: relative;
+  overflow: hidden;
+  --sx: 50%; --sy: 50%;
+}
+.glass-hover::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(320px circle at var(--sx) var(--sy), var(--ac-g), transparent 70%);
+  opacity: 0; transition: opacity .35s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.glass-hover:hover::before { opacity: 1; }
+.glass-hover > * { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════════════════ */
+#scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--ac), var(--ac-l));
+  z-index: 10000;
+  box-shadow: 0 0 10px var(--ac-g);
+  transition: width .1s ease-out;
+}
+
+/* Animated gradient sweep on hero name */
+.hero-name {
+  background: linear-gradient(100deg, #fff 20%, var(--ac-l) 45%, #fff 60%, var(--ac-l) 80%);
+  background-size: 250% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: nameShine 6s linear infinite;
+}
+@keyframes nameShine { to { background-position: -250% center; } }
+
+/* Ripple on click */
+.btn-primary, .btn-ghost, .form-btn, .qbtn { position: relative; overflow: hidden; }
+.ripple {
+  position: absolute; border-radius: 50%;
+  transform: scale(0);
+  animation: rippleAnim .6s ease-out;
+  background: rgba(255,255,255,.45);
+  pointer-events: none;
+}
+@keyframes rippleAnim { to { transform: scale(2.6); opacity: 0; } }
+
+/* Animated underline for nav links */
+.nav-links a { position: relative; }
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: -4px;
+  width: 0; height: 2px; background: var(--ac-l);
+  transition: width .3s ease;
+}
+.nav-links a:hover::after { width: 100%; }
 
 /* ═══════════════════════════════════════════════
    HERO
@@ -218,6 +277,50 @@ section { position: relative; z-index: 1; }
   min-height: 100vh;
   display: flex; align-items: center;
   padding: 80px clamp(16px,5vw,80px) 60px;
+  position: relative;
+  overflow: hidden;
+}
+#hero-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  opacity: .55;
+  pointer-events: none;
+}
+#hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, transparent 0%, #04060f 78%);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 2; }
+
+/* ═══════════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════════ */
+@media (hover:hover) and (pointer:fine) {
+  body { cursor: none; }
+  a, button, .form-btn, .social-link { cursor: none; }
+}
+.cur-dot, .cur-ring {
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  will-change: transform;
+}
+.cur-dot { width: 6px; height: 6px; background: var(--ac); }
+.cur-ring {
+  width: 34px; height: 34px;
+  border: 1px solid var(--ac-l);
+  opacity: .6;
+  transition: width .25s ease, height .25s ease, opacity .25s ease, border-color .25s ease;
+}
+.cur-ring.hovering { width: 56px; height: 56px; opacity: 1; border-color: var(--ac); }
+@media (hover:none), (pointer:coarse) {
+  .cur-dot, .cur-ring { display: none; }
+  body { cursor: auto; }
 }
 .hero-inner {
   max-width: 1160px; width: 100%; margin: 0 auto;
@@ -245,7 +348,10 @@ section { position: relative; z-index: 1; }
   margin-bottom: 18px;
   animation: fadeUp .8s .1s ease both;
 }
-.hero-name .accent { color: var(--ac); text-shadow: 0 0 50px var(--ac-g); }
+.hero-name .accent {
+  color: var(--ac); text-shadow: 0 0 50px var(--ac-g);
+  -webkit-text-fill-color: var(--ac); background: none;
+}
 
 .hero-typing {
   font-size: clamp(1rem,2.5vw,1.3rem); color: #718096;
@@ -679,6 +785,8 @@ footer {
 </style>
 </head>
 <body>
+<div class="cur-dot" id="curDot"></div>
+<div class="cur-ring" id="curRing"></div>
 
 <!-- LOADER -->
 <div id="loader">
@@ -691,6 +799,7 @@ footer {
 <!-- BACKGROUNDS -->
 <div id="bg-grid"></div>
 <div id="bg-glow"></div>
+<div id="scroll-progress"></div>
 
 <!-- ══════════════════════════════════════════
      NAVBAR
@@ -720,6 +829,7 @@ footer {
      HERO
 ══════════════════════════════════════════ -->
 <section id="hero">
+  <canvas id="hero-bg"></canvas>
   <div class="hero-inner">
 
     <!-- Text -->
@@ -1458,12 +1568,13 @@ footer {
       Looking to build powerful data solutions or need a skilled analyst?
       Let's discuss how I can add value to your team.
     </p>
-    <div class="glass contact-form reveal" style="transition-delay:.16s">
-      <input type="text"  class="form-field" placeholder="Your Name" />
-      <input type="email" class="form-field" placeholder="Your Email" />
-      <textarea class="form-field" placeholder="Your Message" rows="4"></textarea>
-      <button class="form-btn" onclick="handleContact()">Send Message ✉️</button>
-    </div>
+    <form id="contactForm" class="glass contact-form reveal" style="transition-delay:.16s" onsubmit="return handleContact(event)">
+      <input type="text"  id="cf-name"  name="name"    class="form-field" placeholder="Your Name" required />
+      <input type="email" id="cf-email" name="email"   class="form-field" placeholder="Your Email" required />
+      <textarea id="cf-message" name="message" class="form-field" placeholder="Your Message" rows="4" required></textarea>
+      <button type="submit" class="form-btn">Send Message ✉️</button>
+      <p id="cf-status" style="margin-top:10px;font-size:.85rem;min-height:1.2em;"></p>
+    </form>
     <div class="social-row reveal" style="transition-delay:.24s">
       <a href="https://linkedin.com/in/ashwik-bire-b2a000186" target="_blank" class="social-link">🔗 LinkedIn</a>
       <a href="https://github.com/AshwikBire" target="_blank" class="social-link">🐙 GitHub</a>
@@ -1484,7 +1595,7 @@ footer {
      FOOTER
 ══════════════════════════════════════════ -->
 <footer>
-  <div class="footer-logo">ASHWIK BIRE<span>DATA SCIENTIST · BI &amp; AUTOMATION SPECIALIST</span></div>
+  <div class="footer-logo">ASHWIK BIRE<span>DATA ANALYST · BI &amp; AUTOMATION SPECIALIST</span></div>
   <div class="footer-copy">© 2026 Ashwik Bire · Built with ❤️</div>
 </footer>
 
@@ -1529,6 +1640,8 @@ footer {
 <!-- ══════════════════════════════════════════
      JAVASCRIPT
 ══════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 /* ── LOADER ── */
 (function() {
@@ -1573,8 +1686,9 @@ footer {
   tick();
 })();
 
-/* ── SCROLL REVEAL ── */
+/* ── SCROLL REVEAL (fallback for when GSAP fails to load) ── */
 (function() {
+  if (window.gsap) return; // GSAP + ScrollTrigger handles reveals instead, see bottom of page
   var els = document.querySelectorAll('.reveal');
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
@@ -1609,15 +1723,70 @@ function setAccent(color) {
   document.querySelector('.' + color + '-btn').classList.add('active');
 }
 
-/* ── CONTACT FORM ── */
-function handleContact() {
-  var btn = document.querySelector('.form-btn');
-  btn.textContent = 'Message Sent! ✅';
-  btn.style.background = 'linear-gradient(135deg,#38a169,#68d391)';
-  setTimeout(function() {
+/* ── CONTACT FORM ──
+   Sends via Formspree — no server needed.
+   1. Go to https://formspree.io, sign up free, create a form.
+   2. Copy your form ID (looks like "mjkvvzzz") and paste it below.
+   3. Formspree will email new submissions straight to your inbox.
+*/
+var FORMSPREE_ID = 'xljrgdaa';
+
+function handleContact(e) {
+  e.preventDefault();
+  var form = document.getElementById('contactForm');
+  var btn = form.querySelector('.form-btn');
+  var status = document.getElementById('cf-status');
+
+  if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+    status.textContent = '⚠️ Form not connected yet — add your Formspree ID in the script.';
+    status.style.color = '#fc8181';
+    return false;
+  }
+
+  var name = document.getElementById('cf-name').value.trim();
+  var email = document.getElementById('cf-email').value.trim();
+  var message = document.getElementById('cf-message').value.trim();
+  if (!name || !email || !message) {
+    status.textContent = 'Please fill in all fields.';
+    status.style.color = '#fc8181';
+    return false;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  status.textContent = '';
+
+  fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, email: email, message: message })
+  })
+  .then(function(res) {
+    if (res.ok) {
+      btn.textContent = 'Message Sent! ✅';
+      btn.style.background = 'linear-gradient(135deg,#38a169,#68d391)';
+      status.textContent = "Thanks! I'll get back to you soon.";
+      status.style.color = '#68d391';
+      form.reset();
+    } else {
+      throw new Error('Request failed');
+    }
+  })
+  .catch(function() {
     btn.textContent = 'Send Message ✉️';
-    btn.style.background = '';
-  }, 3000);
+    status.textContent = "Something went wrong — please email ashwikbire@gmail.com directly.";
+    status.style.color = '#fc8181';
+  })
+  .finally(function() {
+    btn.disabled = false;
+    setTimeout(function() {
+      btn.textContent = 'Send Message ✉️';
+      btn.style.background = '';
+      status.textContent = '';
+    }, 4000);
+  });
+
+  return false;
 }
 
 /* ── CHATBOT ── */
@@ -1703,5 +1872,233 @@ function sendChat() {
 }
 </script>
 
+<script>
+/* ── HERO CANVAS BACKGROUND ──
+   No video file was supplied, so this is a lightweight animated
+   particle/constellation canvas standing in for a video background —
+   zero external assets, guaranteed to render, and easy to swap:
+   just replace <canvas id="hero-bg"> with a <video autoplay muted loop>
+   pointing at your own .mp4 if you'd rather use real footage. */
+(function() {
+  var canvas = document.getElementById('hero-bg');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var w, h, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize() {
+    w = canvas.offsetWidth; h = canvas.offsetHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  var accent = getComputedStyle(document.body).getPropertyValue('--ac-l') || '#fc8181';
+  var count = Math.min(70, Math.floor((w * h) / 18000));
+  var pts = [];
+  for (var i = 0; i < count; i++) {
+    pts.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - .5) * .25,
+      vy: (Math.random() - .5) * .25,
+      r: Math.random() * 1.6 + .6
+    });
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < pts.length; i++) {
+      var p = pts[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = accent.trim() || '#fc8181';
+      ctx.globalAlpha = .55;
+      ctx.fill();
+      for (var j = i + 1; j < pts.length; j++) {
+        var q = pts[j];
+        var dx = p.x - q.x, dy = p.y - q.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 130) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = accent.trim() || '#fc8181';
+          ctx.globalAlpha = (1 - dist / 130) * .18;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+    if (!reduceMotion) requestAnimationFrame(step);
+  }
+  step();
+})();
+
+/* ── CUSTOM CURSOR ── */
+(function() {
+  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  var dot = document.getElementById('curDot');
+  var ring = document.getElementById('curRing');
+  if (!dot || !ring) return;
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  window.addEventListener('mousemove', function(e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  (function loop() {
+    rx += (mx - rx) * .16; ry += (my - ry) * .16;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a, button, .form-btn, .social-link, .glass-hover').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { ring.classList.add('hovering'); });
+    el.addEventListener('mouseleave', function() { ring.classList.remove('hovering'); });
+  });
+})();
+
+/* ── MAGNETIC BUTTONS ── */
+(function() {
+  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  document.querySelectorAll('.form-btn, .hero-btns a, .social-link').forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
+      var r = btn.getBoundingClientRect();
+      var x = e.clientX - r.left - r.width / 2;
+      var y = e.clientY - r.top - r.height / 2;
+      btn.style.transform = 'translate(' + x * .25 + 'px,' + y * .35 + 'px)';
+    });
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform = 'translate(0,0)';
+      btn.style.transition = 'transform .4s cubic-bezier(.2,.9,.3,1.3)';
+      setTimeout(function() { btn.style.transition = ''; }, 400);
+    });
+  });
+})();
+
+/* ── GSAP HERO ENTRANCE + SCROLL MOTION ── */
+if (window.gsap) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.timeline({ defaults: { ease: 'power3.out' } })
+    .from('.hero-badge', { y: -16, opacity: 0, duration: .6 })
+    .from('.hero-name', { y: 30, opacity: 0, duration: .8 }, '-=.3')
+    .from('.hero-typing', { y: 16, opacity: 0, duration: .6 }, '-=.4')
+    .from('.hero-desc', { y: 16, opacity: 0, duration: .6 }, '-=.4')
+    .from('.hero-btns a', { y: 16, opacity: 0, duration: .5, stagger: .1 }, '-=.3')
+    .from('.hero-stats > *', { y: 16, opacity: 0, duration: .5, stagger: .08 }, '-=.3')
+    .from('.hero-photo', { scale: .85, opacity: 0, duration: .9, ease: 'back.out(1.4)' }, '-=.9');
+
+  gsap.to('.hero-photo', {
+    y: -14, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1
+  });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    gsap.fromTo(el,
+      { opacity: 0, y: el.classList.contains('slide') ? 0 : 26, x: el.classList.contains('slide') ? -28 : 0, scale: el.classList.contains('scale') ? .86 : 1 },
+      {
+        opacity: 1, y: 0, x: 0, scale: 1, duration: .8, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      }
+    );
+  });
+
+  document.querySelectorAll('.project-card, .glass-hover').forEach(function(card) {
+    card.addEventListener('mouseenter', function() { gsap.to(card, { y: -8, duration: .35, ease: 'power2.out' }); });
+    card.addEventListener('mouseleave', function() { gsap.to(card, { y: 0, duration: .45, ease: 'power2.out' }); });
+  });
+}
+
+/* ── SCROLL PROGRESS BAR ── */
+(function() {
+  var bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  function update() {
+    var h = document.documentElement;
+    var scrolled = h.scrollTop || document.body.scrollTop;
+    var height = h.scrollHeight - h.clientHeight;
+    bar.style.width = (height > 0 ? (scrolled / height) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ── SPOTLIGHT GLOW FOLLOWS CURSOR ON CARDS ── */
+(function() {
+  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  document.querySelectorAll('.glass-hover').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--sx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--sy', (e.clientY - r.top) + 'px');
+    });
+  });
+})();
+
+/* ── BUTTON RIPPLE EFFECT ── */
+(function() {
+  document.querySelectorAll('.btn-primary, .btn-ghost, .form-btn, .qbtn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      var r = btn.getBoundingClientRect();
+      var d = Math.max(r.width, r.height);
+      var span = document.createElement('span');
+      span.className = 'ripple';
+      span.style.width = span.style.height = d + 'px';
+      span.style.left = (e.clientX - r.left - d / 2) + 'px';
+      span.style.top = (e.clientY - r.top - d / 2) + 'px';
+      btn.appendChild(span);
+      setTimeout(function() { span.remove(); }, 620);
+    });
+  });
+})();
+
+/* ── ANIMATED STAT COUNTERS ── */
+(function() {
+  var stats = document.querySelectorAll('.stat-num');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      obs.unobserve(e.target);
+      var el = e.target;
+      var raw = el.textContent.trim();
+      var match = raw.match(/(\d+)/);
+      if (!match) return;
+      var target = parseInt(match[1], 10);
+      var suffix = raw.replace(match[1], '');
+      var cur = 0;
+      var steps = 36;
+      var inc = target / steps;
+      var iv = setInterval(function() {
+        cur += inc;
+        if (cur >= target) { cur = target; clearInterval(iv); }
+        el.textContent = Math.round(cur) + suffix;
+      }, 32);
+    });
+  }, { threshold: 0.4 });
+  stats.forEach(function(s) { obs.observe(s); });
+})();
+
+/* ── 3D TILT ON CARDS ── */
+(function() {
+  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  document.querySelectorAll('.glass-hover').forEach(function(card) {
+    card.style.transformStyle = 'preserve-3d';
+    card.addEventListener('mousemove', function(e) {
+      var r = card.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - .5;
+      var py = (e.clientY - r.top) / r.height - .5;
+      card.style.transform = 'perspective(700px) rotateY(' + (px * 7) + 'deg) rotateX(' + (py * -7) + 'deg) translateY(-4px)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = '';
+    });
+  });
+})();
+</script>
 </body>
 </html>
