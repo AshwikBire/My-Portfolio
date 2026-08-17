@@ -702,6 +702,47 @@ a.cert-card { cursor: pointer; }
 .cert-org  { font-size: 10px; margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
 
 /* ═══════════════════════════════════════════════
+   RESEARCH & PUBLICATIONS
+═══════════════════════════════════════════════ */
+.section-sub {
+  max-width: 640px; margin: 14px auto 0; text-align: center;
+  color: #718096; font-size: 13.5px; line-height: 1.8;
+}
+.research-grid {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 24px;
+}
+.research-card {
+  display: flex; flex-direction: column; height: 100%;
+}
+.research-top {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px;
+}
+.research-icon {
+  width: 50px; height: 50px; border-radius: 14px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.research-badge {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 5px 10px; border-radius: 99px; white-space: nowrap;
+}
+.research-title { font-size: 15.5px; font-weight: 700; color: #f7fafc; line-height: 1.4; margin-bottom: 10px; }
+.research-meta {
+  font-size: 11px; color: #a0aec0; letter-spacing: .4px; margin-bottom: 12px; line-height: 1.7;
+}
+.research-meta strong { color: #cbd5e0; font-weight: 600; }
+.research-desc { color: #4a5568; font-size: 13px; line-height: 1.8; margin-bottom: 18px; flex: 1; }
+.research-author {
+  display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: #718096;
+  letter-spacing: .3px; margin-bottom: 18px;
+}
+.research-link {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  border-radius: 10px; padding: 9px; font-size: 12px;
+  letter-spacing: 1px; transition: opacity .2s; text-transform: uppercase;
+}
+.research-link:hover { opacity: .75; }
+
+/* ═══════════════════════════════════════════════
    RECOMMENDATIONS
 ═══════════════════════════════════════════════ */
 .rec-grid {
@@ -1084,6 +1125,7 @@ footer {
       <a href="#projects">Projects</a>
       <a href="#certifications">Certs</a>
       <a href="#achievements">Achievements</a>
+      <a href="#research">Research</a>
       <a href="#recommendations">Recs</a>
       <a href="#contact">Contact</a>
     </div>
@@ -1128,6 +1170,10 @@ footer {
   <a href="#achievements" class="sb-link" data-section="achievements" aria-label="Achievements">
     <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.6 6.6 19.6l1.2-6-4.5-4.2 6.1-.8L12 3z"/></svg>
     <span class="sb-tooltip">Achievements</span>
+  </a>
+  <a href="#research" class="sb-link" data-section="research" aria-label="Research &amp; Publications">
+    <svg viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 1 4 17.5v-13z"/><path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20"/><path d="M8 6.5h8M8 9.5h8"/></svg>
+    <span class="sb-tooltip">Research</span>
   </a>
   <a href="#recommendations" class="sb-link" data-section="recommendations" aria-label="Recommendations">
     <svg viewBox="0 0 24 24"><path d="M7.5 6.5h-2A1.5 1.5 0 0 0 4 8v2a1.5 1.5 0 0 0 1.5 1.5H7v1c0 1.4-.9 2.3-2.3 2.6"/><path d="M16.5 6.5h-2A1.5 1.5 0 0 0 13 8v2a1.5 1.5 0 0 0 1.5 1.5H16v1c0 1.4-.9 2.3-2.3 2.6"/></svg>
@@ -1779,6 +1825,67 @@ footer {
         <div class="cert-icon" style="background:rgba(104,211,145,.12);border:1px solid rgba(104,211,145,.28);box-shadow:0 0 18px rgba(104,211,145,.2)">💯</div>
         <div><div class="cert-name">Top 100 Rank — 100 Days Coding Challenge</div><div class="cert-org" style="color:#68d391">Unstop</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     RESEARCH & PUBLICATIONS
+══════════════════════════════════════════ -->
+<section id="research" class="alt-bg">
+  <div class="section-inner">
+    <div class="section-title reveal">
+      <h2>Research &amp; Publications</h2>
+      <div class="title-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+      <p class="section-sub">Research, publications, and interdisciplinary studies exploring technology, AI, engineering, psychology, and human-centered innovation.</p>
+    </div>
+
+    <div class="research-grid">
+
+      <div class="glass glass-hover research-card reveal scale" style="border-color:rgba(99,179,237,.16);transition-delay:.02s">
+        <div class="research-top">
+          <div class="research-icon" style="background:rgba(99,179,237,.12);border:1px solid rgba(99,179,237,.28);box-shadow:0 0 18px rgba(99,179,237,.2)">🔥</div>
+          <div class="research-badge" style="background:rgba(99,179,237,.12);border:1px solid rgba(99,179,237,.3);color:#63b3ed">IJIRCCE</div>
+        </div>
+        <div class="research-title">IoT Based Fire Control System for Four Wheeler</div>
+        <div class="research-meta">Volume 10, Issue 2 &nbsp;·&nbsp; February 2022</div>
+        <div class="research-desc">Research project focused on an IoT-based fire detection and control system for four-wheelers, designed to improve early fire detection and automated safety mechanisms for vehicle fire emergencies.</div>
+        <div class="research-author">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2"/></svg>
+          Ashwik Bire
+        </div>
+        <a href="https://drive.google.com/file/d/1KXCszn8lr61_piG6IbE8L07IlI4i4lGE/view?usp=drivesdk" target="_blank" rel="noopener" class="research-link" style="background:rgba(99,179,237,.1);border:1px solid rgba(99,179,237,.25);color:#63b3ed">View Paper →</a>
+      </div>
+
+      <div class="glass glass-hover research-card reveal scale" style="border-color:rgba(183,148,244,.16);transition-delay:.1s">
+        <div class="research-top">
+          <div class="research-icon" style="background:rgba(183,148,244,.12);border:1px solid rgba(183,148,244,.28);box-shadow:0 0 18px rgba(183,148,244,.2)">🤖</div>
+          <div class="research-badge" style="background:rgba(183,148,244,.12);border:1px solid rgba(183,148,244,.3);color:#b794f4">AI Research</div>
+        </div>
+        <div class="research-title">Hallucination Drift in Retrieval-Augmented Generation Systems</div>
+        <div class="research-desc">Research study focused on hallucination drift in Retrieval-Augmented Generation systems, examining reliability challenges that can occur across retrieval and LLM generation pipelines.</div>
+        <div class="research-author">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2"/></svg>
+          Ashwik Bire
+        </div>
+        <a href="https://docs.google.com/document/d/1jEoeEZuKg59LIKuh0HF7K3DwR8iLKSEd/edit?usp=drivesdk" target="_blank" rel="noopener" class="research-link" style="background:rgba(183,148,244,.1);border:1px solid rgba(183,148,244,.25);color:#b794f4">View Paper →</a>
+      </div>
+
+      <div class="glass glass-hover research-card reveal scale" style="border-color:rgba(246,173,85,.16);transition-delay:.18s">
+        <div class="research-top">
+          <div class="research-icon" style="background:rgba(246,173,85,.12);border:1px solid rgba(246,173,85,.28);box-shadow:0 0 18px rgba(246,173,85,.2)">🧠</div>
+          <div class="research-badge" style="background:rgba(246,173,85,.12);border:1px solid rgba(246,173,85,.3);color:#f6ad55">Pratyaksh 2026</div>
+        </div>
+        <div class="research-title">Redefining Narratives: A Cross-Disciplinary Study of Memory, Identity, and Collective Storytelling</div>
+        <div class="research-meta">Theme: Philosophy &amp; Psychology</div>
+        <div class="research-desc">A cross-disciplinary study examining reconstructive memory, narrative identity, and collective storytelling across neurocognitive, psychological, and societal levels.</div>
+        <div class="research-author">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2"/></svg>
+          Ashwik Bire
+        </div>
+        <a href="https://docs.google.com/document/d/1pivD53crwoTBk4wu-SP01FZ0tjspI86V/edit?usp=drivesdk" target="_blank" rel="noopener" class="research-link" style="background:rgba(246,173,85,.1);border:1px solid rgba(246,173,85,.25);color:#f6ad55">View Paper →</a>
+      </div>
+
     </div>
   </div>
 </section>
