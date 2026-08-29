@@ -4,6 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ashwik Bire | Data & Business Intelligence Engineer</title>
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#c81e2c" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Ashwik Bire" />
+<link rel="icon" href="icon-192.png" type="image/png" />
+<link rel="apple-touch-icon" href="icon-192.png" />
 
 <meta name="description" content="Ashwik Bire's professional portfolio featuring Data Analytics, Power BI, SQL, Python, Azure, Microsoft Fabric, AI projects, and Microsoft certifications.">
 
@@ -37,6 +45,7 @@
 ═══════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
+body.loading-lock { overflow: hidden; height: 100vh; }
 body {
   background: #04060f;
   color: #e2e8f0;
@@ -54,9 +63,9 @@ img { max-width: 100%; display: block; }
    CSS VARIABLES
 ═══════════════════════════════════════════════ */
 :root {
-  --ac: #86213c;
-  --ac-l: #d64d6b;
-  --ac-g: rgba(134,33,60,.18);
+  --ac: #c81e2c;
+  --ac-l: #f4453f;
+  --ac-g: rgba(200,30,44,.22);
   --glass-blur: 16px;
   --glass-sat: 140%;
   --glass-bg: rgba(255,255,255,.018);
@@ -68,30 +77,35 @@ img { max-width: 100%; display: block; }
   --glass-inset: inset 0 2px 6px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.02);
   --glass-sheen: radial-gradient(120% 140% at 15% -10%, rgba(255,255,255,.08), transparent 55%);
 }
+body.maroon {
+  --ac: #a3223f;
+  --ac-l: #f4453f;
+  --ac-g: rgba(163,34,63,.22);
+}
 body.blue {
-  --ac: #2c5282;
-  --ac-l: #4a7bb5;
-  --ac-g: rgba(44,82,130,.16);
+  --ac: #1e5fa8;
+  --ac-l: #4da3f0;
+  --ac-g: rgba(30,95,168,.22);
 }
 body.violet {
-  --ac: #553c8f;
-  --ac-l: #7c62b8;
-  --ac-g: rgba(85,60,143,.16);
+  --ac: #6b32b8;
+  --ac-l: #a568f0;
+  --ac-g: rgba(107,50,184,.22);
 }
 body.emerald {
-  --ac: #276749;
-  --ac-l: #3f8f68;
-  --ac-g: rgba(39,103,73,.16);
+  --ac: #16915e;
+  --ac-l: #34d399;
+  --ac-g: rgba(22,145,94,.22);
 }
 body.amber {
-  --ac: #975a16;
-  --ac-l: #bd7f34;
-  --ac-g: rgba(151,90,22,.16);
+  --ac: #c2710a;
+  --ac-l: #f7ab2f;
+  --ac-g: rgba(194,113,10,.22);
 }
 body.cyan {
-  --ac: #0e7182;
-  --ac-l: #2a9cb0;
-  --ac-g: rgba(14,113,130,.16);
+  --ac: #0891b8;
+  --ac-l: #38d4f0;
+  --ac-g: rgba(8,145,184,.22);
 }
 
 /* ═══════════════════════════════════════════════
@@ -204,7 +218,7 @@ body.cyan {
   pointer-events: none;
 }
 .cur-ring.hovering .cur-label { opacity: 1; }
-.cur-ring.hovering { background: rgba(214,77,107,.14); backdrop-filter: blur(2px); }
+.cur-ring.hovering { background: rgba(244,69,63,.14); backdrop-filter: blur(2px); }
 
 /* ═══════════════════════════════════════════════
    KEYFRAMES
@@ -265,12 +279,13 @@ nav {
   width: 13px; height: 13px; border-radius: 50%; border: 2px solid transparent;
   cursor: pointer; transition: all .2s ease;
 }
-.accent-btn.red-btn { background: #9b2c3f; }
-.accent-btn.blue-btn { background: #2c5282; }
-.accent-btn.violet-btn { background: #553c8f; }
-.accent-btn.emerald-btn { background: #276749; }
-.accent-btn.amber-btn { background: #975a16; }
-.accent-btn.cyan-btn { background: #0e7182; }
+.accent-btn.red-btn { background: #c81e2c; }
+.accent-btn.maroon-btn { background: #a3223f; }
+.accent-btn.blue-btn { background: #1e5fa8; }
+.accent-btn.violet-btn { background: #6b32b8; }
+.accent-btn.emerald-btn { background: #16915e; }
+.accent-btn.amber-btn { background: #c2710a; }
+.accent-btn.cyan-btn { background: #0891b8; }
 .accent-btn.active { border-color: #f7fafc; box-shadow: 0 0 8px currentColor; }
 .accent-btn:hover { transform: scale(1.18); }
 
@@ -467,7 +482,7 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
 
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(214,77,107,.1); border: 1px solid rgba(214,77,107,.28);
+  background: rgba(244,69,63,.1); border: 1px solid rgba(244,69,63,.28);
   border-radius: 99px; padding: 5px 14px; margin-bottom: 24px;
   animation: fadeUp .8s ease both;
 }
@@ -476,6 +491,43 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
   animation: pulseGlow 2s infinite;
 }
 .hero-badge span { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ac-l); }
+
+.visitor-badge {
+  display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
+  border-radius: 99px; padding: 5px 14px; margin: 0 0 18px; margin-top: -12px;
+  font-size: 12px; color: #cbd5e0; animation: fadeUp .8s ease .1s both;
+}
+.visitor-badge span#visitorGeo { color: var(--ac-l); font-weight: 600; }
+
+.resume-toast {
+  position: fixed; left: 50%; bottom: -80px; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 12px;
+  background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  box-shadow: var(--glass-shadow-lg);
+  border-radius: 99px; padding: 10px 10px 10px 20px;
+  font-size: 12.5px; color: #e2e8f0; z-index: 60;
+  transition: bottom .45s cubic-bezier(.2,.8,.2,1), opacity .45s ease;
+  opacity: 0; max-width: 92vw;
+}
+.resume-toast.show { bottom: 24px; opacity: 1; }
+.resume-toast-btn {
+  background: var(--ac); color: #fff; border: none; border-radius: 99px;
+  padding: 7px 16px; font-size: 12px; font-weight: 700; cursor: pointer;
+  white-space: nowrap; transition: background .2s ease;
+}
+.resume-toast-btn:hover { background: var(--ac-l); }
+.resume-toast-close {
+  background: transparent; border: none; color: #718096; cursor: pointer;
+  font-size: 13px; padding: 4px 6px;
+}
+.resume-toast-close:hover { color: #e2e8f0; }
+@media (max-width: 480px) {
+  .resume-toast { font-size: 11.5px; padding: 8px 8px 8px 16px; gap: 8px; }
+  .resume-toast-btn { padding: 6px 12px; }
+}
 
 .hero-name {
   font-family: 'Bebas Neue', sans-serif;
@@ -555,20 +607,20 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
 .hero-ring-outer {
   position: absolute; inset: -20px;
   border-radius: 42% 58% 48% 52% / 40% 44% 56% 60%;
-  border: 1px solid rgba(214,77,107,.15);
+  border: 1px solid rgba(244,69,63,.15);
   animation: spin 22s linear infinite;
 }
 .hero-ring-inner {
   position: absolute; inset: -5px;
   border-radius: 42% 58% 48% 52% / 40% 44% 56% 60%;
-  border: 1px solid rgba(214,77,107,.25);
+  border: 1px solid rgba(244,69,63,.25);
 }
 .hero-img-box {
   width: clamp(220px,30vw,310px);
   height: clamp(220px,30vw,310px);
   border-radius: 42% 58% 48% 52% / 40% 44% 56% 60%;
   overflow: hidden;
-  border: 2px solid rgba(214,77,107,.38);
+  border: 2px solid rgba(244,69,63,.38);
   box-shadow: 0 0 70px var(--ac-g), 0 30px 80px rgba(0,0,0,.5);
 }
 .hero-img-box img {
@@ -597,7 +649,7 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
   width: clamp(160px,20vw,210px);
   height: clamp(200px,25vw,262px);
   border-radius: 22px; overflow: hidden;
-  border: 1px solid rgba(214,77,107,.28);
+  border: 1px solid rgba(244,69,63,.28);
   box-shadow: 0 24px 64px rgba(0,0,0,.5), 0 0 32px var(--ac-g);
   margin: 0 auto;
 }
@@ -609,7 +661,7 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
 .about-text strong { color: var(--ac-l); }
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .tag {
-  background: rgba(214,77,107,.06); border: 1px solid rgba(214,77,107,.15);
+  background: rgba(244,69,63,.06); border: 1px solid rgba(244,69,63,.15);
   border-radius: 99px; padding: 4px 13px; font-size: 11px;
   color: var(--ac-l); letter-spacing: .8px;
 }
@@ -705,6 +757,12 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
   font-size: 26px; margin-bottom: 18px;
 }
 .proj-title { font-size: 16px; font-weight: 700; color: #f7fafc; margin-bottom: 10px; }
+.most-viewed-badge {
+  display: inline-block; margin-left: 8px; font-size: 9px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; padding: 3px 8px; border-radius: 99px;
+  background: rgba(246,173,85,.15); border: 1px solid rgba(246,173,85,.35); color: #f6ad55;
+  vertical-align: middle;
+}
 .proj-desc  { color: #4a5568; font-size: 13px; line-height: 1.8; margin-bottom: 20px; flex: 1; }
 .proj-tags  { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
 .proj-tag   { border-radius: 99px; padding: 3px 10px; font-size: 10px; letter-spacing: .8px; }
@@ -726,6 +784,7 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
 }
 .cert-card {
   display: flex; gap: 16px; align-items: center; padding: 20px 22px;
+  position: relative;
 }
 a.cert-card { cursor: pointer; }
 .cert-icon {
@@ -734,6 +793,16 @@ a.cert-card { cursor: pointer; }
 }
 .cert-name { font-size: 13px; font-weight: 600; color: #e2e8f0; line-height: 1.35; }
 .cert-org  { font-size: 10px; margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
+
+.cert-verified {
+  position: absolute; top: -8px; right: -8px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg,#34d399,#16915e);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+  box-shadow: 0 0 0 3px #14181f, 0 2px 8px rgba(22,145,94,.5);
+}
+a.cert-card:hover .cert-verified { box-shadow: 0 0 0 3px #14181f, 0 0 12px rgba(52,211,153,.8); }
 
 /* ═══════════════════════════════════════════════
    RESEARCH & PUBLICATIONS
@@ -870,6 +939,8 @@ footer {
 }
 .footer-logo span { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 2px; color: #2d3748; margin-left: 10px; }
 .footer-copy { color: #2d3748; font-size: 11px; letter-spacing: 1.5px; }
+.footer-meta { color: #4a5568; font-size: 10.5px; letter-spacing: 1px; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.footer-dot { opacity: .5; }
 
 /* ═══════════════════════════════════════════════
    WHATSAPP FLOAT BUTTON
@@ -877,12 +948,27 @@ footer {
 #wa-float {
   position: fixed; right: 22px; bottom: 22px; z-index: 500;
   width: 56px; height: 56px; border-radius: 50%;
-  background: #25d366; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 6px 22px rgba(37,211,102,.45);
+  background: linear-gradient(145deg, #2be374, #1fa855);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 22px rgba(37,211,102,.45), inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 6px rgba(0,0,0,.18);
   transition: transform .25s ease, box-shadow .25s ease;
 }
+#wa-float::before {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  animation: fabPulseWa 2.6s cubic-bezier(.4,0,.6,1) infinite;
+  pointer-events: none; z-index: -1;
+}
+@keyframes fabPulseWa {
+  0%   { box-shadow: 0 0 0 0 rgba(43,227,116,.5); }
+  70%  { box-shadow: 0 0 0 16px rgba(43,227,116,0); }
+  100% { box-shadow: 0 0 0 0 rgba(43,227,116,0); }
+}
 #wa-float:hover { transform: scale(1.08); box-shadow: 0 8px 28px rgba(37,211,102,.6); }
-#wa-float svg { width: 28px; height: 28px; fill: #fff; }
+#wa-float svg { width: 27px; height: 27px; fill: #fff; filter: drop-shadow(0 1px 1px rgba(0,0,0,.15)); }
+.fab-status {
+  position: absolute; top: 2px; right: 2px; width: 11px; height: 11px; border-radius: 50%;
+  background: #2be374; border: 2px solid #04060f; box-shadow: 0 0 6px rgba(43,227,116,.8);
+}
 #wa-tooltip {
   position: absolute; right: 66px; top: 50%; transform: translateY(-50%);
   background: #1a202c; color: #f7fafc; font-size: 11.5px; white-space: nowrap;
@@ -897,15 +983,35 @@ footer {
 #chat-float {
   position: fixed; right: 22px; bottom: 90px; z-index: 500;
   width: 56px; height: 56px; border-radius: 50%;
-  background: var(--ac); display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 6px 22px var(--ac-g); cursor: pointer; border: none;
+  background: linear-gradient(145deg, var(--ac-l), var(--ac)); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 22px var(--ac-g), inset 0 1px 0 rgba(255,255,255,.3), inset 0 -2px 6px rgba(0,0,0,.18); cursor: pointer; border: none;
   transition: transform .25s ease, box-shadow .25s ease, background .3s ease;
-  font-size: 24px;
+  color: #fff;
+}
+#chat-float::before {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  animation: fabPulseAccent 2.6s cubic-bezier(.4,0,.6,1) infinite;
+  pointer-events: none; z-index: -1;
+}
+#chat-float.open::before { display: none; }
+@keyframes fabPulseAccent {
+  0%   { box-shadow: 0 0 0 0 var(--ac-g); }
+  70%  { box-shadow: 0 0 0 16px rgba(0,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
 }
 #chat-float:hover { transform: scale(1.08); }
+#chat-float .chat-ico { position: relative; display: flex; align-items: center; justify-content: center; }
+#chat-float .chat-ico svg:first-child { width: 27px; height: 27px; }
+#chat-float .chat-spark {
+  position: absolute; top: -9px; right: -8px; width: 13px; height: 13px;
+  color: #ffe27a; filter: drop-shadow(0 0 3px rgba(255,226,122,.8));
+  animation: sparkPulse 1.8s ease-in-out infinite;
+}
+@keyframes sparkPulse { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
+#chat-float .close-ico svg { width: 22px; height: 22px; }
 #chat-float .close-ico { display: none; }
 #chat-float.open .chat-ico { display: none; }
-#chat-float.open .close-ico { display: block; }
+#chat-float.open .close-ico { display: flex; align-items: center; justify-content: center; }
 
 #chat-window {
   position: fixed; right: 22px; bottom: 158px; z-index: 501;
@@ -1179,6 +1285,22 @@ footer {
 }
 @media (max-width: 700px) { #cmdk-trigger { display: none; } }
 
+/* Mobile-only compact search FAB (cmdk-trigger's text pill doesn't fit small screens) */
+#search-fab {
+  display: none;
+  position: fixed; right: 22px; bottom: 158px; z-index: 500;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  box-shadow: 0 6px 20px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.1);
+  align-items: center; justify-content: center; color: #f7fafc; cursor: pointer;
+  transition: transform .25s ease, border-color .25s ease;
+}
+#search-fab svg { width: 21px; height: 21px; }
+#search-fab:active { transform: scale(.92); }
+@media (max-width: 700px) { #search-fab { display: flex; } }
+
 /* ═══════════════════════════════════════════════
    GITHUB STATS WIDGET
 ═══════════════════════════════════════════════ */
@@ -1187,6 +1309,8 @@ footer {
 }
 .gh-widget-grid img { width: 100%; border-radius: 12px; display: block; background: rgba(255,255,255,.02); }
 .gh-widget-full { grid-column: 1 / -1; }
+.gh-heatmap-wrap { background: #fff; border-radius: 12px; padding: 12px 10px 4px; overflow-x: auto; }
+.gh-heatmap-wrap img { width: 100%; min-width: 480px; background: transparent; }
 .gh-fallback-text { display: none; grid-column: 1 / -1; color: #718096; font-size: 13px; text-align: center; padding: 18px 0; }
 .gh-fallback-text a { color: var(--ac-l); }
 .gh-widget-grid.gh-fallback .gh-fallback-text { display: block; }
@@ -1486,10 +1610,321 @@ body.drawer-lock { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   #mobile-drawer, #mobile-drawer a.md-link, #totop-btn, .proj-card, .ripple-el { animation: none !important; transition: none !important; }
+  #wa-float::before, #chat-float::before, .chat-spark { animation: none !important; }
 }
+
+/* ═══════════════════════════════════════════════
+   TOP SCROLL PROGRESS BAR (mobile-first, always on)
+═══════════════════════════════════════════════ */
+#top-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--ac), var(--ac-l));
+  box-shadow: 0 0 10px var(--ac-g);
+  z-index: 9998;
+  transition: width .1s linear;
+}
+
+/* ═══════════════════════════════════════════════
+   TOAST NOTIFICATION
+═══════════════════════════════════════════════ */
+#toast-host {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(20px);
+  z-index: 9997; display: flex; flex-direction: column; gap: 8px;
+  pointer-events: none; align-items: center;
+}
+.toast {
+  background: rgba(10,12,20,.92);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  color: #f7fafc; font-size: 13px; font-weight: 500;
+  padding: 11px 20px; border-radius: 99px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.5);
+  display: flex; align-items: center; gap: 8px;
+  opacity: 0; transform: translateY(10px) scale(.94);
+  transition: opacity .3s ease, transform .3s cubic-bezier(.2,.8,.3,1);
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateY(0) scale(1); }
+.toast .toast-ic { color: var(--ac-l); font-size: 15px; }
+
+/* ═══════════════════════════════════════════════
+   SKELETON SHIMMER (GitHub widgets loading state)
+═══════════════════════════════════════════════ */
+@keyframes shimmerMove { 0% { background-position: -300px 0; } 100% { background-position: 300px 0; } }
+.gh-skel {
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(255,255,255,.025) 25%, rgba(255,255,255,.06) 50%, rgba(255,255,255,.025) 75%);
+  background-size: 600px 100%;
+  animation: shimmerMove 1.4s linear infinite;
+  min-height: 140px;
+}
+.gh-widget-full.gh-skel { min-height: 90px; }
+.gh-img { opacity: 0; transition: opacity .4s ease; }
+.gh-img.loaded { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   FILTER CHIPS (Projects)
+═══════════════════════════════════════════════ */
+.filter-chip-row {
+  display: flex; gap: 9px; overflow-x: auto; padding: 10px 2px 18px;
+  scrollbar-width: none; -ms-overflow-style: none;
+  position: sticky; top: 62px; z-index: 50;
+  background: linear-gradient(to bottom, rgba(4,6,15,.88) 70%, rgba(4,6,15,0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin: 0 -4px; padding-left: 4px; padding-right: 4px;
+}
+.filter-chip-row::-webkit-scrollbar { display: none; }
+.filter-chip {
+  flex-shrink: 0; padding: 8px 16px; border-radius: 99px; font-size: 12.5px;
+  font-weight: 600; letter-spacing: .3px; cursor: pointer; white-space: nowrap;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); color: #a0aec0;
+  transition: all .25s cubic-bezier(.2,.8,.3,1);
+}
+.filter-chip:hover { border-color: var(--glass-border-hover); color: #f7fafc; }
+.filter-chip.active {
+  background: linear-gradient(135deg, var(--ac), var(--ac-l));
+  border-color: transparent; color: #fff;
+  box-shadow: 0 6px 18px var(--ac-g);
+}
+.proj-card.filtered-out, .cert-card.filtered-out {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE SWIPE CAROUSEL — Projects & Certifications
+═══════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  .projects-grid.swipe-mode, .certs-grid.swipe-mode {
+    display: flex !important; grid-template-columns: none !important;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    gap: 14px; padding: 6px 6px 20px;
+    margin: 0 -18px; padding-left: 18px; padding-right: 18px;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .projects-grid.swipe-mode::-webkit-scrollbar, .certs-grid.swipe-mode::-webkit-scrollbar { display: none; }
+  .projects-grid.swipe-mode .proj-card {
+    flex: 0 0 86vw; scroll-snap-align: center;
+  }
+  .certs-grid.swipe-mode .cert-card {
+    flex: 0 0 78vw; scroll-snap-align: center;
+  }
+  .swipe-hint {
+    display: flex; align-items: center; gap: 6px; justify-content: center;
+    font-size: 11px; color: #718096; letter-spacing: .5px; margin: -8px 0 14px;
+  }
+}
+.swipe-hint { display: none; }
+
+/* ═══════════════════════════════════════════════
+   ACTION BUTTONS (Save Contact / Share)
+═══════════════════════════════════════════════ */
+.contact-actions {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin: 22px 0 6px;
+}
+.action-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px; border-radius: 14px; font-size: 13.5px; font-weight: 600;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); color: #e2e8f0;
+  cursor: pointer; transition: all .25s cubic-bezier(.2,.8,.3,1);
+}
+.action-btn:hover { border-color: var(--glass-border-hover); transform: translateY(-2px); }
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--ac), var(--ac-l)); border-color: transparent; color: #fff;
+  box-shadow: 0 10px 26px var(--ac-g);
+}
+.action-btn svg { width: 16px; height: 16px; }
+
+/* ═══════════════════════════════════════════════
+   COPY BUTTONS on email / phone
+═══════════════════════════════════════════════ */
+.copy-wrap { display: inline-flex; align-items: center; gap: 4px; }
+.copy-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 8px; cursor: pointer;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); color: #a0aec0;
+  font-size: 11px; transition: all .2s ease; flex-shrink: 0;
+}
+.copy-ic:hover { color: var(--ac-l); border-color: var(--glass-border-hover); }
+
+/* ═══════════════════════════════════════════════
+   INTRO / LOADING SCREEN
+═══════════════════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 10001;
+  background: #04060f;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity .45s ease, visibility .45s ease;
+  overflow: hidden;
+}
+.loader-glow {
+  position: absolute; width: 60vw; height: 60vw; max-width: 560px; max-height: 560px;
+  background: radial-gradient(circle, var(--ac-g), transparent 70%);
+  filter: blur(10px); opacity: .8; pointer-events: none;
+  animation: loaderGlowPulse 3s ease-in-out infinite;
+}
+@keyframes loaderGlowPulse { 0%,100% { transform: scale(1); opacity: .6; } 50% { transform: scale(1.15); opacity: .95; } }
+#loader h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem,7vw,4rem);
+  letter-spacing: 10px; color: #f7fafc; margin-bottom: 4px;
+  background: linear-gradient(120deg, #f7fafc, var(--ac-l), #f7fafc);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: loaderShine 2.2s linear infinite;
+  position: relative; z-index: 1;
+}
+@keyframes loaderShine { to { background-position: 200% center; } }
+#loader p {
+  font-size: 11px; letter-spacing: 5px; color: var(--ac-l);
+  text-transform: uppercase; margin-bottom: 40px;
+  position: relative; z-index: 1;
+}
+#loader-track {
+  width: 220px; height: 5px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-inset);
+  border-radius: 99px; overflow: hidden;
+  position: relative; z-index: 1;
+}
+#loader-bar {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--ac), var(--ac-l));
+  border-radius: 99px;
+  transition: width .18s ease-out;
+  box-shadow: 0 0 14px var(--ac-g);
+}
+#loader-pct {
+  margin-top: 12px; font-size: 12px; font-weight: 600;
+  color: var(--ac-l); letter-spacing: 2px; position: relative; z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .loader-glow, #loader h1 { animation: none !important; }
+}
+
+/* ═══════════════════════════════════════════════
+   PAGE-LEVEL SECTION TRANSITION
+═══════════════════════════════════════════════ */
+#page-transition {
+  position: fixed; inset: 0; z-index: 10000;
+  background: radial-gradient(circle at var(--tx,50%) var(--ty,50%), var(--ac-l), var(--ac) 70%);
+  clip-path: circle(0% at var(--tx,50%) var(--ty,50%));
+  transition: clip-path .55s cubic-bezier(.65,0,.35,1);
+  pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+#page-transition.active {
+  clip-path: circle(140% at var(--tx,50%) var(--ty,50%));
+  pointer-events: all;
+}
+#page-transition .pt-label {
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 7px; font-size: 20px;
+  color: rgba(255,255,255,.92); opacity: 0;
+  transition: opacity .3s ease .18s;
+}
+#page-transition.active .pt-label { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  #page-transition { transition: none; }
+}
+
+/* ═══════════════════════════════════════════════
+   NEUMORPHISM (WHITE) THEME
+═══════════════════════════════════════════════ */
+body.neumorphic {
+  --glass-blur: 0px;
+  --glass-sat: 100%;
+  --glass-bg: #fafafc;
+  --glass-bg-strong: #f2f2f6;
+  --glass-border: transparent;
+  --glass-border-hover: rgba(0,0,0,.12);
+  --glass-shadow: 8px 8px 16px rgba(190,190,205,.45), -8px -8px 16px rgba(255,255,255,.95);
+  --glass-shadow-lg: 12px 12px 26px rgba(190,190,205,.5), -12px -12px 26px rgba(255,255,255,1);
+  --glass-inset: inset 4px 4px 9px rgba(190,190,205,.4), inset -4px -4px 9px rgba(255,255,255,.95);
+  --glass-sheen: none;
+  background: #f6f7fb;
+  color: #000000;
+}
+body.neumorphic .glass::after { display: none; }
+body.neumorphic #bg-grid,
+body.neumorphic .aurora-blob,
+body.neumorphic #bg-grain { display: none !important; }
+body.neumorphic ::-webkit-scrollbar-track { background: #f0f0f4; }
+body.neumorphic .alt-bg { background: rgba(0,0,0,.02); }
+
+body.neumorphic nav {
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 8px 24px rgba(0,0,0,.06), inset 0 -1px 0 rgba(0,0,0,.04);
+}
+body.neumorphic #mobile-drawer { background: rgba(252,252,254,.97); }
+body.neumorphic #sidebar-nav {
+  background: linear-gradient(160deg, #fefeff, #f2f2f6);
+  box-shadow: 8px 8px 18px rgba(190,190,205,.4), -8px -8px 18px rgba(255,255,255,.95);
+}
+body.neumorphic .hero-badge-float { background: rgba(255,255,255,.9); }
+body.neumorphic #chat-window { background: rgba(252,252,254,.96); }
+body.neumorphic .accent-btn.active { border-color: #000000; box-shadow: 0 0 8px rgba(0,0,0,.25); }
+
+/* All text on light surfaces — pure black */
+body.neumorphic .nav-logo span,
+body.neumorphic .section-title h2,
+body.neumorphic .hero-name,
+body.neumorphic .hero-desc,
+body.neumorphic .hero-badge-float strong,
+body.neumorphic .about-text,
+body.neumorphic .tl-role,
+body.neumorphic .proj-title,
+body.neumorphic .research-title,
+body.neumorphic .rec-name,
+body.neumorphic .case-title,
+body.neumorphic .sb-link:hover,
+body.neumorphic .filter-chip:hover,
+body.neumorphic .cert-name,
+body.neumorphic .msg.bot,
+body.neumorphic .prof-ring span,
+body.neumorphic .action-btn,
+body.neumorphic .form-field,
+body.neumorphic #chat-input,
+body.neumorphic #mobile-drawer a.md-link,
+body.neumorphic .skill-name,
+body.neumorphic .research-meta strong,
+body.neumorphic .rec-text,
+body.neumorphic h1, body.neumorphic h2, body.neumorphic h3 {
+  color: #000000 !important;
+}
+/* Pale accent colors tuned for dark backgrounds — deepen for contrast on white */
+body.neumorphic [style*="color:#68d391"] { color: #1a8a54 !important; }
+body.neumorphic [style*="color:#3182ce"] { color: #1f5f9e !important; }
+body.neumorphic [style*="color:#b794f4"] { color: #6b32b8 !important; }
+body.neumorphic [style*="color:#f6ad55"] { color: #c2710a !important; }
+body.neumorphic [style*="color:#63b3ed"] { color: #1e5fa8 !important; }
+body.neumorphic [style*="color:#76e4f7"] { color: #0891b8 !important; }
+body.neumorphic [style*="color:#fc8181"] { color: #c81e2c !important; }
+body.neumorphic .action-btn.primary,
+body.neumorphic #chat-header,
+body.neumorphic #chat-header * { color: #fff !important; }
+body.neumorphic #chat-body { background: #fafafc !important; }
 </style>
 </head>
 <body>
+<!-- INTRO / LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-glow"></div>
+  <h1>ASHWIK BIRE</h1>
+  <p>Portfolio Loading</p>
+  <div id="loader-track"><div id="loader-bar"></div></div>
+  <div id="loader-pct">0%</div>
+</div>
+
+<!-- PAGE-LEVEL SECTION TRANSITION -->
+<div id="page-transition"><span class="pt-label">ASHWIK BIRE</span></div>
+
+<div id="top-progress"></div>
+<div id="toast-host"></div>
 <div class="cur-dot" id="curDot"></div>
 <div class="cur-ring" id="curRing"><span class="cur-label" id="curLabel"></span></div>
 
@@ -1498,6 +1933,9 @@ body.drawer-lock { overflow: hidden; }
 ══════════════════════════════════════════ -->
 <button id="cmdk-trigger" onclick="cmdkOpen()" aria-label="Open command palette">
   🔎 Quick Nav <kbd>⌘K</kbd>
+</button>
+<button id="search-fab" onclick="cmdkOpen()" aria-label="Search">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
 </button>
 <div id="cmdk-overlay" onclick="if(event.target===this) cmdkClose()">
   <div id="cmdk-box" role="dialog" aria-label="Command palette">
@@ -1542,6 +1980,7 @@ body.drawer-lock { overflow: hidden; }
     <a href="Ashwik_Bire_Resume.pdf" download="Ashwik_Bire_Resume.pdf" class="nav-resume-btn">⬇ Resume</a>
     <div class="accent-toggles">
       <button class="accent-btn red-btn active" onclick="setAccent('red')" title="Crimson theme"></button>
+      <button class="accent-btn maroon-btn" onclick="setAccent('maroon')" title="Maroon theme"></button>
       <button class="accent-btn blue-btn" onclick="setAccent('blue')" title="Azure theme"></button>
       <button class="accent-btn violet-btn" onclick="setAccent('violet')" title="Violet theme"></button>
       <button class="accent-btn emerald-btn" onclick="setAccent('emerald')" title="Emerald theme"></button>
@@ -1639,6 +2078,10 @@ body.drawer-lock { overflow: hidden; }
       <div class="hero-badge">
         <div class="hero-badge-dot"></div>
         <span>Open to Opportunities</span>
+      </div>
+
+      <div class="visitor-badge" id="visitorBadge" style="display:none">
+        <span id="visitorGreet"></span><span id="visitorGeo"></span>
       </div>
 
       <h1 class="hero-name">
@@ -1753,15 +2196,24 @@ body.drawer-lock { overflow: hidden; }
         <div class="glass reveal" style="transition-delay:.28s">
           <div class="skill-cat-title"><span>🐙</span> Live GitHub Activity</div>
           <div class="gh-widget-grid" id="gh-widget-grid">
-            <img loading="lazy" alt="Ashwik Bire GitHub stats" class="gh-img"
-                 src="https://github-readme-stats.vercel.app/api?username=AshwikBire&show_icons=true&count_private=true&hide_border=true&theme=transparent&title_color=d64d6b&icon_color=d64d6b&text_color=cbd5e0&bg_color=00000000"
+            <img loading="lazy" alt="Ashwik Bire GitHub stats" class="gh-img gh-skel"
+                 src="https://github-readme-stats.vercel.app/api?username=AshwikBire&show_icons=true&count_private=true&hide_border=true&theme=transparent&title_color=f4453f&icon_color=f4453f&text_color=cbd5e0&bg_color=00000000"
+                 onload="this.classList.add('loaded');this.classList.remove('gh-skel');"
                  onerror="this.closest('.gh-widget-grid').classList.add('gh-fallback'); this.remove();" />
-            <img loading="lazy" alt="Ashwik Bire top languages" class="gh-img"
-                 src="https://github-readme-stats.vercel.app/api/top-langs/?username=AshwikBire&layout=compact&hide_border=true&theme=transparent&title_color=d64d6b&text_color=cbd5e0&bg_color=00000000"
+            <img loading="lazy" alt="Ashwik Bire top languages" class="gh-img gh-skel"
+                 src="https://github-readme-stats.vercel.app/api/top-langs/?username=AshwikBire&layout=compact&hide_border=true&theme=transparent&title_color=f4453f&text_color=cbd5e0&bg_color=00000000"
+                 onload="this.classList.add('loaded');this.classList.remove('gh-skel');"
                  onerror="this.closest('.gh-widget-grid').classList.add('gh-fallback'); this.remove();" />
-            <img loading="lazy" class="gh-widget-full gh-img" alt="Ashwik Bire GitHub streak"
-                 src="https://streak-stats.demolab.com?user=AshwikBire&hide_border=true&background=00000000&ring=d64d6b&fire=d64d6b&currStreakLabel=d64d6b&sideLabels=cbd5e0&currStreakNum=f7fafc&sideNums=f7fafc&dates=4a5568"
+            <img loading="lazy" class="gh-widget-full gh-img gh-skel" alt="Ashwik Bire GitHub streak"
+                 src="https://streak-stats.demolab.com?user=AshwikBire&hide_border=true&background=00000000&ring=f4453f&fire=f4453f&currStreakLabel=f4453f&sideLabels=cbd5e0&currStreakNum=f7fafc&sideNums=f7fafc&dates=4a5568"
+                 onload="this.classList.add('loaded');this.classList.remove('gh-skel');"
                  onerror="this.closest('.gh-widget-grid').classList.add('gh-fallback'); this.remove();" />
+            <div class="gh-widget-full gh-heatmap-wrap">
+              <img loading="lazy" class="gh-img gh-skel gh-heatmap" alt="Ashwik Bire GitHub contribution heatmap"
+                   src="https://ghchart.rshah.org/f4453f/AshwikBire"
+                   onload="this.classList.add('loaded');this.classList.remove('gh-skel');"
+                   onerror="this.closest('.gh-heatmap-wrap').style.display='none';" />
+            </div>
             <p class="gh-fallback-text">Live GitHub stats are temporarily unavailable — <a href="https://github.com/AshwikBire" target="_blank" rel="noopener">view profile on GitHub ↗</a></p>
           </div>
         </div>
@@ -1942,14 +2394,14 @@ body.drawer-lock { overflow: hidden; }
 
       <!-- VDA -->
       <div class="tl-item reveal slide">
-        <div class="tl-dot" style="background:rgba(214,77,107,.14);border:2px solid rgba(214,77,107,.42);box-shadow:0 0 24px rgba(214,77,107,.22);">🏢</div>
-        <div class="tl-card glass" style="flex:1;border-color:rgba(214,77,107,.16)">
+        <div class="tl-dot" style="background:rgba(244,69,63,.14);border:2px solid rgba(244,69,63,.42);box-shadow:0 0 24px rgba(244,69,63,.22);">🏢</div>
+        <div class="tl-card glass" style="flex:1;border-color:rgba(244,69,63,.16)">
           <div class="tl-header">
             <div>
               <div class="tl-role">Data Analyst</div>
               <div class="tl-co" style="color:var(--ac-l)">VDA Infosolutions Pvt. Ltd.</div>
             </div>
-            <span class="tl-badge" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.156);color:var(--ac-l)">Dec 2023 – May 2025</span>
+            <span class="tl-badge" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.156);color:var(--ac-l)">Dec 2023 – May 2025</span>
           </div>
           <ul class="tl-list">
             <li><span class="bullet" style="color:var(--ac-l)">◆</span><span>Analyzed large-scale datasets from OLTP/OLAP systems, enabling data-driven operational decisions and strategic planning</span></li>
@@ -2066,19 +2518,21 @@ body.drawer-lock { overflow: hidden; }
       <div class="title-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
     </div>
 
-<div class="projects-grid">
+<div class="filter-chip-row" id="projFilterChips"></div>
+<p class="swipe-hint">👈 Swipe to browse projects 👉</p>
+<div class="projects-grid" id="projectsGrid">
 
-      <div class="glass glass-hover reveal proj-card" style="transition-delay:.05s;border-color:rgba(214,77,107,.12)">
-        <div class="proj-icon" style="background:rgba(214,77,107,.12);border:1px solid rgba(214,77,107,.15);box-shadow:0 0 20px rgba(214,77,107,.18)">🚀</div>
+      <div class="glass glass-hover reveal proj-card" style="transition-delay:.05s;border-color:rgba(244,69,63,.12)">
+        <div class="proj-icon" style="background:rgba(244,69,63,.12);border:1px solid rgba(244,69,63,.15);box-shadow:0 0 20px rgba(244,69,63,.18)">🚀</div>
         <div class="proj-title">SkyTrail Desktop</div>
         <div class="proj-desc">AI-Powered Vedic & Western Astrology Desktop Application combining traditional astrology calculations with modern AI capabilities, Panchang, Kundali Milan, and holographic UI.</div>
         <div class="proj-tags">
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">Python</span>
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">PyQt6</span>
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">Ollama</span>
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">AI</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">Python</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">PyQt6</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">Ollama</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">AI</span>
         </div>
-        <a href="https://github.com/AshwikBire/skytrail-desktop" target="_blank" class="proj-link" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.15);color:var(--ac-l)">View on GitHub →</a>
+        <a href="https://github.com/AshwikBire/skytrail-desktop" target="_blank" class="proj-link" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.15);color:var(--ac-l)">View on GitHub →</a>
       </div>
 
       <div class="glass glass-hover reveal proj-card" style="transition-delay:.12s;border-color:rgba(49,130,206,.12)">
@@ -2144,16 +2598,16 @@ body.drawer-lock { overflow: hidden; }
         <a href="https://github.com/AshwikBire/ai-stock-predictor" target="_blank" class="proj-link" style="background:rgba(99,179,237,.06);border:1px solid rgba(99,179,237,.15);color:#63b3ed">View on GitHub →</a>
       </div>
 
-      <div class="glass glass-hover reveal proj-card" style="transition-delay:.42s;border-color:rgba(214,77,107,.12)">
-        <div class="proj-icon" style="background:rgba(214,77,107,.12);border:1px solid rgba(214,77,107,.15);box-shadow:0 0 20px rgba(214,77,107,.18)">🎤</div>
+      <div class="glass glass-hover reveal proj-card" style="transition-delay:.42s;border-color:rgba(244,69,63,.12)">
+        <div class="proj-icon" style="background:rgba(244,69,63,.12);border:1px solid rgba(244,69,63,.15);box-shadow:0 0 20px rgba(244,69,63,.18)">🎤</div>
         <div class="proj-title">AI Interview Simulator</div>
         <div class="proj-desc">LLM-powered mock interview tool generating role-specific questions and evaluating candidate responses in real-time with NLP analysis.</div>
         <div class="proj-tags">
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">LLM App Dev</span>
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">NLP</span>
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">Prompt Engineering</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">LLM App Dev</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">NLP</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">Prompt Engineering</span>
         </div>
-        <a href="https://github.com/AshwikBire/ai-interview-simulator" target="_blank" class="proj-link" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.15);color:var(--ac-l)">View on GitHub →</a>
+        <a href="https://github.com/AshwikBire/ai-interview-simulator" target="_blank" class="proj-link" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.15);color:var(--ac-l)">View on GitHub →</a>
       </div>
 
       <div class="glass glass-hover reveal proj-card" style="transition-delay:.48s;border-color:rgba(118,228,247,.12)">
@@ -2168,17 +2622,17 @@ body.drawer-lock { overflow: hidden; }
         <a href="https://github.com/AshwikBire" target="_blank" class="proj-link" style="background:rgba(118,228,247,.06);border:1px solid rgba(118,228,247,.15);color:#76e4f7">View on GitHub →</a>
       </div>
 
-      <div class="glass glass-hover reveal proj-card" style="transition-delay:.54s;border-color:rgba(214,77,107,.12)">
-        <div class="proj-icon" style="background:rgba(214,77,107,.12);border:1px solid rgba(214,77,107,.15);box-shadow:0 0 20px rgba(214,77,107,.18)">🧭</div>
+      <div class="glass glass-hover reveal proj-card" style="transition-delay:.54s;border-color:rgba(244,69,63,.12)">
+        <div class="proj-icon" style="background:rgba(244,69,63,.12);border:1px solid rgba(244,69,63,.15);box-shadow:0 0 20px rgba(244,69,63,.18)">🧭</div>
         <div class="proj-title">Pravesh Pod — Recruiting Pipeline Co-Pilot</div>
         <div class="proj-desc">AI-powered recruiting pipeline co-pilot built on Lemma SDK — automates resume ingestion, JD fit scoring, screener routing, and interview scheduling end-to-end.</div>
         <div class="proj-tags">
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">AI</span>
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">Machine Learning</span>
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">Lemma SDK</span>
-          <span class="proj-tag" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.132);color:var(--ac-l)">Automation</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">AI</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">Machine Learning</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">Lemma SDK</span>
+          <span class="proj-tag" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.132);color:var(--ac-l)">Automation</span>
         </div>
-        <a href="https://github.com/AshwikBire/pravesh-lemma-pod" target="_blank" class="proj-link" style="background:rgba(214,77,107,.06);border:1px solid rgba(214,77,107,.15);color:var(--ac-l)">View on GitHub →</a>
+        <a href="https://github.com/AshwikBire/pravesh-lemma-pod" target="_blank" class="proj-link" style="background:rgba(244,69,63,.06);border:1px solid rgba(244,69,63,.15);color:var(--ac-l)">View on GitHub →</a>
       </div>
 
       <div class="glass glass-hover reveal proj-card" style="transition-delay:.6s;border-color:rgba(49,130,206,.12)">
@@ -2326,7 +2780,9 @@ body.drawer-lock { overflow: hidden; }
       <div class="title-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
     </div>
 
-    <div class="certs-grid">
+    <div class="filter-chip-row" id="certFilterChips"></div>
+    <p class="swipe-hint">👈 Swipe to browse certifications 👉</p>
+    <div class="certs-grid" id="certsGrid">
       <a href="https://learn.microsoft.com/api/credentials/share/en-us/AshwikBire-7557/B4324BFF2A4C2081?sharingId=76BD5BF23210903E" target="_blank" rel="noopener" class="glass glass-hover cert-card reveal scale" style="border-color:rgba(246,173,85,.16);transition-delay:.02s">
         <div class="cert-icon" style="background:rgba(246,173,85,.12);border:1px solid rgba(246,173,85,.168);box-shadow:0 0 18px rgba(246,173,85,.2)">🏅</div>
         <div><div class="cert-name">Power BI Data Analyst Associate (PL-300)</div><div class="cert-org" style="color:#f6ad55">Microsoft ↗</div></div>
@@ -2339,13 +2795,13 @@ body.drawer-lock { overflow: hidden; }
         <div class="cert-icon" style="background:rgba(104,211,145,.12);border:1px solid rgba(104,211,145,.168);box-shadow:0 0 18px rgba(104,211,145,.2)">🧠</div>
         <div><div class="cert-name">Azure Data Scientist Associate</div><div class="cert-org" style="color:#68d391">Microsoft</div></div>
       </div>
-      <a href="https://learn.microsoft.com/api/credentials/share/en-in/AshwikBire-4950/1E87AA6F5851BCA8?sharingId=4C363AB1FFC3A56C" target="_blank" rel="noopener" class="glass glass-hover cert-card reveal scale" style="border-color:rgba(214,77,107,.16);transition-delay:.14s">
-        <div class="cert-icon" style="background:rgba(214,77,107,.12);border:1px solid rgba(214,77,107,.168);box-shadow:0 0 18px rgba(214,77,107,.2)">🧩</div>
+      <a href="https://learn.microsoft.com/api/credentials/share/en-in/AshwikBire-4950/1E87AA6F5851BCA8?sharingId=4C363AB1FFC3A56C" target="_blank" rel="noopener" class="glass glass-hover cert-card reveal scale" style="border-color:rgba(244,69,63,.16);transition-delay:.14s">
+        <div class="cert-icon" style="background:rgba(244,69,63,.12);border:1px solid rgba(244,69,63,.168);box-shadow:0 0 18px rgba(244,69,63,.2)">🧩</div>
         <div><div class="cert-name">Fabric Analytics Engineer Associate (DP-600)</div><div class="cert-org" style="color:var(--ac-l)">Microsoft ↗</div></div>
       </a>
 	  
-	  <a href="https://learn.microsoft.com/api/credentials/share/en-us/AshwikBire-7358/F1A5E104890BBD25?sharingId=CA4A91A725386160" target="_blank" rel="noopener" class="glass glass-hover cert-card reveal scale" style="border-color:rgba(214,77,107,.16);transition-delay:.14s">
-        <div class="cert-icon" style="background:rgba(214,77,107,.12);border:1px solid rgba(214,77,107,.168);box-shadow:0 0 18px rgba(214,77,107,.2)">🧩</div>
+	  <a href="https://learn.microsoft.com/api/credentials/share/en-us/AshwikBire-7358/F1A5E104890BBD25?sharingId=CA4A91A725386160" target="_blank" rel="noopener" class="glass glass-hover cert-card reveal scale" style="border-color:rgba(244,69,63,.16);transition-delay:.14s">
+        <div class="cert-icon" style="background:rgba(244,69,63,.12);border:1px solid rgba(244,69,63,.168);box-shadow:0 0 18px rgba(244,69,63,.2)">🧩</div>
         <div><div class="cert-name">Microsoft Certified: Fabric Data Engineer Associate (DP-700)</div><div class="cert-org" style="color:var(--ac-l)">Microsoft ↗</div></div>
       </a>
 	  
@@ -2369,8 +2825,8 @@ body.drawer-lock { overflow: hidden; }
         <div class="cert-icon" style="background:rgba(104,211,145,.12);border:1px solid rgba(104,211,145,.168);box-shadow:0 0 18px rgba(104,211,145,.2)">🐍</div>
         <div><div class="cert-name">SQL &amp; Python (Advanced), Software Engineer</div><div class="cert-org" style="color:#68d391">HackerRank ↗</div></div>
       </a>
-      <a href="https://coursera.org/share/0bdcea47443b0dd332cfdc1738f24ede" target="_blank" rel="noopener" class="glass glass-hover cert-card reveal scale" style="border-color:rgba(214,77,107,.16);transition-delay:.38s">
-        <div class="cert-icon" style="background:rgba(214,77,107,.12);border:1px solid rgba(214,77,107,.168);box-shadow:0 0 18px rgba(214,77,107,.2)">🛡️</div>
+      <a href="https://coursera.org/share/0bdcea47443b0dd332cfdc1738f24ede" target="_blank" rel="noopener" class="glass glass-hover cert-card reveal scale" style="border-color:rgba(244,69,63,.16);transition-delay:.38s">
+        <div class="cert-icon" style="background:rgba(244,69,63,.12);border:1px solid rgba(244,69,63,.168);box-shadow:0 0 18px rgba(244,69,63,.2)">🛡️</div>
         <div><div class="cert-name">Introduction to Cloud Identity</div><div class="cert-org" style="color:var(--ac-l)">Coursera ↗</div></div>
       </a>
       <div class="glass glass-hover cert-card reveal scale" style="border-color:rgba(118,228,247,.16);transition-delay:.42s">
@@ -2408,8 +2864,8 @@ body.drawer-lock { overflow: hidden; }
         <div class="cert-icon" style="background:rgba(104,211,145,.12);border:1px solid rgba(104,211,145,.168);box-shadow:0 0 18px rgba(104,211,145,.2)">🥇</div>
         <div><div class="cert-name">Amrita Business Innovation Challenge</div><div class="cert-org" style="color:#68d391">State-wise Winner &amp; All India Rank 3 (Unstop)</div></div>
       </div>
-      <div class="glass glass-hover cert-card reveal scale" style="border-color:rgba(214,77,107,.16);transition-delay:.14s">
-        <div class="cert-icon" style="background:rgba(214,77,107,.12);border:1px solid rgba(214,77,107,.168);box-shadow:0 0 18px rgba(214,77,107,.2)">🎖️</div>
+      <div class="glass glass-hover cert-card reveal scale" style="border-color:rgba(244,69,63,.16);transition-delay:.14s">
+        <div class="cert-icon" style="background:rgba(244,69,63,.12);border:1px solid rgba(244,69,63,.168);box-shadow:0 0 18px rgba(244,69,63,.2)">🎖️</div>
         <div><div class="cert-name">MangaVerse Hackathon — National Rank 3</div><div class="cert-org" style="color:var(--ac-l)">Unstop · IEEE Vasut WIE</div></div>
       </div>
       <div class="glass glass-hover cert-card reveal scale" style="border-color:rgba(183,148,244,.16);transition-delay:.18s">
@@ -2650,6 +3106,16 @@ body.drawer-lock { overflow: hidden; }
       Looking to build powerful data solutions or need a skilled analyst?
       Let's discuss how I can add value to your team.
     </p>
+    <div class="contact-actions reveal" style="transition-delay:.1s">
+      <button class="action-btn primary" id="saveContactBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+        Save Contact
+      </button>
+      <button class="action-btn" id="sharePortfolioBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5 15.4 17.5M15.4 6.5 8.6 10.5"/></svg>
+        Share Portfolio
+      </button>
+    </div>
     <form id="contactForm" class="glass contact-form reveal" style="transition-delay:.16s" onsubmit="return handleContact(event)">
       <input type="text"  id="cf-name"  name="name"    class="form-field" placeholder="Your Name" required />
       <input type="email" id="cf-email" name="email"   class="form-field" placeholder="Your Email" required />
@@ -2666,8 +3132,14 @@ body.drawer-lock { overflow: hidden; }
       <a href="https://codechef.com/users/ashwikbire" target="_blank" class="social-link">🍽️ CodeChef</a>
       <a href="https://fiverr.com/ashwikbire" target="_blank" class="social-link">🟢 Fiverr</a>
       <a href="https://techgig.com/ashwikbire" target="_blank" class="social-link">⚙️ TechGig</a>
-      <a href="mailto:ashwikbire@gmail.com" class="social-link">📧 Email</a>
-      <a href="tel:+918459291488" class="social-link">📱 Call</a>
+      <span class="copy-wrap">
+        <a href="mailto:ashwikbire@gmail.com" class="social-link">📧 Email</a>
+        <span class="copy-ic" data-copy="ashwikbire@gmail.com" title="Copy email">⧉</span>
+      </span>
+      <span class="copy-wrap">
+        <a href="tel:+918459291488" class="social-link">📱 Call</a>
+        <span class="copy-ic" data-copy="+91 8459291488" title="Copy phone number">⧉</span>
+      </span>
       <a href="https://drive.google.com/file/d/1cE29y3vuALqiSVJETrVmFP_iJmv6zHhE/view?usp=sharing" download="Ashwik_Bire_Resume.pdf" class="social-link" style="background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600">⬇ Download Resume</a>
     </div>
   </div>
@@ -2679,11 +3151,22 @@ body.drawer-lock { overflow: hidden; }
 <footer>
   <div class="footer-logo">ASHWIK BIRE<span>DATA SCIENTIST · BI &amp; AUTOMATION SPECIALIST</span></div>
   <div class="footer-copy">© 2026 Ashwik Bire · Built with ❤️</div>
+  <div class="footer-meta">
+    <span id="footerUpdated"></span>
+    <span class="footer-dot">·</span>
+    <span id="footerVisits"></span>
+  </div>
 </footer>
 
 <!-- ══════════════════════════════════════════
      WHATSAPP FLOAT BUTTON
 ══════════════════════════════════════════ -->
+<div id="resumeToast" class="resume-toast">
+  <span id="resumeToastText">Continue where you left off?</span>
+  <button id="resumeToastGo" class="resume-toast-btn">Resume →</button>
+  <button id="resumeToastClose" class="resume-toast-close" aria-label="Dismiss">✕</button>
+</div>
+
 <button id="totop-btn" onclick="scrollToTop()" aria-label="Back to top">
   <svg class="ring" viewBox="0 0 46 46"><circle class="ring-bg" cx="23" cy="23" r="20.5" fill="none" stroke-width="2"/><circle class="ring-fg" cx="23" cy="23" r="20.5" fill="none" stroke-width="2"/></svg>
   <svg viewBox="0 0 24 24"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
@@ -2691,15 +3174,26 @@ body.drawer-lock { overflow: hidden; }
 
 <a id="wa-float" href="https://wa.me/918459291488?text=Hi%20Ashwik%2C%20I%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener">
   <span id="wa-tooltip">Chat on WhatsApp</span>
-  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.79 14.12c-.24.68-1.4 1.31-1.94 1.39-.5.08-1.13.11-1.83-.11-.42-.14-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.26-.29.58-.36.77-.36.19 0 .39 0 .55.01.18.01.42-.07.66.5.24.58.83 2 .9 2.14.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.58.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.19.72-.84.92-1.13.19-.29.38-.24.64-.14.26.1 1.68.79 1.97.94.29.14.48.22.55.34.07.13.07.72-.17 1.4z"/></svg>
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 0h-.002C7.164 0 0 7.164 0 16c0 3.53 1.14 6.795 3.08 9.447L1.053 31.947l6.71-1.999A15.9 15.9 0 0 0 16 32c8.836 0 16-7.164 16-16S24.837 0 16.001 0zM16 29.334c-2.63 0-5.09-.77-7.16-2.093l-.514-.306-5.31 1.582 1.607-5.174-.335-.532A13.28 13.28 0 0 1 2.667 16C2.667 8.639 8.639 2.667 16 2.667S29.334 8.639 29.334 16 23.362 29.334 16 29.334zm7.29-9.938c-.4-.2-2.37-1.17-2.74-1.303-.368-.134-.635-.2-.902.2-.267.4-1.035 1.303-1.269 1.57-.234.267-.468.3-.867.1-.4-.2-1.688-.622-3.216-1.984-1.189-1.06-1.99-2.367-2.224-2.767-.234-.4-.025-.617.176-.816.181-.18.4-.468.6-.702.2-.234.267-.4.4-.667.134-.267.067-.5-.034-.7-.1-.2-.902-2.17-1.236-2.973-.325-.783-.656-.677-.902-.69-.234-.011-.5-.013-.767-.013-.267 0-.7.1-1.067.5-.367.4-1.4 1.367-1.4 3.334 0 1.967 1.434 3.867 1.634 4.134.2.267 2.822 4.311 6.837 6.043.955.412 1.7.658 2.28.842.958.305 1.83.262 2.52.159.769-.115 2.37-.969 2.704-1.905.334-.936.334-1.738.234-1.905-.1-.167-.367-.267-.767-.467z"/></svg>
+  <span class="fab-status"></span>
 </a>
 
 <!-- ══════════════════════════════════════════
      CHATBOT WIDGET
 ══════════════════════════════════════════ -->
-<button id="chat-float" onclick="toggleChat()">
-  <span class="chat-ico">💬</span>
-  <span class="close-ico">✕</span>
+<button id="chat-float" onclick="toggleChat()" aria-label="Chat with Ashwik's AI assistant">
+  <span class="chat-ico">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 6.2A2.7 2.7 0 0 1 6.7 3.5h10.6A2.7 2.7 0 0 1 20 6.2v6.1a2.7 2.7 0 0 1-2.7 2.7h-6l-4.35 3.3c-.55.42-1.34.03-1.34-.66v-2.64h-.9A2.7 2.7 0 0 1 4 12.3V6.2z"/>
+      <circle cx="8.4" cy="9.2" r=".85" fill="currentColor" stroke="none"/>
+      <circle cx="12" cy="9.2" r=".85" fill="currentColor" stroke="none"/>
+      <circle cx="15.6" cy="9.2" r=".85" fill="currentColor" stroke="none"/>
+    </svg>
+    <svg class="chat-spark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 2l1.2 3.3L23.5 6.5l-3.3 1.2L19 11l-1.2-3.3-3.3-1.2 3.3-1.2z"/></svg>
+  </span>
+  <span class="close-ico">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </span>
 </button>
 
 <div id="chat-window">
@@ -2787,14 +3281,29 @@ body.drawer-lock { overflow: hidden; }
 })();
 
 /* ── ACCENT / COLOR THEME SWITCHER ── */
-var THEME_NAMES = ['blue', 'violet', 'emerald', 'amber', 'cyan'];
-function setAccent(color) {
+var THEME_NAMES = ['maroon', 'blue', 'violet', 'emerald', 'amber', 'cyan'];
+function setAccent(color, skipSave) {
   THEME_NAMES.forEach(function(t) { document.body.classList.remove(t); });
   if (color !== 'red') document.body.classList.add(color);
-  document.querySelectorAll('.accent-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.accent-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
   var btn = document.querySelector('.' + color + '-btn');
   if (btn) btn.classList.add('active');
+  if (!skipSave) {
+    try { localStorage.setItem('ab-accent', color); } catch (e) {}
+  }
 }
+
+/* ── RESTORE SAVED THEME PREFERENCES ── */
+(function() {
+  try {
+    var savedAccent = localStorage.getItem('ab-accent');
+    if (savedAccent && (savedAccent === 'red' || THEME_NAMES.indexOf(savedAccent) !== -1)) {
+      setAccent(savedAccent, true);
+    }
+  } catch (e) {}
+})();
 
 /* ── CONTACT FORM ──
    Sends via Formspree — no server needed.
@@ -3566,10 +4075,11 @@ if (window.gsap) {
 /* ── TOUCH RIPPLE FEEDBACK (buttons, links, cards on mobile) ── */
 (function() {
   if (!('ontouchstart' in window)) return;
-  var selector = '.proj-link, .accent-btn, .rec-arrow, .nav-resume-btn, .sb-link, .md-link, #hamburger-btn, #totop-btn, #wa-float, #chat-float';
+  var selector = '.proj-link, .accent-btn, .rec-arrow, .nav-resume-btn, .sb-link, .md-link, #hamburger-btn, #totop-btn, #wa-float, #chat-float, .social-link, .form-btn, .proj-card, .cert-card, .filter-chip, .tab-link, .action-btn';
   document.addEventListener('touchstart', function(e) {
     var target = e.target.closest(selector);
     if (!target) return;
+    if (navigator.vibrate) { navigator.vibrate(8); }
     var rect = target.getBoundingClientRect();
     var touch = e.touches[0];
     var size = Math.max(rect.width, rect.height) * 1.3;
@@ -3606,6 +4116,514 @@ if (window.gsap) {
       card.style.transform = '';
     });
   });
+})();
+
+/* ── TOP SCROLL PROGRESS BAR ── */
+(function() {
+  var bar = document.getElementById('top-progress');
+  if (!bar) return;
+  function update() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', function() { requestAnimationFrame(update); }, { passive: true });
+  update();
+})();
+
+/* ── TOAST NOTIFICATIONS ── */
+function showToast(message, icon) {
+  var host = document.getElementById('toast-host');
+  if (!host) return;
+  var t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = '<span class="toast-ic">' + (icon || '✓') + '</span><span>' + message + '</span>';
+  host.appendChild(t);
+  requestAnimationFrame(function() { t.classList.add('show'); });
+  setTimeout(function() {
+    t.classList.remove('show');
+    setTimeout(function() { t.remove(); }, 350);
+  }, 2200);
+}
+
+/* ── COPY TO CLIPBOARD (email / phone) ── */
+document.querySelectorAll('.copy-ic').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var text = btn.getAttribute('data-copy');
+    var done = function() { showToast('Copied "' + text + '"', '📋'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function() {
+        fallbackCopy(text); done();
+      });
+    } else {
+      fallbackCopy(text); done();
+    }
+  });
+});
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch (err) {}
+  document.body.removeChild(ta);
+}
+
+/* ── SAVE CONTACT (vCard download) ── */
+(function() {
+  var btn = document.getElementById('saveContactBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    var vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'N:Bire;Ashwik;;;',
+      'FN:Ashwik Bire',
+      'TITLE:Data Analyst / BI & Automation Specialist',
+      'EMAIL;TYPE=INTERNET:ashwikbire@gmail.com',
+      'TEL;TYPE=CELL:+918459291488',
+      'URL:https://ashwikbire.github.io/My-Portfolio/',
+      'END:VCARD'
+    ].join('\n');
+    var blob = new Blob([vcard], { type: 'text/vcard' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'Ashwik_Bire.vcf';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Contact card downloaded', '👤');
+  });
+})();
+
+/* ── NATIVE SHARE ── */
+(function() {
+  var btn = document.getElementById('sharePortfolioBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    var shareData = {
+      title: 'Ashwik Bire — Data Analyst / BI & Automation Specialist',
+      text: 'Check out Ashwik Bire\'s portfolio',
+      url: window.location.href
+    };
+    if (navigator.share) {
+      navigator.share(shareData).catch(function() {});
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(shareData.url).then(function() {
+        showToast('Portfolio link copied', '🔗');
+      });
+    } else {
+      fallbackCopy(shareData.url);
+      showToast('Portfolio link copied', '🔗');
+    }
+  });
+})();
+
+/* ── PROJECT FILTER CHIPS (auto-built from proj-tag text) ── */
+(function() {
+  var grid = document.getElementById('projectsGrid');
+  var chipRow = document.getElementById('projFilterChips');
+  if (!grid || !chipRow) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.proj-card'));
+  var tagSet = [];
+  cards.forEach(function(card) {
+    card.querySelectorAll('.proj-tag').forEach(function(tag) {
+      var t = tag.textContent.trim();
+      if (t && tagSet.indexOf(t) === -1) tagSet.push(t);
+    });
+  });
+  // Keep a manageable, high-signal chip set
+  var priority = ['Python','React 18','SQL','Power BI','Azure','AI','Streamlit','FastAPI','Machine Learning'];
+  var ordered = priority.filter(function(t) { return tagSet.indexOf(t) !== -1; })
+    .concat(tagSet.filter(function(t) { return priority.indexOf(t) === -1; }));
+  var shown = ordered.slice(0, 10);
+
+  var allChip = document.createElement('div');
+  allChip.className = 'filter-chip active';
+  allChip.textContent = 'All';
+  allChip.dataset.tag = '';
+  chipRow.appendChild(allChip);
+
+  shown.forEach(function(tagText) {
+    var chip = document.createElement('div');
+    chip.className = 'filter-chip';
+    chip.textContent = tagText;
+    chip.dataset.tag = tagText;
+    chipRow.appendChild(chip);
+  });
+
+  chipRow.addEventListener('click', function(e) {
+    var chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    chipRow.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+    var tag = chip.dataset.tag;
+    cards.forEach(function(card) {
+      if (!tag) { card.classList.remove('filtered-out'); return; }
+      var tags = Array.prototype.map.call(card.querySelectorAll('.proj-tag'), function(t) { return t.textContent.trim(); });
+      card.classList.toggle('filtered-out', tags.indexOf(tag) === -1);
+    });
+  });
+})();
+
+/* ── CERTIFICATION FILTER CHIPS (auto-built from issuing org) ── */
+(function() {
+  var grid = document.getElementById('certsGrid');
+  var chipRow = document.getElementById('certFilterChips');
+  if (!grid || !chipRow) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.cert-card'));
+  var orgOf = function(card) {
+    var el = card.querySelector('.cert-org');
+    return el ? el.textContent.replace('↗', '').trim() : '';
+  };
+  var orgSet = [];
+  cards.forEach(function(card) {
+    var org = orgOf(card);
+    if (org && orgSet.indexOf(org) === -1) orgSet.push(org);
+  });
+
+  var allChip = document.createElement('div');
+  allChip.className = 'filter-chip active';
+  allChip.textContent = 'All';
+  allChip.dataset.tag = '';
+  chipRow.appendChild(allChip);
+
+  orgSet.forEach(function(org) {
+    var chip = document.createElement('div');
+    chip.className = 'filter-chip';
+    chip.textContent = org;
+    chip.dataset.tag = org;
+    chipRow.appendChild(chip);
+  });
+
+  chipRow.addEventListener('click', function(e) {
+    var chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    chipRow.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+    var org = chip.dataset.tag;
+    cards.forEach(function(card) {
+      if (!org) { card.classList.remove('filtered-out'); return; }
+      card.classList.toggle('filtered-out', orgOf(card) !== org);
+    });
+  });
+})();
+
+/* ── MOBILE SWIPE CAROUSEL TOGGLE ── */
+(function() {
+  var grids = [document.getElementById('projectsGrid'), document.getElementById('certsGrid')].filter(Boolean);
+  function apply() {
+    var isMobile = window.matchMedia('(max-width: 700px)').matches;
+    grids.forEach(function(g) { g.classList.toggle('swipe-mode', isMobile); });
+  }
+  apply();
+  window.addEventListener('resize', apply);
+})();
+
+/* ── PWA: SERVICE WORKER REGISTRATION ── */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').catch(function() {});
+  });
+}
+
+/* ── INTRO LOADER (real load progress, no artificial delay) ── */
+(function() {
+  var loader = document.getElementById('loader');
+  var bar = document.getElementById('loader-bar');
+  var pct = document.getElementById('loader-pct');
+  if (!loader || !bar || !pct) return;
+  document.body.classList.add('loading-lock');
+
+  var current = 0;
+  var target = 20;
+  var trickleTimer = null;
+
+  function setProgress(p) {
+    current = Math.max(current, Math.min(100, p));
+    bar.style.width = current + '%';
+    pct.textContent = Math.round(current) + '%';
+  }
+
+  function trickleTo(cap) {
+    target = cap;
+    if (trickleTimer) return;
+    trickleTimer = setInterval(function() {
+      if (current < target - 1) {
+        setProgress(current + Math.max(0.5, (target - current) * 0.12));
+      } else {
+        clearInterval(trickleTimer);
+        trickleTimer = null;
+      }
+    }, 40);
+  }
+
+  function finish() {
+    clearInterval(trickleTimer);
+    trickleTimer = null;
+    setProgress(100);
+    setTimeout(function() {
+      loader.classList.add('hidden');
+      document.body.classList.remove('loading-lock');
+    }, 220);
+  }
+
+  setProgress(20);
+  trickleTo(55);
+
+  var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  fontsReady.then(function() { trickleTo(80); }).catch(function() { trickleTo(80); });
+
+  if (document.readyState === 'complete') {
+    finish();
+  } else {
+    window.addEventListener('load', finish);
+  }
+  // Safety fallback so the loader never gets stuck on a slow connection
+  setTimeout(finish, 2200);
+})();
+
+/* ── PAGE-LEVEL SECTION TRANSITIONS ── */
+(function() {
+  var overlay = document.getElementById('page-transition');
+  if (!overlay) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    var hash = link.getAttribute('href');
+    if (!hash || hash.length < 2) return;
+    var targetEl;
+    try { targetEl = document.querySelector(hash); } catch (err) { return; }
+    if (!targetEl) return;
+
+    if (reduceMotion) return; // let default smooth-scroll handle it
+
+    e.preventDefault();
+
+    var rect = link.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    overlay.style.setProperty('--tx', cx + 'px');
+    overlay.style.setProperty('--ty', cy + 'px');
+
+    overlay.classList.add('active');
+
+    setTimeout(function() {
+      var navOffset = window.innerWidth <= 700 ? 0 : 70;
+      var top = targetEl.getBoundingClientRect().top + window.pageYOffset - navOffset;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+    }, 300);
+
+    setTimeout(function() { overlay.classList.remove('active'); }, 620);
+  }, true);
+})();
+
+/* ── MAGNETIC BUTTONS (desktop pointer only — cursor pulls the button) ── */
+(function() {
+  if (!window.matchMedia('(pointer: fine)').matches) return; // skip touch devices
+  var selector = '.btn-primary, .action-btn.primary, .nav-resume-btn, .form-btn, #saveContactBtn, #sharePortfolioBtn';
+  var strength = 0.35;
+  var maxPull = 14;
+
+  document.querySelectorAll(selector).forEach(function(el) {
+    el.style.willChange = 'transform';
+    el.addEventListener('mousemove', function(e) {
+      var rect = el.getBoundingClientRect();
+      var relX = e.clientX - (rect.left + rect.width / 2);
+      var relY = e.clientY - (rect.top + rect.height / 2);
+      var pullX = Math.max(-maxPull, Math.min(maxPull, relX * strength));
+      var pullY = Math.max(-maxPull, Math.min(maxPull, relY * strength));
+      el.style.transform = 'translate(' + pullX + 'px,' + pullY + 'px)';
+    });
+    el.addEventListener('mouseleave', function() {
+      el.style.transition = 'transform .4s cubic-bezier(.2,.9,.3,1.3)';
+      el.style.transform = 'translate(0,0)';
+      setTimeout(function() { el.style.transition = ''; }, 400);
+    });
+    el.addEventListener('mouseenter', function() { el.style.transition = ''; });
+  });
+})();
+
+/* ── VERIFIED CREDENTIAL BADGES ──
+   Adds a prominent checkmark to certification cards that link to a real,
+   externally-verifiable credential URL (i.e. rendered as <a>, not <div>).
+*/
+(function() {
+  document.querySelectorAll('a.cert-card').forEach(function(card) {
+    if (card.querySelector('.cert-verified')) return;
+    var badge = document.createElement('span');
+    badge.className = 'cert-verified';
+    badge.title = 'Verified credential — tap to view on issuer site';
+    badge.setAttribute('aria-label', 'Verified credential');
+    badge.textContent = '✓';
+    card.appendChild(badge);
+  });
+})();
+
+/* ── TIME-AWARE GREETING + VISITOR LOCATION BADGE ──
+   Greeting uses the visitor's own device clock (no network call).
+   City/country is a best-effort IP lookup that fails silently and
+   never blocks or delays the rest of the page.
+*/
+(function() {
+  var badge = document.getElementById('visitorBadge');
+  var greetEl = document.getElementById('visitorGreet');
+  var geoEl = document.getElementById('visitorGeo');
+  if (!badge || !greetEl) return;
+
+  var hour = new Date().getHours();
+  var greeting = hour < 5 ? 'Late night 🌙' :
+                 hour < 12 ? 'Good morning ☀️' :
+                 hour < 17 ? 'Good afternoon 👋' :
+                 hour < 21 ? 'Good evening 👋' : 'Good night 🌙';
+  greetEl.textContent = greeting;
+  badge.style.display = 'inline-flex';
+
+  fetch('https://ipapi.co/json/')
+    .then(function(r) { return r && r.ok ? r.json() : null; })
+    .then(function(data) {
+      if (data && data.city) {
+        geoEl.textContent = ' · Hi from ' + data.city + (data.country_name ? ', ' + data.country_name : '') + '!';
+      }
+    })
+    .catch(function() { /* geolocation is a nice-to-have, fail quietly */ });
+})();
+
+/* ── LIVE "LAST UPDATED" FOOTER TIMESTAMP ──
+   Auto-derived from the file's modified date — no manual editing needed.
+*/
+(function() {
+  var el = document.getElementById('footerUpdated');
+  if (!el) return;
+  try {
+    var d = new Date(document.lastModified);
+    el.textContent = 'Last updated ' + d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  } catch (e) {}
+})();
+
+/* ── PRIVACY-FRIENDLY VISIT COUNTER ──
+   Uses CountAPI (no cookies, no personal data, just an anonymous
+   incrementing counter) to show a real cross-visitor total.
+*/
+(function() {
+  var el = document.getElementById('footerVisits');
+  if (!el) return;
+  fetch('https://api.countapi.xyz/hit/ashwikbire-portfolio/total-visits')
+    .then(function(r) { return r && r.ok ? r.json() : null; })
+    .then(function(data) {
+      if (data && typeof data.value === 'number') {
+        el.textContent = '👀 ' + data.value.toLocaleString() + ' people have visited';
+      }
+    })
+    .catch(function() { /* counter is a nice-to-have, fail quietly */ });
+})();
+
+/* ── CONTINUE WHERE YOU LEFT OFF ──
+   Tracks the most-recently-viewed section in localStorage as the visitor
+   scrolls, then on a fresh landing (scrolled near the top) offers a
+   one-tap way to jump back to it. Dismissed at most once per session.
+*/
+(function() {
+  var SECTION_LABELS = {
+    about: 'About', skills: 'Skills', experience: 'Experience', education: 'Education',
+    projects: 'Projects', 'case-studies': 'Case Studies', certifications: 'Certifications',
+    achievements: 'Achievements', research: 'Research', recommendations: 'Recommendations', contact: 'Contact'
+  };
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  var current = null;
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) current = entry.target.id;
+      });
+    }, { rootMargin: '-42% 0px -52% 0px', threshold: 0 });
+    sections.forEach(function(s) { obs.observe(s); });
+  }
+
+  function persist() {
+    if (current && SECTION_LABELS[current]) {
+      try { localStorage.setItem('ab-last-section', current); } catch (e) {}
+    }
+  }
+  window.addEventListener('scroll', persist, { passive: true });
+  window.addEventListener('beforeunload', persist);
+  window.addEventListener('pagehide', persist);
+
+  var toast = document.getElementById('resumeToast');
+  var toastText = document.getElementById('resumeToastText');
+  var toastGo = document.getElementById('resumeToastGo');
+  var toastClose = document.getElementById('resumeToastClose');
+  if (!toast) return;
+
+  try {
+    var alreadyPrompted = sessionStorage.getItem('ab-resume-prompted');
+    var savedId = localStorage.getItem('ab-last-section');
+    if (!alreadyPrompted && savedId && SECTION_LABELS[savedId] && window.scrollY < 200) {
+      setTimeout(function() {
+        toastText.textContent = 'Continue where you left off — ' + SECTION_LABELS[savedId] + '?';
+        toast.classList.add('show');
+      }, 1800);
+
+      toastGo.addEventListener('click', function() {
+        var target = document.getElementById(savedId);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        toast.classList.remove('show');
+        try { sessionStorage.setItem('ab-resume-prompted', '1'); } catch (e) {}
+      });
+    }
+  } catch (e) {}
+
+  toastClose.addEventListener('click', function() {
+    toast.classList.remove('show');
+    try { sessionStorage.setItem('ab-resume-prompted', '1'); } catch (e) {}
+  });
+})();
+
+/* ── "MOST VIEWED PROJECT" INDICATOR ──
+   Each project's outbound link click increments an anonymous per-project
+   counter (CountAPI). On load, the current leader gets a small badge.
+   No cookies, no personal data — just aggregate click counts.
+*/
+(function() {
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.proj-card'));
+  if (!cards.length) return;
+  var NAMESPACE = 'ashwikbire-portfolio';
+
+  function slugify(str) {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 40) || 'untitled';
+  }
+
+  var entries = cards.map(function(card) {
+    var titleEl = card.querySelector('.proj-title');
+    var linkEl = card.querySelector('.proj-link');
+    var title = titleEl ? titleEl.textContent.trim() : '';
+    return { card: card, titleEl: titleEl, key: 'proj-' + slugify(title), linkEl: linkEl };
+  });
+
+  entries.forEach(function(entry) {
+    if (!entry.linkEl) return;
+    entry.linkEl.addEventListener('click', function() {
+      try { fetch('https://api.countapi.xyz/hit/' + NAMESPACE + '/' + entry.key).catch(function() {}); } catch (e) {}
+    });
+  });
+
+  Promise.all(entries.map(function(entry) {
+    return fetch('https://api.countapi.xyz/get/' + NAMESPACE + '/' + entry.key)
+      .then(function(r) { return r && r.ok ? r.json() : null; })
+      .then(function(data) { return { entry: entry, value: (data && data.value) || 0 }; })
+      .catch(function() { return { entry: entry, value: 0 }; });
+  })).then(function(results) {
+    var top = results.reduce(function(max, r) { return r.value > (max ? max.value : 0) ? r : max; }, null);
+    if (top && top.value > 0 && top.entry.titleEl && !top.entry.titleEl.querySelector('.most-viewed-badge')) {
+      var badge = document.createElement('span');
+      badge.className = 'most-viewed-badge';
+      badge.textContent = '🔥 Most Viewed';
+      top.entry.titleEl.appendChild(badge);
+    }
+  }).catch(function() { /* click tracking is a nice-to-have, fail quietly */ });
 })();
 </script>
 </body>
