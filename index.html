@@ -499,6 +499,7 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
   font-size: 12px; color: #cbd5e0; animation: fadeUp .8s ease .1s both;
 }
 .visitor-badge span#visitorGeo { color: var(--ac-l); font-weight: 600; }
+.visitor-badge span#visitorTime { color: #94a3b8; font-variant-numeric: tabular-nums; }
 
 .resume-toast {
   position: fixed; left: 50%; bottom: -80px; transform: translateX(-50%);
@@ -2206,7 +2207,7 @@ body.neumorphic #chat-body { background: #fafafc !important; }
       </div>
 
       <div class="visitor-badge" id="visitorBadge" style="display:none">
-        <span id="visitorGreet"></span><span id="visitorGeo"></span>
+        <span id="visitorGreet"></span><span id="visitorGeo"></span><span id="visitorTime"></span>
       </div>
 
       <h1 class="hero-name">
@@ -4718,6 +4719,7 @@ if ('serviceWorker' in navigator) {
   var badge = document.getElementById('visitorBadge');
   var greetEl = document.getElementById('visitorGreet');
   var geoEl = document.getElementById('visitorGeo');
+  var timeEl = document.getElementById('visitorTime');
   if (!badge || !greetEl) return;
 
   var hour = new Date().getHours();
@@ -4736,6 +4738,18 @@ if ('serviceWorker' in navigator) {
       }
     })
     .catch(function() { /* geolocation is a nice-to-have, fail quietly */ });
+
+  // Live local time + date, in the visitor's own timezone — updates every 30s.
+  if (timeEl) {
+    var updateClock = function() {
+      var now = new Date();
+      var time = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      var date = now.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+      timeEl.textContent = ' · 🕒 ' + time + ' · ' + date;
+    };
+    updateClock();
+    setInterval(updateClock, 30000);
+  }
 })();
 
 /* ── LIVE "LAST UPDATED" FOOTER TIMESTAMP ──
