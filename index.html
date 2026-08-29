@@ -1908,6 +1908,53 @@ body.neumorphic .action-btn.primary,
 body.neumorphic #chat-header,
 body.neumorphic #chat-header * { color: #fff !important; }
 body.neumorphic #chat-body { background: #fafafc !important; }
+/* ═══════════════════════════════════════════════
+   BI SANDBOX (live interactive Power BI-style widget)
+═══════════════════════════════════════════════ */
+.bi-shell { display:flex; flex-direction:column; gap:20px; }
+.bi-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:14px 16px; }
+.bi-toolbar label { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#94a3b8; margin-right:6px; }
+.bi-select {
+  background: var(--glass-bg-strong); border:1px solid var(--glass-border); color:#e2e8f0;
+  border-radius:10px; padding:8px 12px; font-family:inherit; font-size:13px; cursor:pointer;
+}
+.bi-select:focus { outline:1.5px solid var(--ac); }
+.bi-live-dot { width:8px; height:8px; border-radius:99px; background:#34d399; box-shadow:0 0 8px #34d399; animation:pulse 1.6s ease-in-out infinite; margin-right:6px; display:inline-block; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+.bi-live-label { font-size:11px; color:#94a3b8; letter-spacing:.06em; margin-left:auto; }
+.bi-kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.bi-kpi { padding:16px; position:relative; overflow:hidden; }
+.bi-kpi-label { font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:#94a3b8; margin-bottom:6px; }
+.bi-kpi-val { font-size:26px; font-weight:700; font-family:'Bebas Neue',sans-serif; letter-spacing:.02em; color:#f7fafc; }
+.bi-kpi-delta { font-size:12px; margin-top:4px; font-weight:600; }
+.bi-kpi-delta.up { color:#34d399; }
+.bi-kpi-delta.down { color:#fc8181; }
+.bi-chart-grid { display:grid; grid-template-columns:1.3fr 1fr; gap:16px; }
+@media (max-width:800px) { .bi-chart-grid { grid-template-columns:1fr; } }
+.bi-chart-card { padding:16px; }
+.bi-chart-title { font-size:13px; font-weight:600; color:#cbd5e0; margin-bottom:10px; }
+.bi-chart-wrap { position:relative; height:230px; }
+.bi-dax-box {
+  padding:14px 16px; font-family:'Courier New',monospace; font-size:12.5px; line-height:1.7;
+  color:#68d391; background:rgba(0,0,0,.25); border-radius:12px; overflow-x:auto; white-space:pre;
+}
+.bi-dax-label { font-family:'DM Sans',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:#94a3b8; margin-bottom:8px; }
+.bi-note { font-size:12px; color:#718096; text-align:center; margin-top:-4px; }
+
+/* Project search box */
+.proj-search-row { display:flex; justify-content:center; margin-bottom:10px; }
+.proj-search-box {
+  width:100%; max-width:360px; background:var(--glass-bg-strong); border:1px solid var(--glass-border);
+  border-radius:99px; padding:10px 18px; color:#e2e8f0; font-family:inherit; font-size:13.5px;
+}
+.proj-search-box::placeholder { color:#64748b; }
+.proj-search-box:focus { outline:1.5px solid var(--ac); }
+.proj-card.filtered-out { display:none !important; }
+.proj-no-results { text-align:center; color:#718096; font-size:14px; padding:24px 0; display:none; }
+
+/* Resume PDF button */
+.action-btn.resume-pdf-btn { background:rgba(104,211,145,.09); border-color:rgba(104,211,145,.28); color:#68d391; }
+.action-btn.resume-pdf-btn:hover { background:rgba(104,211,145,.16); }
 </style>
 </head>
 <body>
@@ -1968,6 +2015,7 @@ body.neumorphic #chat-body { background: #fafafc !important; }
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
+      <a href="#bi-sandbox">BI Sandbox</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#projects">Projects</a>
@@ -2000,6 +2048,7 @@ body.neumorphic #chat-body { background: #fafafc !important; }
   <a href="#hero" class="md-link" onclick="closeDrawer()">Home <span class="md-arrow">→</span></a>
   <a href="#about" class="md-link" onclick="closeDrawer()">About <span class="md-arrow">→</span></a>
   <a href="#skills" class="md-link" onclick="closeDrawer()">Skills <span class="md-arrow">→</span></a>
+  <a href="#bi-sandbox" class="md-link" onclick="closeDrawer()">BI Sandbox <span class="md-arrow">→</span></a>
   <a href="#experience" class="md-link" onclick="closeDrawer()">Experience <span class="md-arrow">→</span></a>
   <a href="#education" class="md-link" onclick="closeDrawer()">Education <span class="md-arrow">→</span></a>
   <a href="#projects" class="md-link" onclick="closeDrawer()">Projects <span class="md-arrow">→</span></a>
@@ -2027,6 +2076,10 @@ body.neumorphic #chat-body { background: #fafafc !important; }
   <a href="#skills" class="sb-link" data-section="skills" aria-label="Skills">
     <svg viewBox="0 0 24 24"><path d="M4 20V11"/><path d="M10 20V4"/><path d="M16 20v-8"/><path d="M21 20v-4"/></svg>
     <span class="sb-tooltip">Skills</span>
+  </a>
+  <a href="#bi-sandbox" class="sb-link" data-section="bi-sandbox" aria-label="BI Sandbox">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 15v-3M12 15V8M17 15v-6"/></svg>
+    <span class="sb-tooltip">BI Sandbox</span>
   </a>
   <a href="#experience" class="sb-link" data-section="experience" aria-label="Experience">
     <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>
@@ -2380,6 +2433,82 @@ body.neumorphic #chat-body { background: #fafafc !important; }
 </section>
 
 <!-- ══════════════════════════════════════════
+     BI SANDBOX — LIVE INTERACTIVE DASHBOARD
+══════════════════════════════════════════ -->
+<section id="bi-sandbox" class="alt-bg">
+  <div class="section-inner">
+    <div class="section-title reveal">
+      <h2>Live BI Sandbox</h2>
+      <div class="title-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+    </div>
+    <p class="section-sub reveal">A working mini Power BI-style report, not a screenshot — filter it and watch the KPIs, charts, and DAX measure recalculate in real time.</p>
+
+    <div class="bi-shell reveal" style="transition-delay:.06s">
+      <div class="glass bi-toolbar">
+        <label for="biRegion">Region</label>
+        <select class="bi-select" id="biRegion">
+          <option value="all">All Regions</option>
+          <option value="North">North</option>
+          <option value="South">South</option>
+          <option value="East">East</option>
+          <option value="West">West</option>
+        </select>
+        <label for="biCategory">Category</label>
+        <select class="bi-select" id="biCategory">
+          <option value="all">All Categories</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Apparel">Apparel</option>
+          <option value="Home &amp; Living">Home &amp; Living</option>
+        </select>
+        <span class="bi-live-label"><span class="bi-live-dot"></span>Live sample dataset</span>
+      </div>
+
+      <div class="bi-kpi-grid">
+        <div class="glass bi-kpi">
+          <div class="bi-kpi-label">Total Revenue</div>
+          <div class="bi-kpi-val" id="biKpiRevenue">$0</div>
+          <div class="bi-kpi-delta" id="biKpiRevenueDelta"></div>
+        </div>
+        <div class="glass bi-kpi">
+          <div class="bi-kpi-label">Orders</div>
+          <div class="bi-kpi-val" id="biKpiOrders">0</div>
+          <div class="bi-kpi-delta" id="biKpiOrdersDelta"></div>
+        </div>
+        <div class="glass bi-kpi">
+          <div class="bi-kpi-label">Avg Order Value</div>
+          <div class="bi-kpi-val" id="biKpiAov">$0</div>
+        </div>
+        <div class="glass bi-kpi">
+          <div class="bi-kpi-label">YoY Growth</div>
+          <div class="bi-kpi-val" id="biKpiYoy">0%</div>
+        </div>
+      </div>
+
+      <div class="bi-chart-grid">
+        <div class="glass bi-chart-card">
+          <div class="bi-chart-title">Monthly Revenue Trend</div>
+          <div class="bi-chart-wrap"><canvas id="biLineChart"></canvas></div>
+        </div>
+        <div class="glass bi-chart-card">
+          <div class="bi-chart-title">Revenue by Region</div>
+          <div class="bi-chart-wrap"><canvas id="biBarChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="glass bi-chart-card">
+        <div class="bi-dax-label">DAX measure powering "YoY Growth" for the current filter selection</div>
+        <div class="bi-dax-box" id="biDaxBox">YoY Growth = 
+DIVIDE(
+    [Total Revenue] - [Total Revenue PY],
+    [Total Revenue PY]
+)</div>
+      </div>
+      <p class="bi-note">Sample dataset for demonstration — modeled on the same star-schema approach used in the Sales &amp; Business Performance Dashboard project above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
      EXPERIENCE
 ══════════════════════════════════════════ -->
 <section id="experience" class="alt-bg">
@@ -2518,6 +2647,9 @@ body.neumorphic #chat-body { background: #fafafc !important; }
       <div class="title-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
     </div>
 
+<div class="proj-search-row">
+  <input type="text" class="proj-search-box" id="projSearchBox" placeholder="🔍 Search projects by name or tech…" autocomplete="off" />
+</div>
 <div class="filter-chip-row" id="projFilterChips"></div>
 <p class="swipe-hint">👈 Swipe to browse projects 👉</p>
 <div class="projects-grid" id="projectsGrid">
@@ -2662,6 +2794,7 @@ body.neumorphic #chat-body { background: #fafafc !important; }
       </div>
 
 </div>
+<p class="proj-no-results" id="projNoResults">No projects match that search — try a different term or clear the filter.</p>
 </div>
 </section>
 
@@ -3115,6 +3248,10 @@ body.neumorphic #chat-body { background: #fafafc !important; }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5 15.4 17.5M15.4 6.5 8.6 10.5"/></svg>
         Share Portfolio
       </button>
+      <button class="action-btn resume-pdf-btn" id="generateResumeBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6M9 11h2"/></svg>
+        Generate Resume PDF
+      </button>
     </div>
     <form id="contactForm" class="glass contact-form reveal" style="transition-delay:.16s" onsubmit="return handleContact(event)">
       <input type="text"  id="cf-name"  name="name"    class="form-field" placeholder="Your Name" required />
@@ -3224,6 +3361,8 @@ body.neumorphic #chat-body { background: #fafafc !important; }
 ══════════════════════════════════════════ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 /* ── TYPING ── */
@@ -4252,18 +4391,39 @@ function fallbackCopy(text) {
     chipRow.appendChild(chip);
   });
 
+  var searchBox = document.getElementById('projSearchBox');
+  var noResults = document.getElementById('projNoResults');
+  var activeTag = '';
+
+  function applyFilters() {
+    var query = (searchBox && searchBox.value || '').trim().toLowerCase();
+    var visibleCount = 0;
+    cards.forEach(function(card) {
+      var tags = Array.prototype.map.call(card.querySelectorAll('.proj-tag'), function(t) { return t.textContent.trim(); });
+      var tagMatch = !activeTag || tags.indexOf(activeTag) !== -1;
+      var haystack = (card.querySelector('.proj-title') ? card.querySelector('.proj-title').textContent : '') + ' ' +
+                     (card.querySelector('.proj-desc') ? card.querySelector('.proj-desc').textContent : '') + ' ' +
+                     tags.join(' ');
+      var textMatch = !query || haystack.toLowerCase().indexOf(query) !== -1;
+      var show = tagMatch && textMatch;
+      card.classList.toggle('filtered-out', !show);
+      if (show) visibleCount++;
+    });
+    if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
   chipRow.addEventListener('click', function(e) {
     var chip = e.target.closest('.filter-chip');
     if (!chip) return;
     chipRow.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
     chip.classList.add('active');
-    var tag = chip.dataset.tag;
-    cards.forEach(function(card) {
-      if (!tag) { card.classList.remove('filtered-out'); return; }
-      var tags = Array.prototype.map.call(card.querySelectorAll('.proj-tag'), function(t) { return t.textContent.trim(); });
-      card.classList.toggle('filtered-out', tags.indexOf(tag) === -1);
-    });
+    activeTag = chip.dataset.tag;
+    applyFilters();
   });
+
+  if (searchBox) {
+    searchBox.addEventListener('input', applyFilters);
+  }
 })();
 
 /* ── CERTIFICATION FILTER CHIPS (auto-built from issuing org) ── */
@@ -4624,6 +4784,282 @@ if ('serviceWorker' in navigator) {
       top.entry.titleEl.appendChild(badge);
     }
   }).catch(function() { /* click tracking is a nice-to-have, fail quietly */ });
+})();
+
+/* ── LIVE BI SANDBOX ── */
+(function() {
+  var regionSel = document.getElementById('biRegion');
+  var catSel = document.getElementById('biCategory');
+  if (!regionSel || !catSel || typeof Chart === 'undefined') return;
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var REGIONS = ['North','South','East','West'];
+  var CATEGORIES = ['Electronics','Apparel','Home & Living'];
+
+  // Deterministic sample dataset — seeded so it's stable across reloads, not random noise each time.
+  function seededRand(seed) {
+    var x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  }
+  var DATA = []; // {month, region, category, revenue, orders}
+  var seed = 1;
+  MONTHS.forEach(function(m, mi) {
+    REGIONS.forEach(function(r, ri) {
+      CATEGORIES.forEach(function(c, ci) {
+        seed++;
+        var base = 14000 + (ri * 3200) + (ci * 2100) + (mi * 420);
+        var wobble = seededRand(seed * 7.13) * 6000;
+        var seasonal = (mi >= 9 ? 1.35 : 1) + (mi === 0 ? -0.1 : 0);
+        var revenue = Math.round((base + wobble) * seasonal);
+        var orders = Math.round(revenue / (55 + seededRand(seed * 3.7) * 25));
+        DATA.push({ month: m, monthIdx: mi, region: r, category: c, revenue: revenue, orders: orders });
+      });
+    });
+  });
+
+  function filtered() {
+    var region = regionSel.value, category = catSel.value;
+    return DATA.filter(function(d) {
+      return (region === 'all' || d.region === region) && (category === 'all' || d.category === category);
+    });
+  }
+
+  function fmtMoney(n) {
+    if (n >= 1000000) return '$' + (n / 1000000).toFixed(2) + 'M';
+    if (n >= 1000) return '$' + (n / 1000).toFixed(1) + 'K';
+    return '$' + n;
+  }
+
+  var lineChart, barChart;
+
+  function render() {
+    var rows = filtered();
+    var totalRevenue = rows.reduce(function(s, d) { return s + d.revenue; }, 0);
+    var totalOrders = rows.reduce(function(s, d) { return s + d.orders; }, 0);
+    var aov = totalOrders ? totalRevenue / totalOrders : 0;
+
+    // Prior-year comparison: simulate PY as ~78-88% of current, deterministic per filter combo.
+    var pyFactor = 0.8 + (seededRand(totalRevenue % 97 + 11) * 0.08);
+    var pyRevenue = totalRevenue * pyFactor;
+    var pyOrders = totalOrders * pyFactor;
+    var yoyRevenue = pyRevenue ? ((totalRevenue - pyRevenue) / pyRevenue) * 100 : 0;
+    var yoyOrders = pyOrders ? ((totalOrders - pyOrders) / pyOrders) * 100 : 0;
+
+    document.getElementById('biKpiRevenue').textContent = fmtMoney(totalRevenue);
+    document.getElementById('biKpiOrders').textContent = totalOrders.toLocaleString();
+    document.getElementById('biKpiAov').textContent = '$' + aov.toFixed(0);
+    document.getElementById('biKpiYoy').textContent = (yoyRevenue >= 0 ? '+' : '') + yoyRevenue.toFixed(1) + '%';
+
+    var revDeltaEl = document.getElementById('biKpiRevenueDelta');
+    revDeltaEl.textContent = (yoyRevenue >= 0 ? '▲ ' : '▼ ') + Math.abs(yoyRevenue).toFixed(1) + '% vs PY';
+    revDeltaEl.className = 'bi-kpi-delta ' + (yoyRevenue >= 0 ? 'up' : 'down');
+
+    var ordDeltaEl = document.getElementById('biKpiOrdersDelta');
+    ordDeltaEl.textContent = (yoyOrders >= 0 ? '▲ ' : '▼ ') + Math.abs(yoyOrders).toFixed(1) + '% vs PY';
+    ordDeltaEl.className = 'bi-kpi-delta ' + (yoyOrders >= 0 ? 'up' : 'down');
+
+    // Monthly trend
+    var monthlyTotals = MONTHS.map(function(m, mi) {
+      return rows.filter(function(d) { return d.monthIdx === mi; }).reduce(function(s, d) { return s + d.revenue; }, 0);
+    });
+
+    // Regional totals (respecting category filter, ignoring region filter so all bars show)
+    var regionRows = DATA.filter(function(d) { return catSel.value === 'all' || d.category === catSel.value; });
+    var regionTotals = REGIONS.map(function(r) {
+      return regionRows.filter(function(d) { return d.region === r; }).reduce(function(s, d) { return s + d.revenue; }, 0);
+    });
+
+    var accentColor = getComputedStyle(document.body).getPropertyValue('--ac-l').trim() || '#f4453f';
+
+    if (!lineChart) {
+      var lctx = document.getElementById('biLineChart').getContext('2d');
+      lineChart = new Chart(lctx, {
+        type: 'line',
+        data: {
+          labels: MONTHS,
+          datasets: [{
+            label: 'Revenue', data: monthlyTotals, borderColor: accentColor,
+            backgroundColor: accentColor + '22', fill: true, tension: 0.35, pointRadius: 2
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,.05)' } },
+            y: { ticks: { color: '#94a3b8', font: { size: 10 }, callback: function(v) { return fmtMoney(v); } }, grid: { color: 'rgba(255,255,255,.05)' } }
+          }
+        }
+      });
+      var bctx = document.getElementById('biBarChart').getContext('2d');
+      barChart = new Chart(bctx, {
+        type: 'bar',
+        data: {
+          labels: REGIONS,
+          datasets: [{ label: 'Revenue', data: regionTotals, backgroundColor: ['#f4453f','#3182ce','#68d391','#f6ad55'], borderRadius: 6 }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } },
+            y: { ticks: { color: '#94a3b8', font: { size: 10 }, callback: function(v) { return fmtMoney(v); } }, grid: { color: 'rgba(255,255,255,.05)' } }
+          }
+        }
+      });
+    } else {
+      lineChart.data.datasets[0].data = monthlyTotals;
+      lineChart.data.datasets[0].borderColor = accentColor;
+      lineChart.data.datasets[0].backgroundColor = accentColor + '22';
+      lineChart.update();
+      barChart.data.datasets[0].data = regionTotals;
+      barChart.update();
+    }
+
+    var regionLabel = regionSel.value === 'all' ? "ALL Regions" : "Region = \"" + regionSel.value + "\"";
+    var catLabel = catSel.value === 'all' ? '' : ',\n    Category = "' + catSel.value + '"';
+    document.getElementById('biDaxBox').textContent =
+'YoY Growth = \nCALCULATE(\n    DIVIDE(\n        [Total Revenue] - [Total Revenue PY],\n        [Total Revenue PY]\n    ),\n    FILTER(ALL(Sales), ' + regionLabel + catLabel + '\n)  →  ' + (yoyRevenue >= 0 ? '+' : '') + yoyRevenue.toFixed(1) + '%';
+  }
+
+  regionSel.addEventListener('change', render);
+  catSel.addEventListener('change', render);
+  // Re-render on theme change too, so chart colors follow the accent
+  document.querySelectorAll('.accent-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { setTimeout(render, 60); });
+  });
+
+  // Only build once visible, to avoid Chart.js rendering into a hidden/zero-size canvas
+  if ('IntersectionObserver' in window) {
+    var target = document.getElementById('bi-sandbox');
+    if (target) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { render(); io.disconnect(); }
+        });
+      }, { threshold: 0.15 });
+      io.observe(target);
+    } else {
+      render();
+    }
+  } else {
+    render();
+  }
+})();
+
+/* ── DYNAMIC RESUME PDF GENERATOR ──
+   Builds a resume PDF by reading live text straight out of the page DOM
+   (name, summary, skills + levels, experience bullets, certifications,
+   contact info) so it never drifts out of sync with the site content.
+*/
+(function() {
+  var btn = document.getElementById('generateResumeBtn');
+  if (!btn) return;
+
+  function text(sel, root) { var el = (root || document).querySelector(sel); return el ? el.textContent.replace(/\s+/g, ' ').trim() : ''; }
+  function textAll(sel, root) { return Array.prototype.map.call((root || document).querySelectorAll(sel), function(e) { return e.textContent.replace(/\s+/g, ' ').trim(); }); }
+
+  btn.addEventListener('click', function() {
+    if (typeof window.jspdf === 'undefined') { showToast('PDF library still loading — try again in a second', '⏳'); return; }
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    var pageW = doc.internal.pageSize.getWidth();
+    var margin = 42;
+    var y = 50;
+    var accent = [200, 30, 44];
+
+    function ensureSpace(need) {
+      if (y + need > doc.internal.pageSize.getHeight() - 40) { doc.addPage(); y = 50; }
+    }
+    function heading(txt) {
+      ensureSpace(26);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.setTextColor(accent[0], accent[1], accent[2]);
+      doc.text(txt.toUpperCase(), margin, y);
+      doc.setDrawColor(accent[0], accent[1], accent[2]); doc.setLineWidth(0.7);
+      doc.line(margin, y + 4, pageW - margin, y + 4);
+      y += 18;
+      doc.setTextColor(40, 40, 40);
+    }
+    function body(txt, size) {
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(size || 9.5);
+      var lines = doc.splitTextToSize(txt, pageW - margin * 2);
+      lines.forEach(function(line) {
+        ensureSpace(13);
+        doc.text(line, margin, y);
+        y += 12.5;
+      });
+    }
+    function bullet(txt) {
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(9.3);
+      var lines = doc.splitTextToSize(txt, pageW - margin * 2 - 12);
+      lines.forEach(function(line, i) {
+        ensureSpace(12.5);
+        doc.text((i === 0 ? '•  ' : '   ') + line, margin, y);
+        y += 12;
+      });
+    }
+
+    // Header
+    var name = document.querySelector('.hero-name') ? document.querySelector('.hero-name').textContent.replace(/\s+/g, ' ').trim() : 'Ashwik Bire';
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(20); doc.setTextColor(accent[0], accent[1], accent[2]);
+    doc.text(name, margin, y); y += 20;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(90, 90, 90);
+    doc.text('Data & Business Intelligence Engineer', margin, y); y += 16;
+
+    var contactBits = textAll('.info-card p').filter(Boolean);
+    doc.setFontSize(9); doc.setTextColor(70, 70, 70);
+    doc.text(contactBits.join('   |   '), margin, y); y += 8;
+    doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.5);
+    y += 8; doc.line(margin, y, pageW - margin, y); y += 16;
+
+    // Summary
+    var summary = text('.hero-desc');
+    if (summary) { heading('Summary'); body(summary); y += 6; }
+
+    // Skills
+    heading('Skills');
+    var skillRows = document.querySelectorAll('.skill-row');
+    var skillLine = [];
+    skillRows.forEach(function(row) {
+      var n = text('.skill-name', row), p = text('.skill-pct', row);
+      if (n) skillLine.push(n + (p ? ' (' + p + ')' : ''));
+    });
+    body(skillLine.join('  •  '), 9);
+    y += 6;
+
+    // Experience
+    heading('Experience');
+    document.querySelectorAll('#experience .tl-item').forEach(function(item) {
+      var role = text('.tl-role', item), co = text('.tl-co', item), badge = text('.tl-badge', item);
+      ensureSpace(16);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5); doc.setTextColor(30, 30, 30);
+      doc.text(role, margin, y);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(120, 120, 120);
+      doc.text(badge, pageW - margin, y, { align: 'right' });
+      y += 12;
+      doc.setFont('helvetica', 'italic'); doc.setFontSize(9.3); doc.setTextColor(accent[0], accent[1], accent[2]);
+      doc.text(co, margin, y); y += 13;
+      doc.setTextColor(40, 40, 40);
+      textAll('.tl-list li span:last-child', item).forEach(function(li) { bullet(li); });
+      y += 8;
+    });
+
+    // Education
+    heading('Education');
+    document.querySelectorAll('#education .tl-item').forEach(function(item) {
+      var role = text('.tl-role', item), co = text('.tl-co', item), badge = text('.tl-badge', item);
+      body((role || '') + (co ? ' — ' + co : '') + (badge ? ' (' + badge + ')' : ''), 9.5);
+    });
+    y += 6;
+
+    // Certifications
+    heading('Certifications');
+    var certNames = textAll('.cert-name');
+    body(certNames.join('  •  ') || 'AZ-900, PL-300, DP-600, DP-800, Applied Skills', 9);
+
+    doc.save('Ashwik_Bire_Resume_Auto.pdf');
+    showToast('Resume PDF generated', '🧾');
+  });
 })();
 </script>
 </body>
