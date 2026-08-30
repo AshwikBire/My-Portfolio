@@ -493,13 +493,34 @@ section { position: relative; z-index: 1; scroll-margin-top: 84px; }
 .hero-badge span { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ac-l); }
 
 .visitor-badge {
-  display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  display: inline-flex; align-items: center; flex-wrap: wrap; gap: 2px;
   background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
-  border-radius: 99px; padding: 5px 14px; margin: 0 0 18px; margin-top: -12px;
+  border-radius: 99px; padding: 4px 6px; margin: 0 0 18px; margin-top: -12px;
   font-size: 12px; color: #cbd5e0; animation: fadeUp .8s ease .1s both;
+  backdrop-filter: blur(12px);
 }
-.visitor-badge span#visitorGeo { color: var(--ac-l); font-weight: 600; }
-.visitor-badge span#visitorTime { color: #94a3b8; font-variant-numeric: tabular-nums; }
+.vb-seg {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 12px; border-radius: 99px; transition: background .25s ease;
+  white-space: nowrap;
+}
+.vb-seg:hover { background: rgba(255,255,255,.05); }
+.vb-icon { font-size: 12px; line-height: 1; opacity: .9; }
+.vb-divider {
+  width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.18); flex: none;
+}
+#visitorGreet { color: #e2e8f0; font-weight: 500; }
+#visitorGeo { color: var(--ac-l); font-weight: 600; }
+.vb-time-seg { color: #94a3b8; }
+.vb-time-seg #visitorTime { font-variant-numeric: tabular-nums; font-family: 'Courier New', monospace; letter-spacing: .02em; color: #b8c2d1; }
+.vb-live-pulse {
+  width: 5px; height: 5px; border-radius: 50%; background: #34d399; box-shadow: 0 0 6px #34d399;
+  animation: pulse 1.8s ease-in-out infinite; flex: none;
+}
+@media (max-width: 480px) {
+  .visitor-badge { padding: 4px; }
+  .vb-seg { padding: 5px 9px; font-size: 11.3px; }
+}
 
 .resume-toast {
   position: fixed; left: 50%; bottom: -80px; transform: translateX(-50%);
@@ -1221,6 +1242,130 @@ footer {
   transition: opacity .2s ease;
 }
 #cmdk-overlay.open { opacity: 1; pointer-events: all; }
+
+/* ── LEAD-CAPTURE MODAL ── */
+#lead-overlay {
+  position: fixed; inset: 0; z-index: 9100;
+  background: rgba(0,0,0,.6);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+#lead-overlay.open { opacity: 1; pointer-events: all; }
+#lead-box {
+  width: min(420px, 100%); position: relative;
+  background: rgba(10,13,22,.75);
+  border: 1px solid var(--glass-border-hover);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-radius: 18px; padding: 28px 26px 22px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.15);
+  transform: translateY(-14px) scale(.97);
+  transition: transform .22s cubic-bezier(.2,.9,.3,1.3);
+}
+#lead-overlay.open #lead-box { transform: translateY(0) scale(1); }
+#lead-close {
+  position: absolute; top: 14px; right: 14px; width: 28px; height: 28px;
+  border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg);
+  color: #94a3b8; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .2s, color .2s;
+}
+#lead-close:hover { background: rgba(244,69,63,.15); color: #f4453f; }
+#lead-title { font-size: 19px; font-weight: 700; color: #f7fafc; margin-bottom: 4px; padding-right: 24px; }
+#lead-subtitle { font-size: 12.5px; color: #94a3b8; line-height: 1.5; margin-bottom: 18px; }
+.lead-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; flex: 1; min-width: 0; }
+.lead-field-row { display: flex; gap: 10px; }
+.lead-field label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: #8a97ab; font-weight: 600; }
+.lead-field input, .lead-field select {
+  background: var(--glass-bg-strong); border: 1px solid var(--glass-border); color: #e8edf4;
+  border-radius: 9px; padding: 9px 12px; font-family: inherit; font-size: 13.5px; width: 100%;
+}
+.lead-field input:focus, .lead-field select:focus { outline: none; border-color: var(--ac); box-shadow: 0 0 0 3px var(--ac-g); }
+#lead-submit { width: 100%; justify-content: center; margin-top: 6px; }
+#lead-privacy-note { font-size: 10.5px; color: #697485; text-align: center; margin-top: 10px; line-height: 1.4; }
+@media (max-width: 480px) {
+  .lead-field-row { flex-direction: column; gap: 0; }
+  #lead-box { padding: 24px 20px 18px; }
+}
+
+/* ── RECRUITER MODE ──
+   Strips decorative motion/backgrounds for a fast, ATS-style scan.
+   Content stays identical — only visual noise is removed. */
+body.recruiter-mode #bg-aurora,
+body.recruiter-mode #bg-grid,
+body.recruiter-mode .cur-ring,
+body.recruiter-mode #chat-float,
+body.recruiter-mode #chat-window,
+body.recruiter-mode #hero-bg { display: none !important; }
+body.recruiter-mode * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .15s !important; }
+body.recruiter-mode #bi-sandbox { display: none; }
+body.recruiter-mode .reveal { opacity: 1 !important; transform: none !important; }
+body.recruiter-mode #generateResumeBtn,
+body.recruiter-mode #scheduleCallBtn { box-shadow: 0 0 0 2px var(--ac) !important; }
+#recruiterModeBtn.active { background: rgba(244,69,63,.14); border-color: var(--ac); color: var(--ac-l); }
+
+/* ── ANALYTICS DASHBOARD ── */
+#an-overlay {
+  position: fixed; inset: 0; z-index: 9200;
+  background: rgba(0,0,0,.65);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  opacity: 0; pointer-events: none; transition: opacity .2s ease;
+}
+#an-overlay.open { opacity: 1; pointer-events: all; }
+#an-box {
+  width: min(880px, 100%); max-height: 88vh; overflow-y: auto; position: relative;
+  background: rgba(8,10,18,.85);
+  border: 1px solid var(--glass-border-hover);
+  backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-radius: 20px; padding: 30px;
+  box-shadow: 0 30px 90px rgba(0,0,0,.6);
+  transform: translateY(-14px) scale(.97); transition: transform .22s cubic-bezier(.2,.9,.3,1.3);
+}
+#an-overlay.open #an-box { transform: translateY(0) scale(1); }
+#an-close {
+  position: absolute; top: 16px; right: 16px; width: 30px; height: 30px; z-index: 2;
+  border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg);
+  color: #94a3b8; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+#an-close:hover { background: rgba(244,69,63,.15); color: #f4453f; }
+
+#an-gate { text-align: center; padding: 30px 10px; }
+#an-gate-icon { font-size: 34px; margin-bottom: 10px; }
+#an-gate h3 { font-size: 20px; color: #f7fafc; margin-bottom: 6px; }
+#an-gate p { font-size: 13px; color: #94a3b8; margin-bottom: 18px; }
+#an-password {
+  width: min(240px, 100%); background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
+  border-radius: 10px; padding: 10px 14px; color: #e8edf4; font-family: inherit; font-size: 14px; margin-bottom: 12px;
+}
+#an-gate-error { color: #fc8181; font-size: 12px; min-height: 16px; }
+
+#an-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+#an-header h3 { font-size: 18px; color: #f7fafc; }
+#an-header-actions { display: flex; gap: 8px; }
+#an-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.an-kpi { padding: 14px; text-align: center; }
+.an-kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: #8a97ab; margin-bottom: 6px; }
+.an-kpi-val { font-size: 22px; font-weight: 700; font-family: 'Bebas Neue',sans-serif; color: #f7fafc; }
+.an-chart-card { padding: 16px; margin-bottom: 16px; }
+.an-chart-title { font-size: 12.5px; font-weight: 600; color: #cbd5e0; margin-bottom: 10px; }
+.an-chart-wrap { position: relative; height: 180px; }
+#anSourcesList { display: flex; flex-direction: column; gap: 8px; }
+.an-source-row { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: #cbd5e0; }
+.an-source-bar-wrap { flex: 1; height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
+.an-source-bar { height: 100%; background: var(--ac); border-radius: 3px; }
+.an-source-count { color: #94a3b8; font-size: 11px; min-width: 22px; text-align: right; }
+.an-leads-card { padding: 16px; }
+#anLeadsTableWrap { overflow-x: auto; }
+#anLeadsTable { width: 100%; border-collapse: collapse; font-size: 12px; }
+#anLeadsTable th { text-align: left; color: #8a97ab; font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--glass-border); white-space: nowrap; }
+#anLeadsTable td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,.04); color: #cbd5e0; white-space: nowrap; }
+#anLeadsEmpty { text-align: center; color: #697485; font-size: 12.5px; padding: 16px 0; }
+#an-config-note { text-align: center; color: #f6ad55; font-size: 12px; background: rgba(246,173,85,.08); border: 1px solid rgba(246,173,85,.25); border-radius: 10px; padding: 10px; margin-top: 14px; }
+@media (max-width: 600px) {
+  #an-box { padding: 22px 16px; }
+  #an-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
 #cmdk-box {
   width: min(560px, 100%);
   background: rgba(10,13,22,.55);
@@ -2023,6 +2168,8 @@ body.neumorphic #chat-body { background: #fafafc !important; }
 .proj-search-box::placeholder { color:#64748b; }
 .proj-search-box:focus { outline:1.5px solid var(--ac); }
 .proj-card.filtered-out { display:none !important; }
+.proj-card.role-match { box-shadow: 0 0 0 2px var(--ac), 0 20px 50px rgba(0,0,0,.3) !important; transform: translateY(-2px); }
+.proj-card.role-dim { opacity: .35; filter: saturate(.5); }
 .proj-no-results { text-align:center; color:#718096; font-size:14px; padding:24px 0; display:none; }
 
 /* Resume PDF button */
@@ -2065,6 +2212,111 @@ body.neumorphic #chat-body { background: #fafafc !important; }
       <span id="cmdk-hint">ESC</span>
     </div>
     <div id="cmdk-list"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     LEAD-CAPTURE MODAL (recruiter contact / gated resume)
+══════════════════════════════════════════ -->
+<div id="lead-overlay" onclick="if(event.target===this) LeadModal.close()">
+  <div id="lead-box" role="dialog" aria-label="Contact form">
+    <button id="lead-close" onclick="LeadModal.close()" aria-label="Close">✕</button>
+    <div id="lead-title"></div>
+    <div id="lead-subtitle"></div>
+    <form id="lead-form">
+      <div class="lead-field">
+        <label for="lead-name">Name *</label>
+        <input type="text" id="lead-name" required autocomplete="name" />
+      </div>
+      <div class="lead-field">
+        <label for="lead-email">Email *</label>
+        <input type="email" id="lead-email" required autocomplete="email" />
+      </div>
+      <div class="lead-field-row">
+        <div class="lead-field">
+          <label for="lead-company">Company</label>
+          <input type="text" id="lead-company" autocomplete="organization" />
+        </div>
+        <div class="lead-field">
+          <label for="lead-whatsapp">WhatsApp</label>
+          <input type="tel" id="lead-whatsapp" autocomplete="tel" placeholder="+91…" />
+        </div>
+      </div>
+      <div class="lead-field" id="lead-role-field" style="display:none">
+        <label for="lead-role">Hiring for</label>
+        <select id="lead-role">
+          <option value="">Select a role…</option>
+          <option value="BI Developer">BI Developer</option>
+          <option value="Data Analyst">Data Analyst</option>
+          <option value="Data Science Trainer">Data Science Trainer</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <button type="submit" id="lead-submit" class="action-btn">Submit</button>
+      <p id="lead-privacy-note">Used only to follow up with you — never shared or spammed.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PRIVATE ANALYTICS DASHBOARD (owner only)
+══════════════════════════════════════════ -->
+<div id="an-overlay" onclick="if(event.target===this) AnalyticsDashboard.close()">
+  <div id="an-box" role="dialog" aria-label="Analytics dashboard">
+    <button id="an-close" onclick="AnalyticsDashboard.close()" aria-label="Close">✕</button>
+
+    <div id="an-gate">
+      <div id="an-gate-icon">🔒</div>
+      <h3>Owner Analytics</h3>
+      <p>Enter the password to view visitor and recruiter activity.</p>
+      <input type="password" id="an-password" placeholder="Password" autocomplete="off" />
+      <button id="an-unlock" class="action-btn primary">Unlock Dashboard</button>
+      <p id="an-gate-error"></p>
+    </div>
+
+    <div id="an-content" style="display:none">
+      <div id="an-header">
+        <h3>📊 Recruiter &amp; Visitor Analytics</h3>
+        <div id="an-header-actions">
+          <button id="an-refresh" class="action-btn">↻ Refresh</button>
+          <button id="an-export" class="action-btn">⬇ Export Leads CSV</button>
+        </div>
+      </div>
+
+      <div id="an-kpi-grid">
+        <div class="glass an-kpi"><div class="an-kpi-label">Total Visits</div><div class="an-kpi-val" id="anTotalVisits">–</div></div>
+        <div class="glass an-kpi"><div class="an-kpi-label">Unique Sessions</div><div class="an-kpi-val" id="anUniqueSessions">–</div></div>
+        <div class="glass an-kpi"><div class="an-kpi-label">Total Leads</div><div class="an-kpi-val" id="anTotalLeads">–</div></div>
+        <div class="glass an-kpi"><div class="an-kpi-label">Resume Downloads</div><div class="an-kpi-val" id="anResumeDownloads">–</div></div>
+        <div class="glass an-kpi"><div class="an-kpi-label">WhatsApp Clicks</div><div class="an-kpi-val" id="anWhatsappClicks">–</div></div>
+        <div class="glass an-kpi"><div class="an-kpi-label">Calls Scheduled</div><div class="an-kpi-val" id="anCallClicks">–</div></div>
+      </div>
+
+      <div class="glass an-chart-card">
+        <div class="an-chart-title">Visits — Last 14 Days</div>
+        <div class="an-chart-wrap"><canvas id="anVisitsChart"></canvas></div>
+      </div>
+
+      <div class="glass an-chart-card">
+        <div class="an-chart-title">Top Traffic Sources</div>
+        <div id="anSourcesList"></div>
+      </div>
+
+      <div class="glass an-leads-card">
+        <div class="an-chart-title">Recruiter &amp; Visitor Leads (<span id="anLeadsCount">0</span>)</div>
+        <div id="anLeadsTableWrap">
+          <table id="anLeadsTable">
+            <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Company</th><th>WhatsApp</th><th>Role</th><th>Type</th></tr></thead>
+            <tbody id="anLeadsBody"></tbody>
+          </table>
+          <p id="anLeadsEmpty" style="display:none">No leads captured yet.</p>
+        </div>
+      </div>
+
+      <p id="an-config-note" style="display:none">
+        ⚠️ KVdb bucket not configured yet — analytics will stay empty until you set SITE_CONFIG.KVDB_BUCKET_ID.
+      </p>
+    </div>
   </div>
 </div>
 
@@ -2201,13 +2453,17 @@ body.neumorphic #chat-body { background: #fafafc !important; }
 
     <!-- Text -->
     <div class="hero-text">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        <span>Open to Opportunities</span>
+      <div class="hero-badge" id="availabilityBadge">
+        <div class="hero-badge-dot" id="availabilityDot"></div>
+        <span id="availabilityText">Open to Opportunities</span>
       </div>
 
       <div class="visitor-badge" id="visitorBadge" style="display:none">
-        <span id="visitorGreet"></span><span id="visitorGeo"></span><span id="visitorTime"></span>
+        <span class="vb-seg" id="visitorGreet"></span>
+        <span class="vb-divider" id="vbDividerGeo" style="display:none"></span>
+        <span class="vb-seg" id="visitorGeoWrap" style="display:none"><span class="vb-icon">📍</span><span id="visitorGeo"></span></span>
+        <span class="vb-divider"></span>
+        <span class="vb-seg vb-time-seg"><span class="vb-live-pulse"></span><span class="vb-icon">🕒</span><span id="visitorTime"></span></span>
       </div>
 
       <h1 class="hero-name">
@@ -3340,6 +3596,22 @@ body.neumorphic #chat-body { background: #fafafc !important; }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6M9 11h2"/></svg>
         Generate Resume PDF
       </button>
+      <button class="action-btn" id="scheduleCallBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+        Schedule a Call
+      </button>
+      <button class="action-btn" id="emailRoleBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+        Email Me a Role
+      </button>
+      <a class="action-btn" id="whatsappBtn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 0 1-12.36 7.56L3 20l1.05-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+        WhatsApp Me
+      </a>
+      <button class="action-btn" id="recruiterModeBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span id="recruiterModeLabel">Recruiter Mode: Off</span>
+      </button>
     </div>
     <form id="contactForm" class="glass contact-form reveal" style="transition-delay:.16s" onsubmit="return handleContact(event)">
       <input type="text"  id="cf-name"  name="name"    class="form-field" placeholder="Your Name" required />
@@ -3380,6 +3652,8 @@ body.neumorphic #chat-body { background: #fafafc !important; }
     <span id="footerUpdated"></span>
     <span class="footer-dot">·</span>
     <span id="footerVisits"></span>
+    <span class="footer-dot">·</span>
+    <span id="analyticsOpenBtn" style="cursor:pointer;opacity:.5;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">📊</span>
   </div>
 </footer>
 
@@ -3453,6 +3727,141 @@ body.neumorphic #chat-body { background: #fafafc !important; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';document.head.appendChild(s);"></script>
 
 <script>
+/* ═══════════════════════════════════════════════════════════════
+   RECRUITER ANALYTICS ENGINE — CONFIG (edit these 4 values)
+   ═══════════════════════════════════════════════════════════════
+   KVDB_BUCKET_ID: create your own FREE bucket (30 seconds, no signup):
+     Open a terminal and run:
+       curl -d "email=YOUR_EMAIL@example.com" https://kvdb.io
+     It returns a bucket ID like "Fd55uogXyxYdnXJvnyN8Xo" — paste it below.
+     This keeps YOUR visit/lead data in YOUR OWN bucket, not shared publicly.
+     Until you replace it, analytics/lead-capture will quietly no-op (fail silently).
+   OWNER_EMAIL / WHATSAPP: used to build the "Email Me" / WhatsApp quick-apply links.
+   CALENDLY_URL: your scheduling link (Calendly, Cal.com, etc.) for "Schedule a Call".
+   ANALYTICS_PASSWORD: gates the /analytics dashboard. NOTE — this is a client-side
+     check only (it lives in this public HTML file), so treat it as a casual deterrent
+     for curious visitors, NOT real security. Don't put anything truly sensitive behind it.
+*/
+var SITE_CONFIG = {
+  KVDB_BUCKET_ID: 'D8ZiCBz24pk7dh76tYhdLt',
+  OWNER_EMAIL: 'ashwikbire@gmail.com',
+  OWNER_WHATSAPP: '918459291488', // country code + number, no + or spaces
+  CALENDLY_URL: 'https://calendly.com/ashwikbire/30min',
+  ANALYTICS_PASSWORD: 'Mackbook@1011',
+  AVAILABILITY_STATUS: 'open' // 'open' | 'interviewing' | 'closed'
+};
+
+/* ── CORE TRACKING ENGINE ── */
+var RecruiterTrack = (function() {
+  var KV = SITE_CONFIG.KVDB_BUCKET_ID;
+  var ready = KV && KV !== 'YOUR_KVDB_BUCKET_ID';
+  var base = 'https://kvdb.io/' + KV + '/';
+
+  // Capture UTM params + referrer once per session, reused on every event this visit.
+  var params = new URLSearchParams(window.location.search);
+  var session = {
+    utm_source: params.get('utm_source') || '',
+    utm_medium: params.get('utm_medium') || '',
+    utm_campaign: params.get('utm_campaign') || '',
+    referrer: document.referrer || 'direct',
+    sid: (function() {
+      var k = 'rt_sid';
+      var v = sessionStorage.getItem(k);
+      if (!v) { v = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); sessionStorage.setItem(k, v); }
+      return v;
+    })()
+  };
+
+  function put(prefix, data) {
+    if (!ready) return Promise.resolve(null);
+    var key = prefix + '/' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+    var payload = Object.assign({ ts: Date.now() }, session, data);
+    return fetch(base + key, { method: 'POST', body: JSON.stringify(payload) }).catch(function() {});
+  }
+
+  function logVisit() {
+    put('visits', { path: window.location.pathname, screen: window.innerWidth + 'x' + window.innerHeight });
+  }
+
+  function logEvent(type, extra) {
+    put('events', Object.assign({ type: type }, extra || {}));
+  }
+
+  function logLead(kind, fields) {
+    return put('leads', Object.assign({ kind: kind }, fields));
+  }
+
+  // List all keys under a prefix, then fetch each value. Capped to keep it light on a free tier.
+  function fetchAll(prefix, cap) {
+    if (!ready) return Promise.resolve([]);
+    cap = cap || 300;
+    return fetch(base + '?prefix=' + prefix + '/&limit=' + cap)
+      .then(function(r) { return r.ok ? r.text() : ''; })
+      .then(function(text) {
+        var keys = text.split('\n').map(function(k) { return k.trim(); }).filter(Boolean);
+        return Promise.all(keys.map(function(k) {
+          return fetch(base + k).then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; });
+        }));
+      })
+      .then(function(items) { return items.filter(Boolean); })
+      .catch(function() { return []; });
+  }
+
+  return { session: session, logVisit: logVisit, logEvent: logEvent, logLead: logLead, fetchAll: fetchAll, isReady: function() { return ready; } };
+})();
+
+// Log the page view once, on load.
+RecruiterTrack.logVisit();
+
+/* ── LEAD-CAPTURE MODAL CONTROLLER ── */
+var LeadModal = (function() {
+  var overlay, form, titleEl, subtitleEl, submitBtn, roleField, currentConfig = null;
+
+  function el(id) { return document.getElementById(id); }
+
+  function open(config) {
+    currentConfig = config || {};
+    if (!overlay) {
+      overlay = el('lead-overlay'); form = el('lead-form'); titleEl = el('lead-title');
+      subtitleEl = el('lead-subtitle'); submitBtn = el('lead-submit'); roleField = el('lead-role-field');
+      form.addEventListener('submit', handleSubmit);
+    }
+    titleEl.textContent = currentConfig.title || '👋 Let\'s Connect';
+    subtitleEl.textContent = currentConfig.subtitle || "Leave your details and I'll get back to you.";
+    submitBtn.textContent = currentConfig.submitLabel || 'Submit';
+    roleField.style.display = currentConfig.roleField ? 'flex' : 'none';
+    form.reset();
+    overlay.classList.add('open');
+    setTimeout(function() { el('lead-name').focus(); }, 250);
+  }
+
+  function close() {
+    if (overlay) overlay.classList.remove('open');
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    var fields = {
+      name: el('lead-name').value.trim(),
+      email: el('lead-email').value.trim(),
+      company: el('lead-company').value.trim(),
+      whatsapp: el('lead-whatsapp').value.trim(),
+      role: el('lead-role').value
+    };
+    if (!fields.name || !fields.email) return;
+    RecruiterTrack.logLead(currentConfig.kind || 'general', fields);
+    close();
+    if (typeof currentConfig.onSubmit === 'function') currentConfig.onSubmit(fields);
+    if (typeof showToast === 'function') showToast('Thanks, ' + fields.name.split(' ')[0] + '! 🎉', '✅');
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) close();
+  });
+
+  return { open: open, close: close };
+})();
+
 /* ── TYPING ── */
 (function() {
   var words = ['5× Microsoft Certified','Data Scientist','BI Developer','Python Specialist','ETL/ELT Engineer','Dashboard Expert','Generative AI Builder','Agentic AI Enthusiast'];
@@ -4718,23 +5127,27 @@ if ('serviceWorker' in navigator) {
 (function() {
   var badge = document.getElementById('visitorBadge');
   var greetEl = document.getElementById('visitorGreet');
+  var geoWrap = document.getElementById('visitorGeoWrap');
+  var geoDivider = document.getElementById('vbDividerGeo');
   var geoEl = document.getElementById('visitorGeo');
   var timeEl = document.getElementById('visitorTime');
   if (!badge || !greetEl) return;
 
   var hour = new Date().getHours();
-  var greeting = hour < 5 ? 'Late night 🌙' :
-                 hour < 12 ? 'Good morning ☀️' :
-                 hour < 17 ? 'Good afternoon 👋' :
-                 hour < 21 ? 'Good evening 👋' : 'Good night 🌙';
+  var greeting = hour < 5 ? '🌙 Late night' :
+                 hour < 12 ? '☀️ Good morning' :
+                 hour < 17 ? '👋 Good afternoon' :
+                 hour < 21 ? '👋 Good evening' : '🌙 Good night';
   greetEl.textContent = greeting;
   badge.style.display = 'inline-flex';
 
   fetch('https://ipapi.co/json/')
     .then(function(r) { return r && r.ok ? r.json() : null; })
     .then(function(data) {
-      if (data && data.city) {
-        geoEl.textContent = ' · Hi from ' + data.city + (data.country_name ? ', ' + data.country_name : '') + '!';
+      if (data && data.city && geoEl && geoWrap) {
+        geoEl.textContent = 'Hi from ' + data.city + (data.country_name ? ', ' + data.country_name : '') + '!';
+        geoWrap.style.display = 'inline-flex';
+        if (geoDivider) geoDivider.style.display = 'inline-block';
       }
     })
     .catch(function() { /* geolocation is a nice-to-have, fail quietly */ });
@@ -4745,7 +5158,7 @@ if ('serviceWorker' in navigator) {
       var now = new Date();
       var time = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
       var date = now.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
-      timeEl.textContent = ' · 🕒 ' + time + ' · ' + date;
+      timeEl.textContent = time + ' · ' + date;
     };
     updateClock();
     setInterval(updateClock, 30000);
@@ -5081,6 +5494,258 @@ function initBiSandbox(regionSel, catSel) {
   }
 }
 
+/* ── PRIVATE ANALYTICS DASHBOARD ── */
+var AnalyticsDashboard = (function() {
+  var overlay, gate, content, passwordInput, gateError, unlocked = false, visitsChart;
+
+  function el(id) { return document.getElementById(id); }
+
+  function open() {
+    if (!overlay) {
+      overlay = el('an-overlay'); gate = el('an-gate'); content = el('an-content');
+      passwordInput = el('an-password'); gateError = el('an-gate-error');
+      el('an-unlock').addEventListener('click', tryUnlock);
+      passwordInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryUnlock(); });
+      el('an-refresh').addEventListener('click', loadData);
+      el('an-export').addEventListener('click', exportCsv);
+    }
+    overlay.classList.add('open');
+    if (unlocked) { content.style.display = 'block'; gate.style.display = 'none'; }
+    else { content.style.display = 'none'; gate.style.display = 'block'; passwordInput.value = ''; gateError.textContent = ''; setTimeout(function() { passwordInput.focus(); }, 200); }
+  }
+
+  function close() { if (overlay) overlay.classList.remove('open'); }
+
+  function tryUnlock() {
+    if (passwordInput.value === SITE_CONFIG.ANALYTICS_PASSWORD) {
+      unlocked = true;
+      gate.style.display = 'none';
+      content.style.display = 'block';
+      loadData();
+    } else {
+      gateError.textContent = 'Incorrect password.';
+    }
+  }
+
+  var lastLeads = [];
+
+  function loadData() {
+    el('an-config-note').style.display = RecruiterTrack.isReady() ? 'none' : 'block';
+    Promise.all([
+      RecruiterTrack.fetchAll('visits', 500),
+      RecruiterTrack.fetchAll('leads', 500),
+      RecruiterTrack.fetchAll('events', 500)
+    ]).then(function(results) {
+      var visits = results[0], leads = results[1], events = results[2];
+      lastLeads = leads;
+
+      el('anTotalVisits').textContent = visits.length;
+      el('anUniqueSessions').textContent = new Set(visits.map(function(v) { return v.sid; })).size;
+      el('anTotalLeads').textContent = leads.length;
+      el('anResumeDownloads').textContent = leads.filter(function(l) { return l.kind === 'resume_download'; }).length;
+      el('anWhatsappClicks').textContent = events.filter(function(e) { return e.type === 'whatsapp_click'; }).length;
+      el('anCallClicks').textContent = events.filter(function(e) { return e.type === 'schedule_call_click'; }).length;
+
+      renderVisitsChart(visits);
+      renderSources(visits);
+      renderLeadsTable(leads);
+    });
+  }
+
+  function renderVisitsChart(visits) {
+    var days = [];
+    for (var i = 13; i >= 0; i--) {
+      var d = new Date(); d.setDate(d.getDate() - i);
+      days.push(d.toISOString().slice(0, 10));
+    }
+    var counts = days.map(function(day) {
+      return visits.filter(function(v) { return new Date(v.ts).toISOString().slice(0, 10) === day; }).length;
+    });
+    var labels = days.map(function(day) { return day.slice(5); });
+    var ctx = el('anVisitsChart').getContext('2d');
+    if (typeof Chart === 'undefined') return;
+    if (visitsChart) { visitsChart.data.labels = labels; visitsChart.data.datasets[0].data = counts; visitsChart.update(); return; }
+    visitsChart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: labels, datasets: [{ label: 'Visits', data: counts, backgroundColor: '#f4453f', borderRadius: 4 }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { display: false } },
+          y: { ticks: { color: '#94a3b8', font: { size: 9 }, precision: 0 }, grid: { color: 'rgba(255,255,255,.05)' } }
+        }
+      }
+    });
+  }
+
+  function renderSources(visits) {
+    var counts = {};
+    visits.forEach(function(v) {
+      var src = v.utm_source || (v.referrer && v.referrer !== 'direct' ? (function() { try { return new URL(v.referrer).hostname; } catch (e) { return v.referrer; } })() : 'Direct');
+      counts[src] = (counts[src] || 0) + 1;
+    });
+    var rows = Object.keys(counts).map(function(k) { return { name: k, count: counts[k] }; }).sort(function(a, b) { return b.count - a.count; }).slice(0, 6);
+    var max = rows.length ? rows[0].count : 1;
+    var container = el('anSourcesList');
+    container.innerHTML = rows.length ? rows.map(function(r) {
+      return '<div class="an-source-row"><span style="min-width:90px">' + r.name + '</span>' +
+        '<span class="an-source-bar-wrap"><span class="an-source-bar" style="width:' + (r.count / max * 100) + '%"></span></span>' +
+        '<span class="an-source-count">' + r.count + '</span></div>';
+    }).join('') : '<p style="color:#697485;font-size:12.5px;text-align:center">No visit data yet.</p>';
+  }
+
+  function renderLeadsTable(leads) {
+    var sorted = leads.slice().sort(function(a, b) { return b.ts - a.ts; });
+    el('anLeadsCount').textContent = leads.length;
+    el('anLeadsBody').innerHTML = sorted.map(function(l) {
+      return '<tr><td>' + new Date(l.ts).toLocaleDateString() + '</td><td>' + esc(l.name) + '</td><td>' + esc(l.email) +
+        '</td><td>' + esc(l.company || '—') + '</td><td>' + esc(l.whatsapp || '—') + '</td><td>' + esc(l.role || '—') +
+        '</td><td>' + esc(l.kind || '—') + '</td></tr>';
+    }).join('');
+    el('anLeadsEmpty').style.display = leads.length ? 'none' : 'block';
+  }
+
+  function esc(s) { return (s || '').toString().replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function exportCsv() {
+    var header = ['Date', 'Name', 'Email', 'Company', 'WhatsApp', 'Role', 'Type'];
+    var rows = lastLeads.slice().sort(function(a, b) { return b.ts - a.ts; }).map(function(l) {
+      return [new Date(l.ts).toLocaleDateString(), l.name, l.email, l.company || '', l.whatsapp || '', l.role || '', l.kind || ''];
+    });
+    var csv = [header].concat(rows).map(function(r) {
+      return r.map(function(c) { return '"' + (c || '').toString().replace(/"/g, '""') + '"'; }).join(',');
+    }).join('\n');
+    var blob = new Blob([csv], { type: 'text/csv' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'portfolio-leads.csv';
+    a.click();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) close();
+  });
+
+  return { open: open, close: close };
+})();
+
+document.getElementById('analyticsOpenBtn') && document.getElementById('analyticsOpenBtn').addEventListener('click', AnalyticsDashboard.open);
+
+/* ── AVAILABILITY BADGE ── */
+(function() {
+  var dot = document.getElementById('availabilityDot');
+  var textEl = document.getElementById('availabilityText');
+  var badge = document.getElementById('availabilityBadge');
+  if (!dot || !textEl) return;
+  var map = {
+    open: { text: 'Open to Opportunities', color: '#34d399' },
+    interviewing: { text: 'Actively Interviewing', color: '#f6ad55' },
+    closed: { text: 'Not Currently Looking', color: '#94a3b8' }
+  };
+  var status = map[SITE_CONFIG.AVAILABILITY_STATUS] || map.open;
+  textEl.textContent = status.text;
+  dot.style.background = status.color;
+  if (badge) badge.style.borderColor = status.color + '48';
+})();
+
+/* ── RECRUITER MODE TOGGLE ── */
+(function() {
+  var btn = document.getElementById('recruiterModeBtn');
+  var label = document.getElementById('recruiterModeLabel');
+  if (!btn) return;
+  function apply(on) {
+    document.body.classList.toggle('recruiter-mode', on);
+    btn.classList.toggle('active', on);
+    label.textContent = 'Recruiter Mode: ' + (on ? 'On' : 'Off');
+  }
+  var saved = localStorage.getItem('recruiterMode') === '1';
+  apply(saved);
+  btn.addEventListener('click', function() {
+    var on = !document.body.classList.contains('recruiter-mode');
+    apply(on);
+    localStorage.setItem('recruiterMode', on ? '1' : '0');
+    RecruiterTrack.logEvent('recruiter_mode_toggle', { on: on });
+  });
+})();
+
+/* ── SCHEDULE A CALL ── */
+(function() {
+  var btn = document.getElementById('scheduleCallBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    RecruiterTrack.logEvent('schedule_call_click');
+    window.open(SITE_CONFIG.CALENDLY_URL, '_blank', 'noopener');
+  });
+})();
+
+/* ── WHATSAPP QUICK-APPLY ── */
+(function() {
+  var link = document.getElementById('whatsappBtn');
+  if (!link) return;
+  var msg = encodeURIComponent("Hi Ashwik, I came across your portfolio and I'd like to connect about a role.");
+  link.href = 'https://wa.me/' + SITE_CONFIG.OWNER_WHATSAPP + '?text=' + msg;
+  link.addEventListener('click', function() { RecruiterTrack.logEvent('whatsapp_click'); });
+})();
+
+/* ── EMAIL ME A ROLE (captures the lead, then opens a prefilled mailto) ── */
+(function() {
+  var btn = document.getElementById('emailRoleBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    LeadModal.open({
+      kind: 'recruiter_intro',
+      title: '📇 Hiring? Let\'s Talk',
+      subtitle: 'Share your details and I\'ll open an email ready to send you my info.',
+      submitLabel: 'Continue to Email',
+      roleField: true,
+      onSubmit: function(fields) {
+        var subject = encodeURIComponent('Role opportunity for Ashwik Bire' + (fields.company ? ' — ' + fields.company : ''));
+        var body = encodeURIComponent(
+          'Hi Ashwik,\n\nI found your portfolio and wanted to reach out about a ' + (fields.role || 'role') + ' opportunity' +
+          (fields.company ? ' at ' + fields.company : '') + '.\n\n[Share JD / next steps here]\n\nBest,\n' + fields.name
+        );
+        window.location.href = 'mailto:' + SITE_CONFIG.OWNER_EMAIL + '?subject=' + subject + '&body=' + body;
+      }
+    });
+  });
+})();
+
+/* ── ROLE-FIT FILTER (Projects section) ── */
+(function() {
+  var grid = document.getElementById('projectsGrid');
+  var chipRow = document.getElementById('projFilterChips');
+  if (!grid || !chipRow) return;
+
+  var ROLE_TAGS = {
+    'BI Developer': ['Power BI', 'DAX', 'Data Visualization', 'Dashboard'],
+    'Data Analyst': ['SQL', 'Python', 'Data Analysis', 'Excel'],
+    'Trainer': ['Education', 'Streamlit', 'Mentoring']
+  };
+
+  var sel = document.createElement('select');
+  sel.className = 'bi-select';
+  sel.id = 'roleFitFilter';
+  sel.style.margin = '0 auto 14px';
+  sel.style.display = 'block';
+  sel.innerHTML = '<option value="">👤 Filter by role you\'re hiring for…</option>' +
+    Object.keys(ROLE_TAGS).map(function(r) { return '<option value="' + r + '">' + r + '</option>'; }).join('');
+  chipRow.parentNode.insertBefore(sel, chipRow);
+
+  sel.addEventListener('change', function() {
+    var tags = ROLE_TAGS[sel.value] || [];
+    var cards = grid.querySelectorAll('.proj-card');
+    cards.forEach(function(card) {
+      if (!sel.value) { card.classList.remove('role-match', 'role-dim'); return; }
+      var cardTags = Array.prototype.map.call(card.querySelectorAll('.proj-tag'), function(t) { return t.textContent.trim(); });
+      var match = tags.some(function(t) { return cardTags.indexOf(t) !== -1; });
+      card.classList.toggle('role-match', match);
+      card.classList.toggle('role-dim', !match);
+    });
+    RecruiterTrack.logEvent('role_fit_filter', { role: sel.value });
+  });
+})();
+
 /* ── DYNAMIC RESUME PDF GENERATOR ──
    Builds a resume PDF by reading live text straight out of the page DOM
    (name, summary, skills + levels, experience bullets, certifications,
@@ -5093,7 +5758,7 @@ function initBiSandbox(regionSel, catSel) {
   function text(sel, root) { var el = (root || document).querySelector(sel); return el ? el.textContent.replace(/\s+/g, ' ').trim() : ''; }
   function textAll(sel, root) { return Array.prototype.map.call((root || document).querySelectorAll(sel), function(e) { return e.textContent.replace(/\s+/g, ' ').trim(); }); }
 
-  btn.addEventListener('click', function() {
+  function runResumeGeneration() {
     if (typeof window.jspdf === 'undefined') { showToast('PDF library still loading — try again in a second', '⏳'); return; }
     var jsPDF = window.jspdf.jsPDF;
     var doc = new jsPDF({ unit: 'pt', format: 'a4' });
@@ -5193,6 +5858,17 @@ function initBiSandbox(regionSel, catSel) {
 
     doc.save('Ashwik_Bire_Resume_Auto.pdf');
     showToast('Resume PDF generated', '🧾');
+  }
+
+  btn.addEventListener('click', function() {
+    LeadModal.open({
+      kind: 'resume_download',
+      title: '📄 Get My Resume',
+      subtitle: "Quick — who's asking? This helps me follow up with the right people.",
+      submitLabel: 'Download Resume PDF',
+      roleField: true,
+      onSubmit: function() { runResumeGeneration(); }
+    });
   });
 })();
 </script>
