@@ -110,7 +110,7 @@ The live site is a **feature-rich, single-file HTML/CSS/JS application** (no bui
 
 </div>
 
-> ⚠️ **Still missing:** the Open Graph preview image (`linkedin-preview.png`, 1200×627px) referenced in the page's `<meta>` tags isn't committed yet, so link previews on LinkedIn/Twitter/WhatsApp currently show a broken image. Add that file to the repo root to fix social-share previews. A `mobile.png` (375px viewport) showing responsiveness is also a nice-to-have but not required for this README to render.
+> 📱 A `screenshots/mobile.png` (375px viewport) showing responsiveness is a nice-to-have addition, but not required for this README to render.
 
 ---
 
