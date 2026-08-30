@@ -1073,8 +1073,60 @@ a.cert-card:hover .cert-verified { box-shadow: 0 0 0 3px #14181f, 0 0 12px rgba(
   max-width: 660px; margin: 0 auto; text-align: center;
   padding: 100px clamp(16px,5vw,80px) 80px;
 }
-.contact-desc { color: #4a5568; font-size: 14.5px; line-height: 1.85; margin-bottom: 44px; }
+.contact-desc { color: #4a5568; font-size: 14.5px; line-height: 1.85; margin-bottom: 24px; }
 .contact-form { text-align: left; }
+
+/* ── Lead-source badge ── */
+.lead-source-badge {
+  display: inline-flex; align-items: center; gap: 6px; margin: 0 auto 20px; padding: 7px 16px;
+  background: var(--ac-g); border: 1px solid rgba(244,69,63,.3); border-radius: 99px;
+  font-size: 12px; font-weight: 600; color: #f7fafc; animation: fadeUp .4s ease both;
+}
+
+/* ── Live timezone / availability widget ── */
+.availability-widget {
+  display: flex; align-items: flex-start; gap: 12px; max-width: 480px; margin: 0 auto 28px;
+  padding: 14px 18px; text-align: left;
+}
+.avw-dot {
+  width: 11px; height: 11px; border-radius: 50%; margin-top: 4px; flex-shrink: 0;
+  background: var(--avw-c, #94a3b8); box-shadow: 0 0 10px var(--avw-c, #94a3b8);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+.avw-label { font-size: 12.5px; font-weight: 700; color: #dbe3ee; margin-bottom: 4px; }
+.avw-times { font-size: 11px; color: #8a97ab; display: flex; flex-wrap: wrap; gap: 6px; }
+.avw-times strong { color: #dbe3ee; font-weight: 600; }
+.avw-sep { opacity: .5; }
+
+/* ── JD-match tool ── */
+.jd-match-card { max-width: 560px; margin: 0 auto 22px; padding: 18px 20px; text-align: left; }
+.jd-match-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.jd-match-title { font-size: 13px; font-weight: 700; color: #dbe3ee; }
+.jd-match-tag { font-size: 9px; letter-spacing: .06em; font-weight: 700; color: var(--ac-l); background: var(--ac-g); border: 1px solid rgba(244,69,63,.3); padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.jd-match-hint { font-size: 11.5px; color: #8a97ab; line-height: 1.6; margin-bottom: 12px; }
+.jd-match-input {
+  width: 100%; background: var(--glass-bg-strong); border: 1px solid var(--glass-border); color: #e8edf4;
+  border-radius: 10px; padding: 12px 14px; font-family: inherit; font-size: 13px; resize: vertical;
+  transition: border-color .2s; margin-bottom: 10px;
+}
+.jd-match-input:focus { outline: none; border-color: var(--ac); box-shadow: 0 0 0 3px var(--ac-g); }
+.jd-match-input::placeholder { color: #5c6779; }
+.jd-match-btn { width: 100%; justify-content: center; }
+.jd-match-result { margin-top: 18px; animation: fadeUp .35s ease both; }
+.jd-match-score-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.jd-match-score-ring { position: relative; width: 64px; height: 64px; flex-shrink: 0; }
+.jd-match-score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.jmr-bg { fill: none; stroke: rgba(255,255,255,.08); stroke-width: 6; }
+.jmr-fg { fill: none; stroke: var(--ac-l); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 176; stroke-dashoffset: 176; transition: stroke-dashoffset 1s cubic-bezier(.2,.8,.3,1); }
+.jmr-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 15px; color: #f7fafc; }
+.jd-match-verdict { font-size: 12.5px; color: #dbe3ee; line-height: 1.6; }
+.jd-match-chips { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.jd-match-chip-label { font-size: 9.5px; text-transform: uppercase; letter-spacing: .07em; color: #697485; font-weight: 700; display: block; margin-bottom: 6px; }
+.jd-match-chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.jd-chip { font-size: 10.5px; font-weight: 600; padding: 4px 10px; border-radius: 99px; }
+.jd-chip.hit { background: rgba(52,211,153,.12); border: 1px solid rgba(52,211,153,.32); color: #34d399; }
+.jd-chip.miss { background: rgba(255,255,255,.04); border: 1px solid var(--glass-border); color: #697485; }
+
 .form-field {
   width: 100%; background: var(--glass-bg);
   border: 1px solid var(--glass-border); border-radius: 12px;
@@ -1234,6 +1286,45 @@ footer {
 .msg { max-width: 82%; font-size: 12.5px; line-height: 1.55; padding: 9px 12px; border-radius: 12px; animation: fadeUp .25s ease; }
 .msg.bot { align-self: flex-start; background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); color: #e2e8f0; border-bottom-left-radius: 3px; }
 .msg.user { align-self: flex-end; background: var(--ac); color: #fff; border-bottom-right-radius: 3px; }
+
+/* ── Typing indicator ── */
+.msg.typing { display: flex; align-items: center; gap: 4px; padding: 12px 14px; }
+.msg.typing span { width: 6px; height: 6px; border-radius: 50%; background: #a0aec0; opacity: .5; animation: typingBounce 1.1s ease-in-out infinite; }
+.msg.typing span:nth-child(2) { animation-delay: .15s; }
+.msg.typing span:nth-child(3) { animation-delay: .3s; }
+@keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: .5; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+/* ── In-chat contextual follow-up chips ── */
+.msg-chips { display: flex; flex-wrap: wrap; gap: 6px; align-self: flex-start; max-width: 90%; margin-top: -2px; animation: fadeUp .25s ease; }
+.msg-chip {
+  font-size: 10.5px; padding: 6px 11px; border-radius: 99px; cursor: pointer;
+  background: var(--glass-bg); border: 1px solid rgba(244,69,63,.3); color: var(--ac-l);
+  transition: all .2s ease; white-space: nowrap;
+}
+.msg-chip:hover { background: var(--ac-g); border-color: var(--ac); }
+
+/* ── In-chat JD-match mini card ── */
+.msg-jdcard { align-self: flex-start; max-width: 92%; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 12px 14px; font-size: 12px; animation: fadeUp .25s ease; }
+.msg-jdcard-score { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--ac-l); letter-spacing: .03em; }
+.msg-jdcard-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0; }
+.msg-jdcard .jd-chip { font-size: 9.5px; padding: 3px 8px; }
+
+/* ── Escalation CTA row ── */
+.msg-escalate { align-self: flex-start; max-width: 92%; display: flex; flex-direction: column; gap: 6px; animation: fadeUp .25s ease; }
+.msg-escalate-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.msg-escalate-btn {
+  font-size: 11px; font-weight: 600; padding: 7px 12px; border-radius: 8px; cursor: pointer;
+  background: var(--ac); color: #fff; border: none; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+}
+.msg-escalate-btn.ghost { background: var(--glass-bg); border: 1px solid var(--glass-border); color: #e2e8f0; }
+
+/* ── Clear-chat header control ── */
+#chat-clear {
+  margin-left: auto; background: rgba(255,255,255,.15); border: none; color: #fff; width: 26px; height: 26px;
+  border-radius: 50%; font-size: 12px; cursor: pointer; flex-shrink: 0; opacity: .8; transition: opacity .2s, background .2s;
+}
+#chat-clear:hover { opacity: 1; background: rgba(255,255,255,.28); }
+
 #chat-quick {
   display: flex; flex-wrap: wrap; gap: 6px; padding: 0 14px 10px;
   background: #04060f;
@@ -4027,6 +4118,20 @@ body.neumorphic #chat-body { background: #fafafc !important; }
       Looking to build powerful data solutions or need a skilled analyst?
       Let's discuss how I can add value to your team.
     </p>
+    <div class="lead-source-badge reveal" id="leadSourceBadge" style="display:none"></div>
+
+    <div class="glass availability-widget reveal" style="transition-delay:.09s" id="availabilityWidget">
+      <div class="avw-dot" id="avwDot"></div>
+      <div class="avw-body">
+        <div class="avw-label" id="avwLabel">Checking availability…</div>
+        <div class="avw-times">
+          <span>🇮🇳 Ashwik's time: <strong id="avwOwnerTime">—</strong></span>
+          <span class="avw-sep">·</span>
+          <span>Your time: <strong id="avwVisitorTime">—</strong></span>
+        </div>
+      </div>
+    </div>
+
     <div class="contact-actions reveal" style="transition-delay:.1s">
       <button class="action-btn primary" id="saveContactBtn" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
@@ -4057,6 +4162,30 @@ body.neumorphic #chat-body { background: #fafafc !important; }
         <span id="recruiterModeLabel">Recruiter Mode: Off</span>
       </button>
     </div>
+    <div class="glass jd-match-card reveal" style="transition-delay:.13s">
+      <div class="jd-match-header">
+        <div class="jd-match-title">🎯 Hiring for a role? Check the fit</div>
+        <span class="jd-match-tag">AUTO-MATCH</span>
+      </div>
+      <p class="jd-match-hint">Paste a job description below and I'll score it against Ashwik's skill set — no waiting on a human to screen it.</p>
+      <textarea id="jdMatchInput" class="jd-match-input" rows="4" placeholder="Paste the job description here…"></textarea>
+      <button type="button" class="action-btn primary jd-match-btn" id="jdMatchBtn">Analyze Match</button>
+      <div class="jd-match-result" id="jdMatchResult" style="display:none">
+        <div class="jd-match-score-row">
+          <div class="jd-match-score-ring">
+            <svg viewBox="0 0 64 64"><circle class="jmr-bg" cx="32" cy="32" r="28"/><circle class="jmr-fg" id="jdMatchRing" cx="32" cy="32" r="28"/></svg>
+            <span class="jmr-val" id="jdMatchScore">0%</span>
+          </div>
+          <div class="jd-match-verdict" id="jdMatchVerdict"></div>
+        </div>
+        <div class="jd-match-chips">
+          <div class="jd-match-chip-group"><span class="jd-match-chip-label">Matched</span><div id="jdMatchedChips" class="jd-match-chip-row"></div></div>
+          <div class="jd-match-chip-group"><span class="jd-match-chip-label">Not mentioned</span><div id="jdMissingChips" class="jd-match-chip-row"></div></div>
+        </div>
+        <button type="button" class="action-btn" id="jdForwardBtn">📧 Forward this role to Ashwik</button>
+      </div>
+    </div>
+
     <form id="contactForm" class="glass contact-form reveal" style="transition-delay:.16s" onsubmit="return handleContact(event)">
       <input type="text"  id="cf-name"  name="name"    class="form-field" placeholder="Your Name" required />
       <input type="email" id="cf-email" name="email"   class="form-field" placeholder="Your Email" required />
@@ -4146,6 +4275,7 @@ body.neumorphic #chat-body { background: #fafafc !important; }
       <div class="cb-title">Ashwik's Assistant</div>
       <div class="cb-sub"><span class="cb-dot"></span> Online now</div>
     </div>
+    <button id="chat-clear" type="button" aria-label="Clear chat" title="Clear chat">🗑</button>
   </div>
   <div id="chat-body"></div>
   <div id="chat-quick">
@@ -4192,8 +4322,112 @@ var SITE_CONFIG = {
   OWNER_WHATSAPP: '918459291488', // country code + number, no + or spaces
   CALENDLY_URL: 'https://calendly.com/ashwikbire/30min',
   ANALYTICS_PASSWORD: 'Mackbook@1011',
-  AVAILABILITY_STATUS: 'open' // 'open' | 'interviewing' | 'closed'
+  AVAILABILITY_STATUS: 'open', // 'open' | 'interviewing' | 'closed'
+  OWNER_TIMEZONE: 'Asia/Kolkata'
 };
+
+/* ── SHARED SKILL DICTIONARY + JD-MATCH ENGINE ──
+   Used by both the Contact-section "JD Match" tool and the chatbot's
+   auto-detection of pasted job descriptions, so the two stay in sync. */
+var SKILL_KEYWORDS = {
+  'Power BI': ['power bi', 'powerbi', 'pbix', 'power query'],
+  'DAX': ['dax'],
+  'SQL': ['sql', 'mysql', 'postgres', 't-sql', 'tsql'],
+  'Python': ['python', 'pandas', 'numpy', 'scikit'],
+  'Azure': ['azure', 'adf', 'data factory'],
+  'ETL / ELT': ['etl', 'elt', 'data pipeline', 'pipeline'],
+  'Data Visualization': ['data visualization', 'dashboard', 'visualisation'],
+  'Excel': ['excel', 'vlookup', 'pivot table'],
+  'KQL': ['kql', 'kusto'],
+  'Machine Learning': ['machine learning', 'ml model', 'predictive model'],
+  'Generative / Agentic AI': ['generative ai', 'genai', 'llm', 'agentic', 'rag', 'prompt engineering'],
+  'TIBCO Spotfire': ['spotfire', 'tibco'],
+  'Data Analysis': ['data analysis', 'analytics', 'business intelligence', 'bi '],
+  'Automation': ['automation', 'power automate', 'rpa', 'workflow']
+};
+
+function computeJdMatch(text) {
+  var t = (text || '').toLowerCase();
+  var matched = [], missing = [];
+  Object.keys(SKILL_KEYWORDS).forEach(function(skill) {
+    var hit = SKILL_KEYWORDS[skill].some(function(kw) { return t.indexOf(kw) !== -1; });
+    (hit ? matched : missing).push(skill);
+  });
+  var total = matched.length + missing.length;
+  var score = total ? Math.round((matched.length / total) * 100) : 0;
+  return { score: score, matched: matched, missing: missing };
+}
+
+function forwardRoleToAshwik(jdText, result) {
+  LeadModal.open({
+    kind: 'jd_forward',
+    title: '📧 Forward This Role',
+    subtitle: result ? ('Ashwik matches ' + result.score + '% of the keywords in this JD — share your details and he\'ll follow up.') : 'Share your details and Ashwik will follow up.',
+    submitLabel: 'Send to Ashwik',
+    roleField: true,
+    onSubmit: function(fields) {
+      var subject = encodeURIComponent('Role opportunity for Ashwik Bire' + (fields.company ? ' — ' + fields.company : '') + (result ? ' (' + result.score + '% match)' : ''));
+      var body = encodeURIComponent(
+        'Hi Ashwik,\n\nI found your portfolio and wanted to reach out about a ' + (fields.role || 'role') + ' opportunity' +
+        (fields.company ? ' at ' + fields.company : '') + '.\n\n' +
+        (jdText ? 'Job description:\n' + jdText.slice(0, 1200) + '\n\n' : '') +
+        (result ? 'Auto-match score: ' + result.score + '% (matched: ' + result.matched.join(', ') + ')\n\n' : '') +
+        'Best,\n' + fields.name
+      );
+      window.location.href = 'mailto:' + SITE_CONFIG.OWNER_EMAIL + '?subject=' + subject + '&body=' + body;
+    }
+  });
+}
+
+/* ── LIVE AVAILABILITY (timezone-aware) ──
+   Computes Ashwik's current local time/status in real time, so a visitor
+   in any timezone can see at a glance whether it's a reasonable hour to expect a reply. */
+function liveAvailability() {
+  var now = new Date();
+  var ownerParts = new Intl.DateTimeFormat('en-US', {
+    timeZone: SITE_CONFIG.OWNER_TIMEZONE, hour: 'numeric', minute: '2-digit', hour12: true, weekday: 'short'
+  }).formatToParts(now);
+  var get = function(type) { var p = ownerParts.find(function(x) { return x.type === type; }); return p ? p.value : ''; };
+  var hour24Str = new Intl.DateTimeFormat('en-US', { timeZone: SITE_CONFIG.OWNER_TIMEZONE, hour: 'numeric', hour12: false }).format(now);
+  var hour24 = parseInt(hour24Str, 10);
+  var weekday = get('weekday');
+  var isWeekend = weekday === 'Sat' || weekday === 'Sun';
+  var localTimeStr = get('weekday') + ' ' + get('hour') + ':' + get('minute') + ' ' + get('dayPeriod');
+
+  var status, label, color;
+  if (SITE_CONFIG.AVAILABILITY_STATUS === 'closed') {
+    status = 'closed'; label = 'Not currently looking'; color = '#94a3b8';
+  } else if (!isWeekend && hour24 >= 9 && hour24 < 19) {
+    status = 'online'; label = 'Likely to reply within a few hours'; color = '#34d399';
+  } else if (!isWeekend && ((hour24 >= 19 && hour24 < 23) || (hour24 >= 7 && hour24 < 9))) {
+    status = 'evening'; label = 'Evening hours — replies may be a bit slower'; color = '#f6ad55';
+  } else {
+    status = 'offline'; label = isWeekend ? 'Weekend — will reply on the next working day' : 'Late night — will reply in the morning (IST)'; color = '#fc8181';
+  }
+  var visitorTimeStr = new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit', hour12: true }).format(now);
+  return { status: status, label: label, color: color, ownerTime: localTimeStr, visitorTime: visitorTimeStr };
+}
+
+/* ── LEAD-SOURCE DETECTION (from URL params / referrer, reuses RecruiterTrack.session) ── */
+function leadSourceLabel() {
+  var s = RecruiterTrack.session;
+  var src = (s.utm_source || '').toLowerCase();
+  var ref = (s.referrer || '').toLowerCase();
+  var map = [
+    ['linkedin', '💼 Welcome from LinkedIn!'],
+    ['github', '🐙 Welcome from GitHub!'],
+    ['naukri', '📋 Welcome from Naukri!'],
+    ['indeed', '📋 Welcome from Indeed!'],
+    ['google', '🔎 Welcome from Google search!'],
+    ['whatsapp', '💬 Welcome from WhatsApp!'],
+    ['twitter', '🐦 Welcome from X / Twitter!'],
+    ['x.com', '🐦 Welcome from X / Twitter!']
+  ];
+  for (var i = 0; i < map.length; i++) {
+    if (src.indexOf(map[i][0]) !== -1 || ref.indexOf(map[i][0]) !== -1) return map[i][1];
+  }
+  return null;
+}
 
 /* ── CORE TRACKING ENGINE ── */
 var RecruiterTrack = (function() {
@@ -4421,10 +4655,15 @@ function handleContact(e) {
   fetch('https://formspree.io/f/' + FORMSPREE_ID, {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: name, email: email, message: message })
+    body: JSON.stringify({
+      name: name, email: email, message: message,
+      lead_source: RecruiterTrack.session.utm_source || RecruiterTrack.session.referrer || 'direct',
+      utm_medium: RecruiterTrack.session.utm_medium, utm_campaign: RecruiterTrack.session.utm_campaign
+    })
   })
   .then(function(res) {
     if (res.ok) {
+      RecruiterTrack.logLead('contact_form', { name: name, email: email, message: message.slice(0, 400) });
       btn.textContent = 'Message Sent! ✅';
       btn.style.background = 'linear-gradient(135deg,#38a169,#68d391)';
       status.textContent = "Thanks! I'll get back to you soon.";
@@ -4453,7 +4692,7 @@ function handleContact(e) {
 
 /* ── CHATBOT ── */
 var CB_REPLIES = {
-  greet: "Hi! 👋 I'm Ashwik's virtual assistant. Ask me about his skills, experience, projects, certifications, or how to get in touch — or tap a quick option below.",
+  greet: "Hi! 👋 I'm Ashwik's virtual assistant. Ask me about his skills, experience, projects, certifications, or how to get in touch — or tap a quick option below. You can also paste a job description and I'll score the fit automatically.",
   skills: "Ashwik works across Data Analytics, Power BI, SQL, Python, Azure, and Generative/Agentic AI tooling. Check the Skills section above for the full breakdown with proficiency levels.",
   experience: "Ashwik has 3+ years of experience across 2 companies, working as a Data Analyst / BI & Automation Specialist. See the Experience section for role-by-role details.",
   education: "Ashwik holds a B.E. in Electronics & Telecommunication from P.R. Pote College of Engineering (CGPA 8.67/10, 2022) and a Diploma in Electronics & Telecommunication from Dr. Panjabrao Deshmukh Polytechnic (75%, 2019). See the Education section for details.",
@@ -4464,8 +4703,9 @@ var CB_REPLIES = {
   linkedin: "Here's Ashwik's LinkedIn: linkedin.com/in/ashwik-bire-b2a000186 — feel free to connect there!",
   hire: "Ashwik is open to opportunities! Use the 'Hire Me' button, the contact form, or WhatsApp to start a conversation.",
   recommendations: "Ashwik has several LinkedIn recommendations from colleagues and managers at Atos Syntel and CGI, praising his work ethic, quick learning, and Power BI skills — check the Recommendations section above.",
+  location: "Ashwik is based in Pune, Maharashtra, India, and is open to remote, hybrid, or relocation opportunities depending on the role.",
   thanks: "You're welcome! Let me know if there's anything else you'd like to know about Ashwik. 🙂",
-  fallback: "I'm not sure about that one — but you can ask about Ashwik's skills, experience, projects, certifications, recommendations, resume, or how to contact him. Or reach out directly via WhatsApp!"
+  fallback: "I'm not sure about that one — but you can ask about Ashwik's skills, experience, projects, certifications, recommendations, resume, availability, or how to contact him. Or paste a job description and I'll score the fit!"
 };
 
 var CB_KEYWORDS = [
@@ -4476,13 +4716,39 @@ var CB_KEYWORDS = [
   { key: 'certifications', words: ['cert','certificate','certification','microsoft'] },
   { key: 'recommendations', words: ['recommendation','review','testimonial','endorse'] },
   { key: 'resume', words: ['resume','cv','download'] },
+  { key: 'availability', words: ['available','availability','timezone','time zone','online now','free right now','busy'] },
+  { key: 'location', words: ['location','based','city','where is','where are','relocate','remote'] },
   { key: 'contact', words: ['contact','email','phone','reach','call','number'] },
   { key: 'linkedin', words: ['linkedin'] },
-  { key: 'hire', words: ['hire','job offer','opportunity','freelance','available'] },
+  { key: 'hire', words: ['hire','job offer','opportunity','freelance'] },
   { key: 'thanks', words: ['thanks','thank you','thx','appreciate'] }
 ];
 
+/* Contextual follow-up suggestions shown as chips after each bot reply */
+var CB_FOLLOWUPS = {
+  greet: ['skills', 'projects', 'availability'],
+  skills: ['experience', 'projects', 'certifications'],
+  experience: ['skills', 'education', 'projects'],
+  education: ['experience', 'certifications'],
+  projects: ['skills', 'resume'],
+  certifications: ['skills', 'resume'],
+  resume: ['contact', 'hire'],
+  availability: ['contact', 'hire'],
+  location: ['availability', 'contact'],
+  contact: ['hire', 'linkedin'],
+  linkedin: ['contact', 'recommendations'],
+  hire: ['contact', 'resume'],
+  recommendations: ['experience', 'hire']
+};
+var CB_CHIP_LABELS = {
+  skills: '🛠️ Skills', experience: '💼 Experience', education: '🎓 Education', projects: '📁 Projects',
+  certifications: '📜 Certifications', resume: '📄 Resume', contact: '✉️ Contact', linkedin: '🔗 LinkedIn',
+  hire: '🤝 Hire Ashwik', recommendations: '⭐ Recommendations', availability: '🕐 Availability', location: '📍 Location'
+};
+
 var chatStarted = false;
+var fallbackStreak = 0;
+var CHAT_HISTORY_KEY = 'ab-chat-history';
 
 function toggleChat() {
   var win = document.getElementById('chat-window');
@@ -4492,18 +4758,123 @@ function toggleChat() {
   btn.classList.toggle('open');
   if (opening && !chatStarted) {
     chatStarted = true;
-    addMsg('bot', CB_REPLIES.greet);
+    if (!restoreChatHistory()) {
+      addMsg('bot', CB_REPLIES.greet);
+      addFollowupChips('greet');
+    }
   }
   if (opening) document.getElementById('chat-input').focus();
 }
 
-function addMsg(who, text) {
+function saveChatHistory() {
+  try {
+    var msgs = Array.prototype.slice.call(document.querySelectorAll('#chat-body > .msg.bot, #chat-body > .msg.user'))
+      .map(function(el) { return { who: el.classList.contains('user') ? 'user' : 'bot', text: el.textContent }; });
+    localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(msgs.slice(-30)));
+  } catch (e) {}
+}
+function restoreChatHistory() {
+  try {
+    var raw = localStorage.getItem(CHAT_HISTORY_KEY);
+    if (!raw) return false;
+    var msgs = JSON.parse(raw);
+    if (!msgs || !msgs.length) return false;
+    msgs.forEach(function(m) { addMsg(m.who, m.text, true); });
+    document.getElementById('chat-body').scrollTop = document.getElementById('chat-body').scrollHeight;
+    return true;
+  } catch (e) { return false; }
+}
+function clearChat() {
+  document.getElementById('chat-body').innerHTML = '';
+  try { localStorage.removeItem(CHAT_HISTORY_KEY); } catch (e) {}
+  fallbackStreak = 0;
+  addMsg('bot', CB_REPLIES.greet);
+  addFollowupChips('greet');
+}
+
+function addMsg(who, text, skipSave) {
   var body = document.getElementById('chat-body');
   var div = document.createElement('div');
   div.className = 'msg ' + who;
   div.textContent = text;
   body.appendChild(div);
   body.scrollTop = body.scrollHeight;
+  if (!skipSave) saveChatHistory();
+}
+
+function showTyping() {
+  var body = document.getElementById('chat-body');
+  var div = document.createElement('div');
+  div.className = 'msg bot typing';
+  div.id = 'chatTypingIndicator';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+function hideTyping() {
+  var el = document.getElementById('chatTypingIndicator');
+  if (el) el.remove();
+}
+
+function addFollowupChips(key) {
+  var followups = CB_FOLLOWUPS[key];
+  if (!followups || !followups.length) return;
+  var body = document.getElementById('chat-body');
+  var row = document.createElement('div');
+  row.className = 'msg-chips';
+  followups.forEach(function(k) {
+    var chip = document.createElement('span');
+    chip.className = 'msg-chip';
+    chip.textContent = CB_CHIP_LABELS[k] || k;
+    chip.addEventListener('click', function() { askBot(k); });
+    row.appendChild(chip);
+  });
+  body.appendChild(row);
+  body.scrollTop = body.scrollHeight;
+}
+
+function addEscalation() {
+  var body = document.getElementById('chat-body');
+  var wrap = document.createElement('div');
+  wrap.className = 'msg-escalate';
+  var msg = document.createElement('div');
+  msg.className = 'msg bot';
+  msg.textContent = "Sounds like I'm not finding the right answer — want to message Ashwik directly instead?";
+  wrap.appendChild(msg);
+  var row = document.createElement('div');
+  row.className = 'msg-escalate-row';
+  var wa = document.createElement('a');
+  wa.className = 'msg-escalate-btn'; wa.target = '_blank'; wa.rel = 'noopener';
+  wa.href = 'https://wa.me/' + SITE_CONFIG.OWNER_WHATSAPP + '?text=' + encodeURIComponent('Hi Ashwik, I had a question your chatbot couldn\'t answer!');
+  wa.textContent = '💬 WhatsApp';
+  var em = document.createElement('a');
+  em.className = 'msg-escalate-btn ghost';
+  em.href = 'mailto:' + SITE_CONFIG.OWNER_EMAIL;
+  em.textContent = '✉️ Email';
+  row.appendChild(wa); row.appendChild(em);
+  wrap.appendChild(row);
+  body.appendChild(wrap);
+  body.scrollTop = body.scrollHeight;
+}
+
+function addJdCard(res, jdText) {
+  var body = document.getElementById('chat-body');
+  var card = document.createElement('div');
+  card.className = 'msg-jdcard';
+  card.innerHTML = '<div class="msg-jdcard-score">' + res.score + '% match</div>' +
+    '<div style="margin:4px 0 8px;color:#a0aec0">Looks like a job description — here\'s how it lines up against Ashwik\'s skill set:</div>' +
+    '<div class="msg-jdcard-chips">' + res.matched.slice(0, 6).map(function(s) { return '<span class="jd-chip hit">✓ ' + s + '</span>'; }).join('') + '</div>';
+  body.appendChild(card);
+  var row = document.createElement('div');
+  row.className = 'msg-chips';
+  var chip = document.createElement('span');
+  chip.className = 'msg-chip';
+  chip.textContent = '📧 Forward this role to Ashwik';
+  chip.addEventListener('click', function() { forwardRoleToAshwik(jdText, res); });
+  row.appendChild(chip);
+  body.appendChild(row);
+  body.scrollTop = body.scrollHeight;
+  saveChatHistory();
 }
 
 function matchIntent(text) {
@@ -4517,12 +4888,25 @@ function matchIntent(text) {
   return 'fallback';
 }
 
+function replyTextFor(key) {
+  if (key === 'availability') {
+    var a = liveAvailability();
+    return "It's currently " + a.ownerTime + " for Ashwik (IST). " + a.label + ".";
+  }
+  return CB_REPLIES[key] || CB_REPLIES.fallback;
+}
+
 function askBot(key) {
   var win = document.getElementById('chat-window');
   if (!win.classList.contains('open')) toggleChat();
-  var label = key.charAt(0).toUpperCase() + key.slice(1);
+  var label = CB_CHIP_LABELS[key] ? CB_CHIP_LABELS[key].replace(/^\S+\s/, '') : (key.charAt(0).toUpperCase() + key.slice(1));
   addMsg('user', label);
-  setTimeout(function() { addMsg('bot', CB_REPLIES[key] || CB_REPLIES.fallback); }, 380);
+  showTyping();
+  setTimeout(function() {
+    hideTyping();
+    addMsg('bot', replyTextFor(key));
+    addFollowupChips(key);
+  }, 420);
 }
 
 function sendChat() {
@@ -4531,9 +4915,39 @@ function sendChat() {
   if (!text) return;
   addMsg('user', text);
   input.value = '';
+
+  // Auto-detect a pasted job description (long block of text) and run the JD-match tool instead
+  var wordCount = text.split(/\s+/).filter(Boolean).length;
+  if (wordCount >= 30) {
+    showTyping();
+    setTimeout(function() {
+      hideTyping();
+      var res = computeJdMatch(text);
+      addJdCard(res, text);
+      RecruiterTrack.logEvent('jd_match_run', { score: res.score, via: 'chat' });
+    }, 500);
+    return;
+  }
+
   var intent = matchIntent(text);
-  setTimeout(function() { addMsg('bot', CB_REPLIES[intent]); }, 420);
+  showTyping();
+  setTimeout(function() {
+    hideTyping();
+    addMsg('bot', replyTextFor(intent));
+    addFollowupChips(intent);
+    if (intent === 'fallback') {
+      fallbackStreak++;
+      if (fallbackStreak >= 2) { addEscalation(); fallbackStreak = 0; }
+    } else {
+      fallbackStreak = 0;
+    }
+  }, 480);
 }
+
+document.getElementById('chat-clear') && document.getElementById('chat-clear').addEventListener('click', function(e) {
+  e.stopPropagation();
+  clearChat();
+});
 </script>
 
 <script>
@@ -6456,6 +6870,86 @@ document.getElementById('analyticsOpenBtn') && document.getElementById('analytic
   textEl.textContent = status.text;
   dot.style.background = status.color;
   if (badge) badge.style.borderColor = status.color + '48';
+})();
+
+/* ── LIVE TIMEZONE / AVAILABILITY WIDGET (Contact section) ── */
+(function() {
+  var dot = document.getElementById('avwDot');
+  var label = document.getElementById('avwLabel');
+  var ownerTimeEl = document.getElementById('avwOwnerTime');
+  var visitorTimeEl = document.getElementById('avwVisitorTime');
+  if (!dot || !label) return;
+  function tick() {
+    var a = liveAvailability();
+    dot.style.setProperty('--avw-c', a.color);
+    label.textContent = a.label;
+    ownerTimeEl.textContent = a.ownerTime;
+    visitorTimeEl.textContent = a.visitorTime;
+  }
+  tick();
+  setInterval(tick, 30000);
+})();
+
+/* ── LEAD-SOURCE BADGE (from URL params / referrer) ── */
+(function() {
+  var badge = document.getElementById('leadSourceBadge');
+  if (!badge) return;
+  var msg = leadSourceLabel();
+  if (msg) {
+    badge.textContent = msg;
+    badge.style.display = 'inline-flex';
+  }
+})();
+
+/* ── JD-MATCH TOOL (Contact section) ── */
+(function() {
+  var input = document.getElementById('jdMatchInput');
+  var btn = document.getElementById('jdMatchBtn');
+  var result = document.getElementById('jdMatchResult');
+  if (!input || !btn) return;
+  var scoreEl = document.getElementById('jdMatchScore');
+  var ringEl = document.getElementById('jdMatchRing');
+  var verdictEl = document.getElementById('jdMatchVerdict');
+  var matchedEl = document.getElementById('jdMatchedChips');
+  var missingEl = document.getElementById('jdMissingChips');
+  var forwardBtn = document.getElementById('jdForwardBtn');
+  var lastResult = null;
+
+  function verdictText(score) {
+    if (score >= 70) return "Strong overlap — Ashwik's skill set lines up well with this role.";
+    if (score >= 40) return 'Solid partial match — several core skills line up, worth a conversation.';
+    return "Limited keyword overlap — but Ashwik picks up new tools fast, so don't rule it out.";
+  }
+
+  function render(res) {
+    lastResult = res;
+    scoreEl.textContent = res.score + '%';
+    var circumference = 176;
+    ringEl.style.strokeDashoffset = (circumference - (circumference * res.score / 100));
+    verdictEl.textContent = verdictText(res.score);
+    matchedEl.innerHTML = res.matched.length
+      ? res.matched.map(function(s) { return '<span class="jd-chip hit">✓ ' + s + '</span>'; }).join('')
+      : '<span class="jd-chip miss">No direct keyword matches found</span>';
+    missingEl.innerHTML = res.missing.length
+      ? res.missing.map(function(s) { return '<span class="jd-chip miss">' + s + '</span>'; }).join('')
+      : '<span class="jd-chip hit">Covers everything on the list!</span>';
+    result.style.display = 'block';
+  }
+
+  btn.addEventListener('click', function() {
+    var text = input.value.trim();
+    if (!text) { input.focus(); return; }
+    var res = computeJdMatch(text);
+    render(res);
+    RecruiterTrack.logEvent('jd_match_run', { score: res.score });
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  if (forwardBtn) {
+    forwardBtn.addEventListener('click', function() {
+      forwardRoleToAshwik(input.value.trim(), lastResult);
+    });
+  }
 })();
 
 /* ── RECRUITER MODE TOGGLE ── */
